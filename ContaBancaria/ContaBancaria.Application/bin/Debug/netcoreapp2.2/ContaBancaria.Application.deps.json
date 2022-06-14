@@ -1,0 +1,58 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v2.2",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v2.2": {
+      "ContaBancaria.Application/1.0.0": {
+        "dependencies": {
+          "ContaBancaria.Application.Contratos": "1.0.0",
+          "ContaBancaria.Data": "1.0.0",
+          "ContaBancaria.Dominio": "1.0.0"
+        },
+        "runtime": {
+          "ContaBancaria.Application.dll": {}
+        }
+      },
+      "ContaBancaria.Application.Contratos/1.0.0": {
+        "runtime": {
+          "ContaBancaria.Application.Contratos.dll": {}
+        }
+      },
+      "ContaBancaria.Data/1.0.0": {
+        "runtime": {
+          "ContaBancaria.Data.dll": {}
+        }
+      },
+      "ContaBancaria.Dominio/1.0.0": {
+        "runtime": {
+          "ContaBancaria.Dominio.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ContaBancaria.Application/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ContaBancaria.Application.Contratos/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ContaBancaria.Data/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ContaBancaria.Dominio/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
