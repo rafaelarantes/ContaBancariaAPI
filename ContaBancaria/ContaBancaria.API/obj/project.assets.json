@@ -4471,6 +4471,11 @@
       "ContaBancaria.Data/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.2",
+        "dependencies": {
+          "ContaBancaria.Data.Contracts": "1.0.0",
+          "ContaBancaria.Dominio": "1.0.0",
+          "ContaBancaria.Dominio.Contracts": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/ContaBancaria.Data.dll": {}
         },
@@ -4478,14 +4483,40 @@
           "bin/placeholder/ContaBancaria.Data.dll": {}
         }
       },
+      "ContaBancaria.Data.Contracts/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.2",
+        "dependencies": {
+          "ContaBancaria.Dominio": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/ContaBancaria.Data.Contracts.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ContaBancaria.Data.Contracts.dll": {}
+        }
+      },
       "ContaBancaria.Dominio/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.2",
+        "dependencies": {
+          "ContaBancaria.Dominio.Contracts": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/ContaBancaria.Dominio.dll": {}
         },
         "runtime": {
           "bin/placeholder/ContaBancaria.Dominio.dll": {}
+        }
+      },
+      "ContaBancaria.Dominio.Contracts/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.2",
+        "compile": {
+          "bin/placeholder/ContaBancaria.Dominio.Contracts.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ContaBancaria.Dominio.Contracts.dll": {}
         }
       }
     }
@@ -12193,10 +12224,20 @@
       "path": "../ContaBancaria.Data/ContaBancaria.Data.csproj",
       "msbuildProject": "../ContaBancaria.Data/ContaBancaria.Data.csproj"
     },
+    "ContaBancaria.Data.Contracts/1.0.0": {
+      "type": "project",
+      "path": "../ContaBancaria.Data.Contracts/ContaBancaria.Data.Contracts.csproj",
+      "msbuildProject": "../ContaBancaria.Data.Contracts/ContaBancaria.Data.Contracts.csproj"
+    },
     "ContaBancaria.Dominio/1.0.0": {
       "type": "project",
       "path": "../ContaBancaria.Dominio/ContaBancaria.Dominio.csproj",
       "msbuildProject": "../ContaBancaria.Dominio/ContaBancaria.Dominio.csproj"
+    },
+    "ContaBancaria.Dominio.Contracts/1.0.0": {
+      "type": "project",
+      "path": "../ContaBancaria.Dominio.Contracts/ContaBancaria.Dominio.Contracts.csproj",
+      "msbuildProject": "../ContaBancaria.Dominio.Contracts/ContaBancaria.Dominio.Contracts.csproj"
     }
   },
   "projectFileDependencyGroups": {

@@ -1,6 +1,6 @@
 ﻿namespace ContaBancaria.Data.Dtos
 {
-    public class DepositoDto
+    public class RetornoDto
     {
     }
 }

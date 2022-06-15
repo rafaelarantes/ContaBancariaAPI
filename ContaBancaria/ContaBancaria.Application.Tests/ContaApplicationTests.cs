@@ -1,6 +1,7 @@
 ﻿using ContaBancaria.Application.Contracts.Interfaces;
 using ContaBancaria.Application.Contracts.ViewModels.Conta;
 using Moq;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace ContaBancaria.Application.Tests
@@ -17,11 +18,11 @@ namespace ContaBancaria.Application.Tests
         }
 
         [Fact]
-        public void Deposito_ValorNegativo_RetornaFalso()
+        public async Task Deposito_ValorNegativo_RetornaFalso()
         {
             var depositoViewModel = new DepositoViewModel();
 
-            var retornoViewModel =_contaApplication.Depositar(depositoViewModel);
+            var retornoViewModel = await _contaApplication.Depositar(depositoViewModel);
 
             Assert.False(retornoViewModel.Resultado);
         }

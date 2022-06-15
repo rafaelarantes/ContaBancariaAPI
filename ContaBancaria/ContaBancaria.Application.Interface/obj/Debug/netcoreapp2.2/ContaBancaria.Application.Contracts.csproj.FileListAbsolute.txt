@@ -13,3 +13,7 @@ C:\Users\rafae\OneDrive\Desktop\Projetos\ContaBancariaAPI\ContaBancaria\ContaBan
 C:\Users\rafae\OneDrive\Desktop\Projetos\ContaBancariaAPI\ContaBancaria\ContaBancaria.Application.Interface\obj\Debug\netcoreapp2.2\ContaBancaria.Application.Contracts.csproj.CopyComplete
 C:\Users\rafae\OneDrive\Desktop\Projetos\ContaBancariaAPI\ContaBancaria\ContaBancaria.Application.Interface\obj\Debug\netcoreapp2.2\ContaBancaria.Application.Contracts.dll
 C:\Users\rafae\OneDrive\Desktop\Projetos\ContaBancariaAPI\ContaBancaria\ContaBancaria.Application.Interface\obj\Debug\netcoreapp2.2\ContaBancaria.Application.Contracts.pdb
+C:\Users\rafae\OneDrive\Desktop\Projetos\ContaBancariaAPI\ContaBancaria\ContaBancaria.Application.Interface\bin\Debug\netcoreapp2.2\ContaBancaria.Data.Contracts.dll
+C:\Users\rafae\OneDrive\Desktop\Projetos\ContaBancariaAPI\ContaBancaria\ContaBancaria.Application.Interface\bin\Debug\netcoreapp2.2\ContaBancaria.Dominio.Contracts.dll
+C:\Users\rafae\OneDrive\Desktop\Projetos\ContaBancariaAPI\ContaBancaria\ContaBancaria.Application.Interface\bin\Debug\netcoreapp2.2\ContaBancaria.Data.Contracts.pdb
+C:\Users\rafae\OneDrive\Desktop\Projetos\ContaBancariaAPI\ContaBancaria\ContaBancaria.Application.Interface\bin\Debug\netcoreapp2.2\ContaBancaria.Dominio.Contracts.pdb

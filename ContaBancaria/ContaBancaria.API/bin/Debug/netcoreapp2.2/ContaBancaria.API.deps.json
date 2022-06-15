@@ -68,6 +68,11 @@
         }
       },
       "ContaBancaria.Data/1.0.0": {
+        "dependencies": {
+          "ContaBancaria.Data.Contracts": "1.0.0",
+          "ContaBancaria.Dominio": "1.0.0",
+          "ContaBancaria.Dominio.Contracts": "1.0.0"
+        },
         "runtime": {
           "ContaBancaria.Data.dll": {}
         },
@@ -75,12 +80,34 @@
           "ContaBancaria.Data.dll": {}
         }
       },
+      "ContaBancaria.Data.Contracts/1.0.0": {
+        "dependencies": {
+          "ContaBancaria.Dominio": "1.0.0"
+        },
+        "runtime": {
+          "ContaBancaria.Data.Contracts.dll": {}
+        },
+        "compile": {
+          "ContaBancaria.Data.Contracts.dll": {}
+        }
+      },
       "ContaBancaria.Dominio/1.0.0": {
+        "dependencies": {
+          "ContaBancaria.Dominio.Contracts": "1.0.0"
+        },
         "runtime": {
           "ContaBancaria.Dominio.dll": {}
         },
         "compile": {
           "ContaBancaria.Dominio.dll": {}
+        }
+      },
+      "ContaBancaria.Dominio.Contracts/1.0.0": {
+        "runtime": {
+          "ContaBancaria.Dominio.Contracts.dll": {}
+        },
+        "compile": {
+          "ContaBancaria.Dominio.Contracts.dll": {}
         }
       },
       "Microsoft.AspNet.WebApi.Client/5.2.6": {
@@ -3300,7 +3327,17 @@
       "serviceable": false,
       "sha512": ""
     },
+    "ContaBancaria.Data.Contracts/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
     "ContaBancaria.Dominio/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ContaBancaria.Dominio.Contracts/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

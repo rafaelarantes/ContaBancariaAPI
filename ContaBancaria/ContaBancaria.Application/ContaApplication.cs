@@ -1,6 +1,7 @@
 ﻿using ContaBancaria.Application.Contracts.Interfaces;
 using ContaBancaria.Application.Contracts.ViewModels.Conta;
 using ContaBancaria.Dominio.Entidades;
+using System.Threading.Tasks;
 
 namespace ContaBancaria.Application
 {
@@ -13,33 +14,33 @@ namespace ContaBancaria.Application
             _bancoApplication = bancoApplication;
         }
 
-        public RetornoViewModel Depositar(DepositoViewModel depositoViewModel)
+        public async Task<RetornoViewModel> Depositar(DepositoViewModel depositoViewModel)
         {
             var conta = new Conta(0);
 
-            return _bancoApplication.Depositar(conta, 1000.5M);
+            return await _bancoApplication.Depositar(conta, 1000.5M);
         }
 
-        public RetornoViewModel Sacar(SaqueViewModel saqueViewModel)
+        public async Task<RetornoViewModel> Sacar(SaqueViewModel saqueViewModel)
         {
             var conta = new Conta(0);
 
-            return _bancoApplication.Sacar(conta, 1000.5M);
+            return await _bancoApplication.Sacar(conta, 1000.5M);
         }
 
-        public RetornoViewModel Transferir(TransferenciaViewModel transferenciaViewModel)
+        public async Task<RetornoViewModel> Transferir(TransferenciaViewModel transferenciaViewModel)
         {
             var contaOrigem = new Conta(0);
             var contaDestino = new Conta(0);
 
-            return _bancoApplication.Transferir(contaOrigem, contaDestino, 1000.5M); 
+            return await _bancoApplication.Transferir(contaOrigem, contaDestino, 1000.5M); 
         }
 
-        public ExtratoViewModel VisualizarExtrato()
+        public async Task<ExtratoViewModel> VisualizarExtrato()
         {
             var conta = new Conta(0);
 
-            return _bancoApplication.VisualizarExtrato(conta);
+            return await _bancoApplication.VisualizarExtrato(conta);
         }
     }
 }

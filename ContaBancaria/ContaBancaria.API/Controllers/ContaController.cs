@@ -1,6 +1,7 @@
 ﻿using ContaBancaria.Application.Contracts.Interfaces;
 using ContaBancaria.Application.Contracts.ViewModels.Conta;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace ContaBancaria.API.Controllers
 {
@@ -16,24 +17,25 @@ namespace ContaBancaria.API.Controllers
         }
 
         [HttpGet]
-        public ExtratoViewModel VisualizarExtrato() => _contaApplication.VisualizarExtrato();
+        public async Task<ExtratoViewModel> VisualizarExtrato() 
+            => await _contaApplication.VisualizarExtrato();
 
         [HttpPost]
-        public RetornoViewModel Depositar([FromBody] DepositoViewModel depositoViewModel)
+        public async Task<RetornoViewModel> Depositar([FromBody] DepositoViewModel depositoViewModel)
         {
-            return _contaApplication.Depositar(depositoViewModel);
+            return await _contaApplication.Depositar(depositoViewModel);
         }
 
         [HttpPost]
-        public RetornoViewModel Sacar([FromBody] SaqueViewModel saqueViewModel)
+        public async Task<RetornoViewModel> Sacar([FromBody] SaqueViewModel saqueViewModel)
         {
-            return _contaApplication.Sacar(saqueViewModel);
+            return await _contaApplication.Sacar(saqueViewModel);
         }
 
         [HttpPost]
-        public RetornoViewModel Transferir([FromBody] TransferenciaViewModel transferenciaViewModel)
+        public async Task<RetornoViewModel> Transferir([FromBody] TransferenciaViewModel transferenciaViewModel)
         {
-            return _contaApplication.Transferir(transferenciaViewModel);
+            return await _contaApplication.Transferir(transferenciaViewModel);
         }
     }
 }
