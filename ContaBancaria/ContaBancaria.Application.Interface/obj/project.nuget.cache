@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "/r6xBs8K4fO7AMHY3UgNiCdRWRnItV8eRGXeLU+dm1wfiMh9r7o6FS8pKIRZ4MA/GO5R0p/MiGJDgvuf6iSIog==",
+  "dgSpecHash": "iPqe0hnOGNR+d7f68oM723/XiKq1NK6rA17qcK9H4WFsQ3aqez3wEfpkie9zl0Ma5ESpojXXCL5u1oJwi23qFg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\rafae\\OneDrive\\Desktop\\Projetos\\ContaBancariaAPI\\ContaBancaria\\ContaBancaria.Application.Interface\\ContaBancaria.Application.Contratos.csproj",
+  "projectFilePath": "C:\\Users\\rafae\\OneDrive\\Desktop\\Projetos\\ContaBancariaAPI\\ContaBancaria\\ContaBancaria.Application.Interface\\ContaBancaria.Application.Contracts.csproj",
   "expectedPackageFiles": [
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.app\\2.2.0\\microsoft.netcore.app.2.2.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.dotnetapphost\\2.2.0\\microsoft.netcore.dotnetapphost.2.2.0.nupkg.sha512",

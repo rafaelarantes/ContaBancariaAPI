@@ -30,7 +30,7 @@
       "ContaBancaria.API/1.0.0": {
         "dependencies": {
           "ContaBancaria.Application": "1.0.0",
-          "ContaBancaria.Application.Contratos": "1.0.0",
+          "ContaBancaria.Application.Contracts": "1.0.0",
           "Microsoft.AspNetCore.App": "2.2.0",
           "Microsoft.AspNetCore.Razor.Design": "2.2.0",
           "Microsoft.NETCore.App": "2.2.0"
@@ -44,7 +44,7 @@
       },
       "ContaBancaria.Application/1.0.0": {
         "dependencies": {
-          "ContaBancaria.Application.Contratos": "1.0.0",
+          "ContaBancaria.Application.Contracts": "1.0.0",
           "ContaBancaria.Data": "1.0.0",
           "ContaBancaria.Dominio": "1.0.0"
         },
@@ -55,12 +55,16 @@
           "ContaBancaria.Application.dll": {}
         }
       },
-      "ContaBancaria.Application.Contratos/1.0.0": {
+      "ContaBancaria.Application.Contracts/1.0.0": {
+        "dependencies": {
+          "ContaBancaria.Data": "1.0.0",
+          "ContaBancaria.Dominio": "1.0.0"
+        },
         "runtime": {
-          "ContaBancaria.Application.Contratos.dll": {}
+          "ContaBancaria.Application.Contracts.dll": {}
         },
         "compile": {
-          "ContaBancaria.Application.Contratos.dll": {}
+          "ContaBancaria.Application.Contracts.dll": {}
         }
       },
       "ContaBancaria.Data/1.0.0": {
@@ -3286,7 +3290,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "ContaBancaria.Application.Contratos/1.0.0": {
+    "ContaBancaria.Application.Contracts/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ContaBancaria.Application.Interface\ContaBancaria.Application.Contratos.csproj" />
+    <ProjectReference Include="..\ContaBancaria.Application.Interface\ContaBancaria.Application.Contracts.csproj" />
     <ProjectReference Include="..\ContaBancaria.Data\ContaBancaria.Data.csproj" />
     <ProjectReference Include="..\ContaBancaria.Dominio\ContaBancaria.Dominio.csproj" />
   </ItemGroup>

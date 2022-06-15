@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ContaBancaria.Application.Interface\ContaBancaria.Application.Contratos.csproj" />
+    <ProjectReference Include="..\ContaBancaria.Application.Interface\ContaBancaria.Application.Contracts.csproj" />
     <ProjectReference Include="..\ContaBancaria.Application\ContaBancaria.Application.csproj" />
   </ItemGroup>
 

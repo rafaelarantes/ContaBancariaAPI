@@ -1,5 +1,5 @@
-﻿using ContaBancaria.Application.Contratos;
-using ContaBancaria.Application.Contratos.ViewModels;
+﻿using ContaBancaria.Application.Contracts.Interfaces;
+using ContaBancaria.Application.Contracts.ViewModels.Conta;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ContaBancaria.API.Controllers

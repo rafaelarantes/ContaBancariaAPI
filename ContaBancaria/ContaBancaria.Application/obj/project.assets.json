@@ -208,14 +208,18 @@
           "build/netstandard2.0/NETStandard.Library.targets": {}
         }
       },
-      "ContaBancaria.Application.Contratos/1.0.0": {
+      "ContaBancaria.Application.Contracts/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.2",
+        "dependencies": {
+          "ContaBancaria.Data": "1.0.0",
+          "ContaBancaria.Dominio": "1.0.0"
+        },
         "compile": {
-          "bin/placeholder/ContaBancaria.Application.Contratos.dll": {}
+          "bin/placeholder/ContaBancaria.Application.Contracts.dll": {}
         },
         "runtime": {
-          "bin/placeholder/ContaBancaria.Application.Contratos.dll": {}
+          "bin/placeholder/ContaBancaria.Application.Contracts.dll": {}
         }
       },
       "ContaBancaria.Data/1.0.0": {
@@ -709,10 +713,10 @@
         "netstandard.library.nuspec"
       ]
     },
-    "ContaBancaria.Application.Contratos/1.0.0": {
+    "ContaBancaria.Application.Contracts/1.0.0": {
       "type": "project",
-      "path": "../ContaBancaria.Application.Interface/ContaBancaria.Application.Contratos.csproj",
-      "msbuildProject": "../ContaBancaria.Application.Interface/ContaBancaria.Application.Contratos.csproj"
+      "path": "../ContaBancaria.Application.Interface/ContaBancaria.Application.Contracts.csproj",
+      "msbuildProject": "../ContaBancaria.Application.Interface/ContaBancaria.Application.Contracts.csproj"
     },
     "ContaBancaria.Data/1.0.0": {
       "type": "project",
@@ -727,7 +731,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.2": [
-      "ContaBancaria.Application.Contratos >= 1.0.0",
+      "ContaBancaria.Application.Contracts >= 1.0.0",
       "ContaBancaria.Data >= 1.0.0",
       "ContaBancaria.Dominio >= 1.0.0",
       "Microsoft.NETCore.App >= 2.2.0"
@@ -767,8 +771,8 @@
         "netcoreapp2.2": {
           "targetAlias": "netcoreapp2.2",
           "projectReferences": {
-            "C:\\Users\\rafae\\OneDrive\\Desktop\\Projetos\\ContaBancariaAPI\\ContaBancaria\\ContaBancaria.Application.Interface\\ContaBancaria.Application.Contratos.csproj": {
-              "projectPath": "C:\\Users\\rafae\\OneDrive\\Desktop\\Projetos\\ContaBancariaAPI\\ContaBancaria\\ContaBancaria.Application.Interface\\ContaBancaria.Application.Contratos.csproj"
+            "C:\\Users\\rafae\\OneDrive\\Desktop\\Projetos\\ContaBancariaAPI\\ContaBancaria\\ContaBancaria.Application.Interface\\ContaBancaria.Application.Contracts.csproj": {
+              "projectPath": "C:\\Users\\rafae\\OneDrive\\Desktop\\Projetos\\ContaBancariaAPI\\ContaBancaria\\ContaBancaria.Application.Interface\\ContaBancaria.Application.Contracts.csproj"
             },
             "C:\\Users\\rafae\\OneDrive\\Desktop\\Projetos\\ContaBancariaAPI\\ContaBancaria\\ContaBancaria.Data\\ContaBancaria.Data.csproj": {
               "projectPath": "C:\\Users\\rafae\\OneDrive\\Desktop\\Projetos\\ContaBancariaAPI\\ContaBancaria\\ContaBancaria.Data\\ContaBancaria.Data.csproj"

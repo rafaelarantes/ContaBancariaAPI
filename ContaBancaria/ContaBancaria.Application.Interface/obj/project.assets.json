@@ -207,6 +207,26 @@
         "build": {
           "build/netstandard2.0/NETStandard.Library.targets": {}
         }
+      },
+      "ContaBancaria.Data/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.2",
+        "compile": {
+          "bin/placeholder/ContaBancaria.Data.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ContaBancaria.Data.dll": {}
+        }
+      },
+      "ContaBancaria.Dominio/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.2",
+        "compile": {
+          "bin/placeholder/ContaBancaria.Dominio.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ContaBancaria.Dominio.dll": {}
+        }
       }
     }
   },
@@ -678,10 +698,22 @@
         "netstandard.library.2.0.3.nupkg.sha512",
         "netstandard.library.nuspec"
       ]
+    },
+    "ContaBancaria.Data/1.0.0": {
+      "type": "project",
+      "path": "../ContaBancaria.Data/ContaBancaria.Data.csproj",
+      "msbuildProject": "../ContaBancaria.Data/ContaBancaria.Data.csproj"
+    },
+    "ContaBancaria.Dominio/1.0.0": {
+      "type": "project",
+      "path": "../ContaBancaria.Dominio/ContaBancaria.Dominio.csproj",
+      "msbuildProject": "../ContaBancaria.Dominio/ContaBancaria.Dominio.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.2": [
+      "ContaBancaria.Data >= 1.0.0",
+      "ContaBancaria.Dominio >= 1.0.0",
       "Microsoft.NETCore.App >= 2.2.0"
     ]
   },
@@ -693,9 +725,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\rafae\\OneDrive\\Desktop\\Projetos\\ContaBancariaAPI\\ContaBancaria\\ContaBancaria.Application.Interface\\ContaBancaria.Application.Contratos.csproj",
-      "projectName": "ContaBancaria.Application.Contratos",
-      "projectPath": "C:\\Users\\rafae\\OneDrive\\Desktop\\Projetos\\ContaBancariaAPI\\ContaBancaria\\ContaBancaria.Application.Interface\\ContaBancaria.Application.Contratos.csproj",
+      "projectUniqueName": "C:\\Users\\rafae\\OneDrive\\Desktop\\Projetos\\ContaBancariaAPI\\ContaBancaria\\ContaBancaria.Application.Interface\\ContaBancaria.Application.Contracts.csproj",
+      "projectName": "ContaBancaria.Application.Contracts",
+      "projectPath": "C:\\Users\\rafae\\OneDrive\\Desktop\\Projetos\\ContaBancariaAPI\\ContaBancaria\\ContaBancaria.Application.Interface\\ContaBancaria.Application.Contracts.csproj",
       "packagesPath": "C:\\Users\\rafae\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\rafae\\OneDrive\\Desktop\\Projetos\\ContaBancariaAPI\\ContaBancaria\\ContaBancaria.Application.Interface\\obj\\",
       "projectStyle": "PackageReference",
@@ -718,7 +750,14 @@
       "frameworks": {
         "netcoreapp2.2": {
           "targetAlias": "netcoreapp2.2",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\rafae\\OneDrive\\Desktop\\Projetos\\ContaBancariaAPI\\ContaBancaria\\ContaBancaria.Data\\ContaBancaria.Data.csproj": {
+              "projectPath": "C:\\Users\\rafae\\OneDrive\\Desktop\\Projetos\\ContaBancariaAPI\\ContaBancaria\\ContaBancaria.Data\\ContaBancaria.Data.csproj"
+            },
+            "C:\\Users\\rafae\\OneDrive\\Desktop\\Projetos\\ContaBancariaAPI\\ContaBancaria\\ContaBancaria.Dominio\\ContaBancaria.Dominio.csproj": {
+              "projectPath": "C:\\Users\\rafae\\OneDrive\\Desktop\\Projetos\\ContaBancariaAPI\\ContaBancaria\\ContaBancaria.Dominio\\ContaBancaria.Dominio.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
