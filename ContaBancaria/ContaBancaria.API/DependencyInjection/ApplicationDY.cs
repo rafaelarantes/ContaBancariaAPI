@@ -16,6 +16,7 @@ namespace ContaBancaria.API.DependencyInjection
 
             services.AddTransient<IContaApplication, ContaApplication>();
             services.AddTransient<IBancoApplication, BancoApplication>();
+            services.AddTransient<IBancoCentralApplication, BancoCentralApplication>();
         }
     }
 }

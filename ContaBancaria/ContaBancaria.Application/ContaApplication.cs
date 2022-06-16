@@ -10,14 +10,16 @@ namespace ContaBancaria.Application
     public class ContaApplication : IContaApplication
     {
         private readonly IBancoApplication _bancoApplication;
-        private readonly IContaRepository _contaRepository;
         private readonly IContaMapper _contaMapper;
+        private readonly IContaRepository _contaRepository;
 
         public ContaApplication(IBancoApplication bancoApplication,
-                                IContaMapper contaMapper)
+                                IContaMapper contaMapper,
+                                IContaRepository contaRepository)
         {
             _bancoApplication = bancoApplication;
             _contaMapper = contaMapper;
+            _contaRepository = contaRepository;
         }
 
         public async Task<RetornoViewModel> Depositar(DepositoViewModel depositoViewModel)

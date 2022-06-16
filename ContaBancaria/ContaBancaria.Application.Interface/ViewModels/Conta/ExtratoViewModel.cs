@@ -6,7 +6,5 @@ namespace ContaBancaria.Application.Contracts.ViewModels.Conta
     {
         public IEnumerable<ExtratoItemViewModel> ExtratoItems { get; set; }
                 = new List<ExtratoItemViewModel>();
-
-
     }
 }

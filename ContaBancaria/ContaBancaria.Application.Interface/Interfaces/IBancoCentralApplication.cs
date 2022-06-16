@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace ContaBancaria.Application.Contracts.Interfaces
 {
-    public interface IBancoApplication
+    public interface IBancoCentralApplication
     {
+        Task<IEnumerable<BancosViewModel>> ListarBancos();
+        Task<RetornoViewModel> CriarBanco(NovoBancoViewModel novoBancoViewModel);
+        Task<RetornoViewModel> ExcluirBanco(Guid guid);
         Task<RetornoViewModel> Transferir(Conta contaOrigem, Conta contaDestino, decimal valor);
-        Task<RetornoViewModel> Depositar(Conta conta, decimal valor);
-        Task<RetornoViewModel> Sacar(Conta conta, decimal valor);
-        Task<IEnumerable<BancosViewModel>> ListarContas();
     }
 }

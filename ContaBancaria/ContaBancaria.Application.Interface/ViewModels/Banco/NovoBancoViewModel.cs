@@ -2,9 +2,9 @@
 {
     public class NovoBancoViewModel
     {
-        public ushort numero;
+        public ushort NumeroBanco { get; set; }
 
-        public ushort agencia;
+        public ushort Agencia { get; set; }
 
         public string Nome { get; set; }
     }

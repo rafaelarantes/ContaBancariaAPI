@@ -16,7 +16,7 @@ namespace ContaBancaria.Application.Mappers
 
         public Banco Map(NovoBancoViewModel novoBancoViewModel)
         {
-            return new Banco(novoBancoViewModel.Nome, novoBancoViewModel.numero, novoBancoViewModel.agencia);
+            return new Banco(novoBancoViewModel.Nome, novoBancoViewModel.NumeroBanco, novoBancoViewModel.Agencia);
         }
     }
 }
