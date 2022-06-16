@@ -1,6 +1,11 @@
-﻿namespace ContaBancaria.Data.Contracts.Repositories.Interfaces
+﻿using ContaBancaria.Dominio.Entidades;
+using System;
+using System.Threading.Tasks;
+
+namespace ContaBancaria.Data.Contracts.Repositories.Interfaces
 {
     public interface IContaRepository
     {
+        Task<Conta> Obter(Guid guidConta);
     }
 }

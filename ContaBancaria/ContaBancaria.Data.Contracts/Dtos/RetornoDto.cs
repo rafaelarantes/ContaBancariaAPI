@@ -2,5 +2,6 @@
 {
     public class RetornoDto
     {
+        public bool Resultado { get; set; }
     }
 }

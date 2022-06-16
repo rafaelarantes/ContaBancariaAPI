@@ -3,6 +3,7 @@ using ContaBancaria.Application.Contracts.ViewModels.Banco;
 using ContaBancaria.Application.Contracts.ViewModels.Conta;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ContaBancaria.API.Controllers
@@ -19,7 +20,7 @@ namespace ContaBancaria.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ListarBancosViewModel> ListarBancos() => await _bancoApplication.ListarBancos();
+        public async Task<IEnumerable<BancosViewModel>> ListarBancos() => await _bancoApplication.ListarBancos();
 
         [HttpPost]
         public async Task<RetornoViewModel> CriarBanco([FromBody] NovoBancoViewModel novoBancoViewModel)

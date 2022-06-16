@@ -8,6 +8,7 @@ namespace ContaBancaria.API.DependencyInjection
     {
         public static void StartData(this IServiceCollection services)
         {
+            services.AddTransient<IContaRepository, ContaRepository>();
             services.AddTransient<IBancoRepository, BancoRepository>();
         }
     }

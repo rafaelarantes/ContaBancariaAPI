@@ -1,4 +1,5 @@
 ﻿using ContaBancaria.Application.Contracts.Interfaces;
+using ContaBancaria.Application.Contracts.Interfaces.Mappers;
 using ContaBancaria.Application.Contracts.ViewModels.Conta;
 using Moq;
 using System.Threading.Tasks;
@@ -10,11 +11,13 @@ namespace ContaBancaria.Application.Tests
     {
         private readonly IContaApplication _contaApplication;
         private Mock<IBancoApplication> _bancoApplicationMock;
+        private Mock<IContaMapper> _contaMapper;
 
         public ContaApplicationTests()
         {
             _bancoApplicationMock = new Mock<IBancoApplication>();
-            _contaApplication = new ContaApplication(_bancoApplicationMock.Object);
+            _contaApplication = new ContaApplication(bancoApplication: _bancoApplicationMock.Object,
+                                                     contaMapper: _contaMapper.Object);
         }
 
         [Fact]

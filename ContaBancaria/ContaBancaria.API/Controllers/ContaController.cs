@@ -1,6 +1,7 @@
 ﻿using ContaBancaria.Application.Contracts.Interfaces;
 using ContaBancaria.Application.Contracts.ViewModels.Conta;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace ContaBancaria.API.Controllers
@@ -17,8 +18,8 @@ namespace ContaBancaria.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ExtratoViewModel> VisualizarExtrato() 
-            => await _contaApplication.VisualizarExtrato();
+        public async Task<ExtratoViewModel> VisualizarExtrato(Guid guid) 
+            => await _contaApplication.VisualizarExtrato(guid);
 
         [HttpPost]
         public async Task<RetornoViewModel> Depositar([FromBody] DepositoViewModel depositoViewModel)

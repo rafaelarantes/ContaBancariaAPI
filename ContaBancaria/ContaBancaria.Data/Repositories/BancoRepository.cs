@@ -8,5 +8,9 @@ namespace ContaBancaria.Data.Repositories
 {
     public class BancoRepository : Repository<Banco>, IBancoRepository
     {
+        public Task<RetornoDto> AtualizarConta(Conta conta)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

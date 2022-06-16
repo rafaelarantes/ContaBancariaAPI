@@ -9,20 +9,14 @@ namespace ContaBancaria.Application.Mappers
 {
     public class BancoMapper : IBancoMapper
     {
-        public ListarBancosViewModel Map(IEnumerable<Banco> bancos)
+        public IEnumerable<BancosViewModel> Map(IEnumerable<Banco> bancos)
         {
-            return new ListarBancosViewModel();
+            return new List<BancosViewModel>();
         }
 
         public Banco Map(NovoBancoViewModel novoBancoViewModel)
         {
             return new Banco(novoBancoViewModel.Nome, novoBancoViewModel.numero, novoBancoViewModel.agencia);
         }
-
-        public RetornoViewModel Map(RetornoDto retornoDto)
-        {
-            return new RetornoViewModel();
-        }
-
     }
 }

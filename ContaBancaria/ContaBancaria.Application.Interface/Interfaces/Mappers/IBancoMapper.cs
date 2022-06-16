@@ -8,8 +8,7 @@ namespace ContaBancaria.Application.Contracts.Interfaces.Mappers
 {
     public interface IBancoMapper
     {
-        ListarBancosViewModel Map(IEnumerable<Banco> bancos);
+        IEnumerable<BancosViewModel> Map(IEnumerable<Banco> bancos);
         Banco Map(NovoBancoViewModel novoBancoViewModel);
-        RetornoViewModel Map(RetornoDto retornoDto);
     }
 }

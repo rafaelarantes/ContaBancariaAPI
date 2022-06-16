@@ -1,11 +1,12 @@
 ﻿using ContaBancaria.Application.Contracts.ViewModels.Conta;
+using System;
 using System.Threading.Tasks;
 
 namespace ContaBancaria.Application.Contracts.Interfaces
 {
     public interface IContaApplication
     {
-        Task<ExtratoViewModel> VisualizarExtrato();
+        Task<ExtratoViewModel> VisualizarExtrato(Guid guidConta);
 
         Task<RetornoViewModel> Depositar(DepositoViewModel depositoViewModel);
         
