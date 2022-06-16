@@ -24,14 +24,14 @@ namespace ContaBancaria.Application
 
         public async Task<RetornoViewModel> Depositar(DepositoViewModel depositoViewModel)
         {
-            var conta = await _contaRepository.Obter(depositoViewModel.GuidConta);
-            return await _bancoApplication.Depositar(conta, depositoViewModel.Valor);
+            var conta = await _contaRepository.Obter(depositoViewModel.GuidContaDestino);
+            return await _bancoApplication.Depositar(conta, depositoViewModel.Valor, depositoViewModel.GuidContaOrigem);
         }
 
         public async Task<RetornoViewModel> Sacar(SaqueViewModel saqueViewModel)
         {
-            var conta = await _contaRepository.Obter(saqueViewModel.GuidConta);
-            return await _bancoApplication.Sacar(conta, saqueViewModel.Valor);
+            var conta = await _contaRepository.Obter(saqueViewModel.GuidContaDestino);
+            return await _bancoApplication.Sacar(conta, saqueViewModel.Valor, saqueViewModel.GuidContaOrigem);
         }
 
         public async Task<RetornoViewModel> Transferir(TransferenciaViewModel transferenciaViewModel)

@@ -20,6 +20,7 @@ namespace ContaBancaria.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.Start();
+            services.AddSwaggerGen();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
@@ -38,6 +39,13 @@ namespace ContaBancaria.API
 
                 app.UseHttpsRedirection();
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+                options.RoutePrefix = string.Empty;
+            });
 
             app.UseMvc();
         }

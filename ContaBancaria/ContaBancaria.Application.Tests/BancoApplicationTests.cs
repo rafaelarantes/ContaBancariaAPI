@@ -184,7 +184,6 @@ namespace ContaBancaria.Application.Tests
             var retornoViewModel = await _bancoApplication.Transferir(contaOrigem, contaDestino, VALOR_TRANSFERIDO);
             
             var saldoExtratoContaOrigem = CalcularSaldoExtrato(contaOrigem);
-            var saldoExtratoContaDestino = CalcularSaldoExtrato(contaDestino);
 
             //Assert
             Assert.True(retornoViewModel.Resultado);
@@ -192,12 +191,10 @@ namespace ContaBancaria.Application.Tests
             Assert.Equal(contaOrigem.Saldo, SALDO_CONTA_ORIGEM);
             Assert.Equal(saldoExtratoContaOrigem, SALDO_CONTA_ORIGEM);
 
-            Assert.Equal(contaDestino.Saldo, SALDO_CONTA_DESTINO);
-            Assert.Equal(saldoExtratoContaDestino, SALDO_CONTA_DESTINO);
-
             _bancoRepositoryMock.Verify(b => b.AtualizarConta(It.IsAny<Conta>()), Times.Exactly(2));
+            _bancoCentralAplicationMock.Verify(b => b.Transferir(It.IsAny<Conta>(),
+                                                                 It.IsAny<Conta>(),
+                                                                 It.IsAny<decimal>()), Times.Once);
         }
-
-
     }
 }

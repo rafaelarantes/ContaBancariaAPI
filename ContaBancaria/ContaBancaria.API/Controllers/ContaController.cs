@@ -17,23 +17,23 @@ namespace ContaBancaria.API.Controllers
             _contaApplication = contaApplication;
         }
 
-        [HttpGet]
+        [HttpGet("{guid}")]
         public async Task<ExtratoViewModel> VisualizarExtrato(Guid guid) 
             => await _contaApplication.VisualizarExtrato(guid);
 
-        [HttpPost]
+        [HttpPost("Depositar")]
         public async Task<RetornoViewModel> Depositar([FromBody] DepositoViewModel depositoViewModel)
         {
             return await _contaApplication.Depositar(depositoViewModel);
         }
 
-        [HttpPost]
+        [HttpPost("Sacar")]
         public async Task<RetornoViewModel> Sacar([FromBody] SaqueViewModel saqueViewModel)
         {
             return await _contaApplication.Sacar(saqueViewModel);
         }
 
-        [HttpPost]
+        [HttpPost("Transferir")]
         public async Task<RetornoViewModel> Transferir([FromBody] TransferenciaViewModel transferenciaViewModel)
         {
             return await _contaApplication.Transferir(transferenciaViewModel);

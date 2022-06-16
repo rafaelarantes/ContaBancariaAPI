@@ -22,17 +22,20 @@ namespace ContaBancaria.Application.Tests
         private readonly Mock<IBancoMapper> _bancoMapperMock;
         private readonly Mock<IRetornoMapper> _retornoMapperMock;
         private readonly Mock<IBancoRepository> _bancoRepositoryMock;
+        private readonly Mock<IContaApplication> _contaApplicationMock;
 
         public BancoCentralApplicationTests()
         {
             _bancoMapperMock = new Mock<IBancoMapper>();
             _retornoMapperMock = new Mock<IRetornoMapper>();
             _bancoRepositoryMock = new Mock<IBancoRepository>();
+            _contaApplicationMock = new Mock<IContaApplication>();
 
             _bancoCentralApplication = new BancoCentralApplication(
                                                      bancoMapper: _bancoMapperMock.Object,
+                                                     bancoRepository: _bancoRepositoryMock.Object,
                                                      retornoMapper: _retornoMapperMock.Object,
-                                                     bancoRepository: _bancoRepositoryMock.Object);
+                                                     contaApplication: _contaApplicationMock.Object);
         }
 
         private void Mockar_BancoMapper_Map(Banco banco)
@@ -56,12 +59,6 @@ namespace ContaBancaria.Application.Tests
         private void Mockar_BancoRepository_Excluir(RetornoDto retornoDto)
         {
             _bancoRepositoryMock.Setup(b => b.Excluir(It.IsAny<Guid>()))
-                .Returns(Task.FromResult(retornoDto));
-        }
-
-        private void Mockar_BancoRepository_AtualizarConta(RetornoDto retornoDto)
-        {
-            _bancoRepositoryMock.Setup(b => b.AtualizarConta(It.IsAny<Conta>()))
                 .Returns(Task.FromResult(retornoDto));
         }
 

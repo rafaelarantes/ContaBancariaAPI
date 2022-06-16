@@ -4,6 +4,7 @@ using ContaBancaria.Application.Contracts.ViewModels.Banco;
 using ContaBancaria.Application.Contracts.ViewModels.Conta;
 using ContaBancaria.Data.Contracts.Repositories.Interfaces;
 using ContaBancaria.Dominio.Entidades;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -28,17 +29,17 @@ namespace ContaBancaria.Application
             throw new System.NotImplementedException();
         }
 
-        public async Task<RetornoViewModel> Depositar(Conta conta, decimal valor)
+        public async Task<RetornoViewModel> Depositar(Conta conta, decimal valor, Guid? guidContaOrigem = null)
         {
-            var creditado = await conta.Creditar(valor);
+            var creditado = await conta.Creditar(valor, guidContaOrigem);
             if (!creditado) return _retornoMapper.Map(creditado);
 
             return await AtualizarConta(conta);
         }
 
-        public async Task<RetornoViewModel> Sacar(Conta conta, decimal valor)
+        public async Task<RetornoViewModel> Sacar(Conta conta, decimal valor, Guid? guidContaOrigem = null)
         {
-            var debitado = await conta.Debitar(valor);
+            var debitado = await conta.Debitar(valor, guidContaOrigem);
             if (!debitado) return _retornoMapper.Map(debitado);
 
             return await AtualizarConta(conta);

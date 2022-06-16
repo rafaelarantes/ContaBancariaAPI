@@ -26,22 +26,26 @@ namespace ContaBancaria.Dominio.Entidades
             _extrato = new List<ExtratoConta>();
         }
 
-        public async Task<bool> Creditar(decimal valor)
+        public async Task<bool> Creditar(decimal valor, Guid? guidContaOrigem = null)
         {
             if (valor < 0)
                 return await Task.FromResult(false);
 
-            _extrato.Add(new ExtratoConta(valor, TipoOperacaoConta.Credito, DateTime.Now));
+            if (guidContaOrigem == null) guidContaOrigem = Guid;
+
+            _extrato.Add(new ExtratoConta(valor, TipoOperacaoConta.Credito, DateTime.Now, guidContaOrigem.Value));
 
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> Debitar(decimal valor)
+        public async Task<bool> Debitar(decimal valor, Guid? guidContaOrigem = null)
         {
             if (Saldo < valor || valor < 0)
                 return await Task.FromResult(false);
 
-            _extrato.Add(new ExtratoConta(valor, TipoOperacaoConta.Debito, DateTime.Now));
+            if (guidContaOrigem == null) guidContaOrigem = Guid;
+
+            _extrato.Add(new ExtratoConta(valor, TipoOperacaoConta.Debito, DateTime.Now, guidContaOrigem.Value));
 
             return await Task.FromResult(true);
         }

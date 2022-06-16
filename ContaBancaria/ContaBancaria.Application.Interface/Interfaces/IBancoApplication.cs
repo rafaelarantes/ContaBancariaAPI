@@ -10,8 +10,8 @@ namespace ContaBancaria.Application.Contracts.Interfaces
     public interface IBancoApplication
     {
         Task<RetornoViewModel> Transferir(Conta contaOrigem, Conta contaDestino, decimal valor);
-        Task<RetornoViewModel> Depositar(Conta conta, decimal valor);
-        Task<RetornoViewModel> Sacar(Conta conta, decimal valor);
+        Task<RetornoViewModel> Depositar(Conta conta, decimal valor, Guid? guidContaOrigem = null);
+        Task<RetornoViewModel> Sacar(Conta conta, decimal valor, Guid? guidContaOrigem = null);
         Task<IEnumerable<BancosViewModel>> ListarContas();
     }
 }
