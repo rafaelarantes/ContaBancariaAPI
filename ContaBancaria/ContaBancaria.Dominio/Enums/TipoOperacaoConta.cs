@@ -3,6 +3,7 @@
     public enum TipoOperacaoConta
     {
         Debito = 1,
-        Credito = 2
+        Credito = 2,
+        TaxaBancaria = 3
     }
 }

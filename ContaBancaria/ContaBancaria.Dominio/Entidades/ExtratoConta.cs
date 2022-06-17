@@ -13,15 +13,19 @@ namespace ContaBancaria.Dominio.Entidades
 
         public Guid GuidContaOrigem { get; private set; }
 
+        public TipoTaxaBancaria? TipoTaxaBancaria { get; private set; }
+
         public ExtratoConta(decimal valor,
                             TipoOperacaoConta tipoOperacao,
                             DateTime dataOperacao,
-                            Guid guidContaOrigem)
+                            Guid guidContaOrigem,
+                            TipoTaxaBancaria? tipoTaxaBancaria = null)
         {
             Valor = valor;
             TipoOperacao = tipoOperacao;
             DataOperacao = dataOperacao;
             GuidContaOrigem = guidContaOrigem;
+            TipoTaxaBancaria = tipoTaxaBancaria;
         }
     }
 }

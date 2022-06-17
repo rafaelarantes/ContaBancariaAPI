@@ -13,10 +13,7 @@ namespace ContaBancaria.Dominio.Entidades
         private readonly Banco _banco;
 
         public Guid GuidBanco => _banco.Guid;
-
         public decimal Saldo => CalcularSaldo();
-
-
         public IReadOnlyCollection<ExtratoConta> Extrato => _extrato.ToList();
 
         public Conta(ulong numero, Banco banco)
@@ -50,12 +47,25 @@ namespace ContaBancaria.Dominio.Entidades
             return await Task.FromResult(true);
         }
 
+        public async Task<bool> DebitarTaxaBancaria(TipoTaxaBancaria tipoTaxaBancaria)
+        {
+            var somaTipoTaxa = _banco.TaxasBancarias.ToList()
+                                                    .Where(t => t.TipoTaxaBancaria == tipoTaxaBancaria)
+                                                    .Sum(t => t.Valor);
+
+            _extrato.Add(new ExtratoConta(somaTipoTaxa, TipoOperacaoConta.TaxaBancaria, 
+                                          DateTime.Now, Guid.Empty, tipoTaxaBancaria));
+
+            return await Task.FromResult(true);
+        }
+
         private decimal CalcularSaldo()
         {
-            var somaValoresCredito = _extrato.Where(e => e.TipoOperacao == TipoOperacaoConta.Credito)
+            var somaValoresCredito = Extrato.Where(e => e.TipoOperacao == TipoOperacaoConta.Credito)
                                              .Sum(e => e.Valor);
 
-            var somaValoresDebito = _extrato.Where(e => e.TipoOperacao == TipoOperacaoConta.Debito)
+            var somaValoresDebito = Extrato.Where(e => e.TipoOperacao == TipoOperacaoConta.Debito || 
+                                                       e.TipoOperacao == TipoOperacaoConta.TaxaBancaria)
                                             .Sum(e => e.Valor);
 
             return somaValoresCredito - somaValoresDebito;

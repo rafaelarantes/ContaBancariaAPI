@@ -9,6 +9,7 @@ using ContaBancaria.Dominio.Entidades;
 using ContaBancaria.Dominio.Enums;
 using Moq;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
@@ -70,7 +71,7 @@ namespace ContaBancaria.Application.Tests
 
         private Conta CriarConta()
         {
-            var banco = new Banco("Banco teste", 1, 1111);
+            var banco = new Banco("Banco teste", 1, 1111, new List<TaxaBancaria>());
             return new Conta(111111, banco);
         }
 
@@ -79,7 +80,8 @@ namespace ContaBancaria.Application.Tests
             var valoresCredito = conta.Extrato.Where(e => e.TipoOperacao == TipoOperacaoConta.Credito)
                                               .Sum(e => e.Valor);
 
-            var valoresDebito = conta.Extrato.Where(e => e.TipoOperacao == TipoOperacaoConta.Debito)
+            var valoresDebito = conta.Extrato.Where(e => e.TipoOperacao == TipoOperacaoConta.Debito ||
+                                                         e.TipoOperacao == TipoOperacaoConta.TaxaBancaria)
                                              .Sum(e => e.Valor);
 
             var saldoExtrato = valoresCredito - valoresDebito;
@@ -169,7 +171,7 @@ namespace ContaBancaria.Application.Tests
             const decimal SALDO_CONTA_ORIGEM = VALOR_DEPOSITO - VALOR_TRANSFERIDO;
             const decimal SALDO_CONTA_DESTINO = VALOR_TRANSFERIDO;
 
-            var bancoOrigem = new Banco("Banco teste", 1, 1111);
+            var bancoOrigem = new Banco("Banco teste", 1, 1111, new List<TaxaBancaria>());
             var contaOrigem = new Conta(111111, bancoOrigem);
             var contaDestino = new Conta(211112, bancoOrigem);
 
@@ -204,10 +206,10 @@ namespace ContaBancaria.Application.Tests
             const decimal SALDO_CONTA_ORIGEM = VALOR_DEPOSITO - VALOR_TRANSFERIDO;
             const decimal SALDO_CONTA_DESTINO = 0;
 
-            var bancoOrigem = new Banco("Banco teste", 1, 1111);
+            var bancoOrigem = new Banco("Banco teste", 1, 1111, new List<TaxaBancaria>());
             var contaOrigem = new Conta(111111, bancoOrigem);
 
-            var bancoDestino = new Banco("Banco teste 2", 2, 2222);
+            var bancoDestino = new Banco("Banco teste 2", 2, 2222, new List<TaxaBancaria>());
             var contaDestino = new Conta(211112, bancoDestino);
 
             Mockar_AtualizarConta(contaOrigem);
@@ -229,6 +231,7 @@ namespace ContaBancaria.Application.Tests
             _bancoRepositoryMock.Verify(b => b.AtualizarConta(It.IsAny<Conta>()), Times.Exactly(2));
             _bancoCentralAplicationMock.Verify(b => b.Transferir(It.IsAny<Conta>(),
                                                                  It.IsAny<Conta>(),
+              
                                                                  It.IsAny<decimal>()), Times.Once);
         }
 
@@ -242,7 +245,7 @@ namespace ContaBancaria.Application.Tests
             const decimal SALDO_CONTA_ORIGEM = VALOR_DEPOSITO;
             const decimal SALDO_CONTA_DESTINO = 0;
 
-            var bancoOrigem = new Banco("Banco teste", 1, 1111);
+            var bancoOrigem = new Banco("Banco teste", 1, 1111, new List<TaxaBancaria>());
             var contaOrigem = new Conta(111111, bancoOrigem);
             var contaDestino = new Conta(211112, bancoOrigem);
 

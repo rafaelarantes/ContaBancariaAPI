@@ -9,6 +9,7 @@ using ContaBancaria.Dominio.Entidades;
 using ContaBancaria.Dominio.Enums;
 using Moq;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
@@ -74,8 +75,9 @@ namespace ContaBancaria.Application.Tests
             };
 
             var novoBanco = new Banco(novoBancoViewModel.Nome,
-                                             novoBancoViewModel.NumeroBanco,
-                                             novoBancoViewModel.Agencia);
+                                      novoBancoViewModel.NumeroBanco,
+                                      novoBancoViewModel.Agencia,
+                                      new List<TaxaBancaria>());
 
             Mockar_BancoMapper_Map(novoBanco);
 
@@ -103,13 +105,14 @@ namespace ContaBancaria.Application.Tests
             {
                 NumeroBanco = 1,
                 Agencia = 1111,
-                Nome = "Banco teste"
+                Nome = "Banco teste"    
             };
 
             var novoBanco = new Banco(novoBancoViewModel.Nome,
-                                             novoBancoViewModel.NumeroBanco,
-                                             novoBancoViewModel.Agencia);
-
+                                      novoBancoViewModel.NumeroBanco,
+                                      novoBancoViewModel.Agencia,
+                                      new List<TaxaBancaria>());
+            
             Mockar_BancoMapper_Map(novoBanco);
 
             Mockar_BancoRepository_Incluir(new RetornoDto

@@ -1,4 +1,6 @@
-﻿namespace ContaBancaria.Application.Contracts.ViewModels.Banco
+﻿using System.Collections.Generic;
+
+namespace ContaBancaria.Application.Contracts.ViewModels.Banco
 {
     public class NovoBancoViewModel
     {
@@ -7,5 +9,8 @@
         public ushort Agencia { get; set; }
 
         public string Nome { get; set; }
+
+        public IEnumerable<TaxaBancariaViewModel> TaxasBancarias { get; set; } =
+            new List<TaxaBancariaViewModel>();
     }
 }
