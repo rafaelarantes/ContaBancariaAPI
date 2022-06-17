@@ -26,7 +26,9 @@ namespace ContaBancaria.Application
         }
         public Task<IEnumerable<BancosViewModel>> ListarContas()
         {
-            throw new System.NotImplementedException();
+            // _bancoRepository.Listar();
+
+            throw new NotImplementedException();
         }
 
         public async Task<RetornoViewModel> Depositar(Conta conta, decimal valor, Guid? guidContaOrigem = null)

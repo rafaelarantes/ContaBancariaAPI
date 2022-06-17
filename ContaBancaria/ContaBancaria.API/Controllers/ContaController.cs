@@ -1,11 +1,13 @@
 ﻿using ContaBancaria.Application.Contracts.Interfaces;
 using ContaBancaria.Application.Contracts.ViewModels.Conta;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 
 namespace ContaBancaria.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ContaController : ControllerBase

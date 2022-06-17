@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ContaBancaria.Data.Contracts\ContaBancaria.Data.Contracts.csproj" />
     <ProjectReference Include="..\ContaBancaria.Dominio.Contracts\ContaBancaria.Dominio.Contracts.csproj" />
     <ProjectReference Include="..\ContaBancaria.Dominio\ContaBancaria.Dominio.csproj" />

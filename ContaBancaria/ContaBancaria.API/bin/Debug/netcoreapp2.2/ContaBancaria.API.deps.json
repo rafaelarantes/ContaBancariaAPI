@@ -190,7 +190,8 @@
         "dependencies": {
           "ContaBancaria.Data.Contracts": "1.0.0",
           "ContaBancaria.Dominio": "1.0.0",
-          "ContaBancaria.Dominio.Contracts": "1.0.0"
+          "ContaBancaria.Dominio.Contracts": "1.0.0",
+          "Microsoft.EntityFrameworkCore": "2.2.0"
         },
         "runtime": {
           "ContaBancaria.Data.dll": {}

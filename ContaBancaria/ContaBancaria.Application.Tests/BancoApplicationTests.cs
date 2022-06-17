@@ -40,6 +40,12 @@ namespace ContaBancaria.Application.Tests
                 .Returns(retornoViewModel);
         }
 
+        private void Mockar_RetornoMapper_MapBool(RetornoViewModel retornoViewModel)
+        {
+            _retornoMapperMock.Setup(b => b.Map(It.IsAny<bool>()))
+                .Returns(retornoViewModel);
+        }
+
         private void Mockar_BancoRepository_AtualizarConta(RetornoDto retornoDto)
         {
             _bancoRepositoryMock.Setup(b => b.AtualizarConta(It.IsAny<Conta>()))
@@ -111,6 +117,7 @@ namespace ContaBancaria.Application.Tests
 
             var conta = CriarConta();
             Mockar_AtualizarConta(conta);
+            Mockar_RetornoMapper_MapBool(new RetornoViewModel { Resultado = true });
 
             //Act
             await _bancoApplication.Depositar(conta, VALOR_DEPOSITO);
@@ -128,6 +135,32 @@ namespace ContaBancaria.Application.Tests
         }
 
         [Fact]
+        public async Task Sacar_ValorMaiorDoquePossui_NaoPermitir()
+        {
+            //Arrange
+            const decimal VALOR_DEPOSITO = 1000M;
+            const decimal VALOR_SAQUE = 1500M;
+            const decimal SALDO = VALOR_DEPOSITO;
+
+            var conta = CriarConta();
+            Mockar_RetornoMapper_MapBool(new RetornoViewModel { Resultado = false });
+
+            //Act
+            await _bancoApplication.Depositar(conta, VALOR_DEPOSITO);
+            var retornoViewModel = await _bancoApplication.Sacar(conta, VALOR_SAQUE);
+
+            var saldoExtrato = CalcularSaldoExtrato(conta);
+
+            //Assert
+            Assert.False(retornoViewModel.Resultado);
+
+            Assert.Equal(conta.Saldo, SALDO);
+            Assert.Equal(saldoExtrato, SALDO);
+
+            _bancoRepositoryMock.Verify(b => b.AtualizarConta(It.IsAny<Conta>()), Times.Once);
+        }
+
+        [Fact]
         public async Task Transferir_TransferirParaMesmoBanco_SaldoEExtratoDevemContemOValorTransferido()
         {
             //Arrange
@@ -141,6 +174,7 @@ namespace ContaBancaria.Application.Tests
             var contaDestino = new Conta(211112, bancoOrigem);
 
             Mockar_AtualizarConta(contaOrigem);
+            Mockar_RetornoMapper_MapBool(new RetornoViewModel { Resultado = true });
 
             //Act
             await _bancoApplication.Depositar(contaOrigem, VALOR_DEPOSITO);
@@ -178,6 +212,7 @@ namespace ContaBancaria.Application.Tests
 
             Mockar_AtualizarConta(contaOrigem);
             Mockar_BancoCentralApplication_Transferir(new RetornoViewModel { Resultado = true });
+            Mockar_RetornoMapper_MapBool(new RetornoViewModel { Resultado = true });
 
             //Act
             await _bancoApplication.Depositar(contaOrigem, VALOR_DEPOSITO);
@@ -196,5 +231,68 @@ namespace ContaBancaria.Application.Tests
                                                                  It.IsAny<Conta>(),
                                                                  It.IsAny<decimal>()), Times.Once);
         }
+
+
+        [Fact]
+        public async Task Transferir_ValorMaiorDoquePossui_NaoPermitir()
+        {
+            //Arrange
+            const decimal VALOR_DEPOSITO = 1000M;
+            const decimal VALOR_TRANSFERIDO = 1500M;
+            const decimal SALDO_CONTA_ORIGEM = VALOR_DEPOSITO;
+            const decimal SALDO_CONTA_DESTINO = 0;
+
+            var bancoOrigem = new Banco("Banco teste", 1, 1111);
+            var contaOrigem = new Conta(111111, bancoOrigem);
+            var contaDestino = new Conta(211112, bancoOrigem);
+
+            Mockar_AtualizarConta(contaOrigem);
+            Mockar_RetornoMapper_MapBool(new RetornoViewModel { Resultado = false });
+
+            //Act
+            await _bancoApplication.Depositar(contaOrigem, VALOR_DEPOSITO);
+            var retornoViewModel = await _bancoApplication.Transferir(contaOrigem, contaDestino, VALOR_TRANSFERIDO);
+
+            var saldoExtratoContaOrigem = CalcularSaldoExtrato(contaOrigem);
+            var saldoExtratoContaDestino = CalcularSaldoExtrato(contaDestino);
+
+            //Assert
+            Assert.False(retornoViewModel.Resultado);
+
+            Assert.Equal(contaOrigem.Saldo, SALDO_CONTA_ORIGEM);
+            Assert.Equal(saldoExtratoContaOrigem, SALDO_CONTA_ORIGEM);
+
+            Assert.Equal(contaDestino.Saldo, SALDO_CONTA_DESTINO);
+            Assert.Equal(saldoExtratoContaDestino, SALDO_CONTA_DESTINO);
+
+            _bancoRepositoryMock.Verify(b => b.AtualizarConta(It.IsAny<Conta>()), Times.Once);
+        }
+
+        [Fact]
+        public async Task Depositar_Taxa_RefletirNoExtrato()
+        {
+            //deposito = 1% valor depositado
+        }
+
+        [Fact]
+        public async Task Sacar_Taxa_RefletirNoExtrato()
+        {
+            //saque = R$ 4
+        }
+
+        [Fact]
+        public async Task Transferir_Taxa_RefletirNoExtrato()
+        {
+            //transferencia = R$ 1
+        }
+
+
+
+
+
+
+
+
+
     }
 }
