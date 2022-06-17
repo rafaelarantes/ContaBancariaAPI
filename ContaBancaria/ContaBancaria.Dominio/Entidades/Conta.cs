@@ -47,13 +47,15 @@ namespace ContaBancaria.Dominio.Entidades
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> DebitarTaxaBancaria(TipoTaxaBancaria tipoTaxaBancaria)
+        public async Task<bool> DebitarTaxaBancaria(TipoTaxaBancaria tipoTaxaBancaria, decimal valor)
         {
-            var somaTipoTaxa = _banco.TaxasBancarias.ToList()
-                                                    .Where(t => t.TipoTaxaBancaria == tipoTaxaBancaria)
-                                                    .Sum(t => t.Valor);
+            var taxasBancarias = _banco.TaxasBancarias.ToList()
+                                                      .Where(t => t.Tipo == tipoTaxaBancaria)
+                                                      .ToList();
 
-            _extrato.Add(new ExtratoConta(somaTipoTaxa, TipoOperacaoConta.TaxaBancaria, 
+            var taxaBancaria = _banco.CalcularTaxaBancaria(valor, taxasBancarias);
+
+            _extrato.Add(new ExtratoConta(taxaBancaria, TipoOperacaoConta.TaxaBancaria,
                                           DateTime.Now, Guid.Empty, tipoTaxaBancaria));
 
             return await Task.FromResult(true);
@@ -64,7 +66,7 @@ namespace ContaBancaria.Dominio.Entidades
             var somaValoresCredito = Extrato.Where(e => e.TipoOperacao == TipoOperacaoConta.Credito)
                                              .Sum(e => e.Valor);
 
-            var somaValoresDebito = Extrato.Where(e => e.TipoOperacao == TipoOperacaoConta.Debito || 
+            var somaValoresDebito = Extrato.Where(e => e.TipoOperacao == TipoOperacaoConta.Debito ||
                                                        e.TipoOperacao == TipoOperacaoConta.TaxaBancaria)
                                             .Sum(e => e.Valor);
 

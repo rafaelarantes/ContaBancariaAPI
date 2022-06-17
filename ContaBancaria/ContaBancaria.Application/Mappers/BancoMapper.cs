@@ -17,7 +17,8 @@ namespace ContaBancaria.Application.Mappers
         {
             return new Banco(novoBancoViewModel.Nome, novoBancoViewModel.NumeroBanco, novoBancoViewModel.Agencia,
                              novoBancoViewModel.TaxasBancarias
-                             .Select(t => new TaxaBancaria(t.Valor, t.TipoTaxaBancaria, t.Descricao)));
+                             .Select(t => new TaxaBancaria(t.Valor, t.TipoTaxaBancaria,
+                                                           novoBancoViewModel.TipoValorTaxaBancaria, t.Descricao)));
         }
     }
 }

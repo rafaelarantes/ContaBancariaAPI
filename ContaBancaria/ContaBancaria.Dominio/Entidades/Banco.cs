@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using ContaBancaria.Dominio.Enums;
+using System.Collections.Generic;
 
 namespace ContaBancaria.Dominio.Entidades
 {
@@ -14,12 +15,30 @@ namespace ContaBancaria.Dominio.Entidades
             _nome = nome;
             _numero = numero;
             _agencia = agencia;
-            TaxasBancarias = taxasBancarias;
+            
+            TaxasBancarias = taxasBancarias ?? new List<TaxaBancaria>();
         }
 
         public override string ToString()
         {
             return $"{ _nome } { _numero } { _agencia }";
+        }
+
+        public decimal CalcularTaxaBancaria(decimal valor, List<TaxaBancaria> taxasBancarias)
+        {
+            decimal taxaBancaria = 0;
+
+            taxasBancarias.ForEach(t =>
+            {
+                if (t.TipoValor == TipoValorTaxaBancaria.Percentual)
+                {
+                    taxaBancaria += valor * t.Valor / 100;
+                    return;
+                }
+
+                taxaBancaria += t.Valor;
+            });
+            return taxaBancaria;
         }
     }
 }

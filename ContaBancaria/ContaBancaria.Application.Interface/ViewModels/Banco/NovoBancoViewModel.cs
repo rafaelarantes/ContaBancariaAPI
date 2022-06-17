@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using ContaBancaria.Dominio.Enums;
+using System.Collections.Generic;
 
 namespace ContaBancaria.Application.Contracts.ViewModels.Banco
 {
@@ -12,5 +13,7 @@ namespace ContaBancaria.Application.Contracts.ViewModels.Banco
 
         public IEnumerable<TaxaBancariaViewModel> TaxasBancarias { get; set; } =
             new List<TaxaBancariaViewModel>();
+
+        public TipoValorTaxaBancaria TipoValorTaxaBancaria { get; set; }
     }
 }

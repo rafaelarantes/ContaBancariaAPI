@@ -105,7 +105,7 @@ namespace ContaBancaria.Application.Tests
             {
                 NumeroBanco = 1,
                 Agencia = 1111,
-                Nome = "Banco teste"    
+                Nome = "Banco teste"
             };
 
             var novoBanco = new Banco(novoBancoViewModel.Nome,

@@ -45,7 +45,6 @@ namespace ContaBancaria.Application
         public async Task<ExtratoViewModel> VisualizarExtrato(Guid guidConta)
         {
             var conta = await _contaRepository.Obter(guidConta);
-
             return _contaMapper.Map(conta.Extrato);
         }
     }

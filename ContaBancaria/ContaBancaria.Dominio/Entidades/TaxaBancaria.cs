@@ -6,15 +6,19 @@ namespace ContaBancaria.Dominio.Entidades
     {
         public decimal Valor { get; private set; }
 
-        public TipoTaxaBancaria TipoTaxaBancaria { get; private set; }
+        public TipoValorTaxaBancaria TipoValor { get; private set; }
+
+        public TipoTaxaBancaria Tipo { get; private set; }
 
         public string Descricao { get; private set; }
 
-        public TaxaBancaria(decimal valor, TipoTaxaBancaria tipoTaxaBancaria, string descricao)
+        public TaxaBancaria(decimal valor, TipoTaxaBancaria tipoTaxaBancaria,
+                            TipoValorTaxaBancaria tipoValorTaxaBancaria, string descricao)
         {
             Valor = valor;
-            TipoTaxaBancaria = tipoTaxaBancaria;
+            Tipo = tipoTaxaBancaria;
             Descricao = descricao;
+            TipoValor = tipoValorTaxaBancaria;
         }
     }
 }
