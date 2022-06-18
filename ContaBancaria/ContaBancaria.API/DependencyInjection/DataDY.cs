@@ -1,4 +1,5 @@
-﻿using ContaBancaria.Data.Contracts.Repositories.Interfaces;
+﻿using ContaBancaria.Data.Contexts;
+using ContaBancaria.Data.Contracts.Repositories.Interfaces;
 using ContaBancaria.Data.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -8,6 +9,7 @@ namespace ContaBancaria.API.DependencyInjection
     {
         public static void StartData(this IServiceCollection services)
         {
+            services.AddDbContext<BancoContext>();
             services.AddTransient<IContaRepository, ContaRepository>();
             services.AddTransient<IBancoRepository, BancoRepository>();
         }

@@ -1,4 +1,5 @@
 ﻿using ContaBancaria.Dominio.Enums;
+using System;
 
 namespace ContaBancaria.Dominio.Entidades
 {
@@ -12,6 +13,11 @@ namespace ContaBancaria.Dominio.Entidades
 
         public string Descricao { get; private set; }
 
+        public Guid GuidBanco { get; private set; }
+
+        public Banco Banco { get; private set; }
+
+
         public TaxaBancaria(decimal valor, TipoTaxaBancaria tipoTaxaBancaria,
                             TipoValorTaxaBancaria tipoValorTaxaBancaria, string descricao)
         {
@@ -19,6 +25,11 @@ namespace ContaBancaria.Dominio.Entidades
             Tipo = tipoTaxaBancaria;
             Descricao = descricao;
             TipoValor = tipoValorTaxaBancaria;
+        }
+
+        public TaxaBancaria()
+        {
+
         }
     }
 }

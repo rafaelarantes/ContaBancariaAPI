@@ -1,6 +1,6 @@
 ﻿namespace ContaBancaria.Dominio.Enums
 {
-    public enum TipoTaxaBancaria
+    public enum TipoTaxaBancaria : byte
     {
         Saque = 1,
         Deposito = 2,

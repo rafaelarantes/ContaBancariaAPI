@@ -1,8 +1,9 @@
 ﻿using ContaBancaria.Application.Contracts.Interfaces;
 using ContaBancaria.Application.Contracts.Interfaces.Mappers;
-using ContaBancaria.Application.Contracts.ViewModels.Banco;
+using ContaBancaria.Application.Contracts.ViewModels.BancoCentral;
 using ContaBancaria.Application.Contracts.ViewModels.Conta;
 using ContaBancaria.Data.Contracts.Repositories.Interfaces;
+using ContaBancaria.Data.Dtos;
 using ContaBancaria.Dominio.Entidades;
 using System;
 using System.Collections.Generic;
@@ -15,17 +16,14 @@ namespace ContaBancaria.Application
         private readonly IBancoMapper _bancoMapper;
         private readonly IBancoRepository _bancoRepository;
         private readonly IRetornoMapper _retornoMapper;
-        private readonly IContaApplication _contaApplication;
 
         public BancoCentralApplication(IBancoMapper bancoMapper,
                         IBancoRepository bancoRepository,
-                        IRetornoMapper retornoMapper,
-                        IContaApplication contaApplication)
+                        IRetornoMapper retornoMapper)
         {
             _bancoMapper = bancoMapper;
             _bancoRepository = bancoRepository;
             _retornoMapper = retornoMapper;
-            _contaApplication = contaApplication;
         }
 
         public async Task<IEnumerable<BancosViewModel>> ListarBancos()
@@ -50,12 +48,14 @@ namespace ContaBancaria.Application
 
         public async Task<RetornoViewModel> Transferir(Conta contaOrigem, Conta contaDestino, decimal valor)
         {
-            return await _contaApplication.Depositar(new DepositoViewModel
+            /*return await _contaApplication.Depositar(new DepositoViewModel
             {
                 GuidContaDestino = contaDestino.Guid,
                 Valor = valor,
                 GuidContaOrigem = contaOrigem.Guid
-            });
+            });*/
+
+            throw new NotImplementedException();
         }
     }
 }

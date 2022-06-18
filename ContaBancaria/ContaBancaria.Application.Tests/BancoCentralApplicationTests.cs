@@ -1,6 +1,7 @@
 ﻿using ContaBancaria.Application.Contracts.Interfaces;
 using ContaBancaria.Application.Contracts.Interfaces.Mappers;
 using ContaBancaria.Application.Contracts.ViewModels.Banco;
+using ContaBancaria.Application.Contracts.ViewModels.BancoCentral;
 using ContaBancaria.Application.Contracts.ViewModels.Conta;
 using ContaBancaria.Application.Mappers;
 using ContaBancaria.Data.Contracts.Repositories.Interfaces;
@@ -23,20 +24,17 @@ namespace ContaBancaria.Application.Tests
         private readonly Mock<IBancoMapper> _bancoMapperMock;
         private readonly Mock<IRetornoMapper> _retornoMapperMock;
         private readonly Mock<IBancoRepository> _bancoRepositoryMock;
-        private readonly Mock<IContaApplication> _contaApplicationMock;
 
         public BancoCentralApplicationTests()
         {
             _bancoMapperMock = new Mock<IBancoMapper>();
             _retornoMapperMock = new Mock<IRetornoMapper>();
             _bancoRepositoryMock = new Mock<IBancoRepository>();
-            _contaApplicationMock = new Mock<IContaApplication>();
 
             _bancoCentralApplication = new BancoCentralApplication(
                                                      bancoMapper: _bancoMapperMock.Object,
                                                      bancoRepository: _bancoRepositoryMock.Object,
-                                                     retornoMapper: _retornoMapperMock.Object,
-                                                     contaApplication: _contaApplicationMock.Object);
+                                                     retornoMapper: _retornoMapperMock.Object);
         }
 
         private void Mockar_BancoMapper_Map(Banco banco)

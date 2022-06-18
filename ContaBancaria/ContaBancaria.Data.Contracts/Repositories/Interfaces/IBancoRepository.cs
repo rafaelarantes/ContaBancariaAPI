@@ -8,12 +8,8 @@ namespace ContaBancaria.Data.Contracts.Repositories.Interfaces
 {
     public interface IBancoRepository
     {
-        Task<IEnumerable<Banco>> Listar();
-
-        Task<RetornoDto> Incluir(Banco banco);
-
         Task<RetornoDto> Excluir(Guid guid);
-
-        Task<RetornoDto> AtualizarConta(Conta conta);
+        Task<RetornoDto> Incluir(Banco banco);
+        Task<IEnumerable<Banco>> Listar();
     }
 }

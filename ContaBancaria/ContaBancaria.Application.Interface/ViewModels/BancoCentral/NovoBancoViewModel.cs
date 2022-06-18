@@ -1,7 +1,8 @@
-﻿using ContaBancaria.Dominio.Enums;
+﻿using ContaBancaria.Application.Contracts.ViewModels.Banco;
+using ContaBancaria.Dominio.Enums;
 using System.Collections.Generic;
 
-namespace ContaBancaria.Application.Contracts.ViewModels.Banco
+namespace ContaBancaria.Application.Contracts.ViewModels.BancoCentral
 {
     public class NovoBancoViewModel
     {

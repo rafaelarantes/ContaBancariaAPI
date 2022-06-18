@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace ContaBancaria.API.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ContaController : ControllerBase

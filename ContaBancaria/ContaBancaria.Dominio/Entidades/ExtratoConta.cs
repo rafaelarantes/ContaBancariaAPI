@@ -11,7 +11,12 @@ namespace ContaBancaria.Dominio.Entidades
 
         public decimal Valor { get; private set; }
 
+        public Guid GuidConta { get; private set; }
+
+        public Conta Conta { get; private set; }
+
         public Guid GuidContaOrigem { get; private set; }
+
 
         public TipoTaxaBancaria? TipoTaxaBancaria { get; private set; }
 
@@ -26,6 +31,11 @@ namespace ContaBancaria.Dominio.Entidades
             DataOperacao = dataOperacao;
             GuidContaOrigem = guidContaOrigem;
             TipoTaxaBancaria = tipoTaxaBancaria;
+        }
+
+        public ExtratoConta()
+        {
+
         }
     }
 }

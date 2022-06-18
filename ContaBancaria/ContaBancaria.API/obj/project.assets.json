@@ -4573,7 +4573,8 @@
           "ContaBancaria.Data.Contracts": "1.0.0",
           "ContaBancaria.Dominio": "1.0.0",
           "ContaBancaria.Dominio.Contracts": "1.0.0",
-          "Microsoft.EntityFrameworkCore": "2.2.0"
+          "Microsoft.EntityFrameworkCore": "2.2.0",
+          "Microsoft.EntityFrameworkCore.SqlServer": "2.2.0"
         },
         "compile": {
           "bin/placeholder/ContaBancaria.Data.dll": {}

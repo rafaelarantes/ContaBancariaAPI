@@ -1,4 +1,4 @@
-﻿using ContaBancaria.Application.Contracts.ViewModels.Banco;
+﻿using ContaBancaria.Application.Contracts.ViewModels.BancoCentral;
 using ContaBancaria.Application.Contracts.ViewModels.Conta;
 using ContaBancaria.Dominio.Entidades;
 using System;

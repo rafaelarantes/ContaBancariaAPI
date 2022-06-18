@@ -1,13 +1,13 @@
 ﻿using ContaBancaria.Application.Contracts.Interfaces;
 using ContaBancaria.Application.Contracts.Interfaces.Mappers;
 using ContaBancaria.Application.Contracts.ViewModels.Banco;
+using ContaBancaria.Application.Contracts.ViewModels.BancoCentral;
 using ContaBancaria.Application.Contracts.ViewModels.Conta;
 using ContaBancaria.Data.Contracts.Repositories.Interfaces;
 using ContaBancaria.Dominio.Entidades;
 using ContaBancaria.Dominio.Enums;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ContaBancaria.Application
@@ -17,53 +17,88 @@ namespace ContaBancaria.Application
         private readonly IBancoCentralApplication _bancoCentralApplication;
         private readonly IBancoRepository _bancoRepository;
         private readonly IRetornoMapper _retornoMapper;
+        private readonly IBancoMapper _bancoMapper;
+        private readonly IContaRepository _contaRepository;
 
         public BancoApplication(IBancoCentralApplication bancoCentralApplication, 
                                 IBancoRepository bancoRepository,
-                                IRetornoMapper retornoMapper)
+                                IRetornoMapper retornoMapper,
+                                IBancoMapper bancoMapper,
+                                IContaRepository contaRepository)
         {
             _bancoCentralApplication = bancoCentralApplication;
             _bancoRepository = bancoRepository;
             _retornoMapper = retornoMapper;
+            _bancoMapper = bancoMapper;
+            _contaRepository = contaRepository;
         }
-        public Task<IEnumerable<BancosViewModel>> ListarContas()
-        {
-            // _bancoRepository.Listar();
 
+        public async Task<RetornoViewModel> CriarConta(NovaContaViewModel novaContaViewModel)
+        {
             throw new NotImplementedException();
         }
 
-        public async Task<RetornoViewModel> Depositar(Conta conta, decimal valor, Guid? guidContaOrigem = null)
+        public async Task<RetornoViewModel> ExcluirConta(Guid guid)
         {
-            if(guidContaOrigem == null)
+            throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<BancosViewModel>> ListarContas()
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<RetornoViewModel> Depositar(DepositoBancarioViewModel depositoBancarioViewModel)
+        {
+            var depositoBancarioDto = _bancoMapper.Map(depositoBancarioViewModel);
+
+            if (depositoBancarioDto.GuidContaOrigem == null)
             {
-                var debitadoTaxaBancaria = await conta.DebitarTaxaBancaria(TipoTaxaBancaria.Deposito, valor);
+                var debitadoTaxaBancaria = await depositoBancarioDto.Conta.DebitarTaxaBancaria(
+                                                    TipoTaxaBancaria.Deposito,
+                                                    depositoBancarioDto.Valor);
+
                 if (!debitadoTaxaBancaria) return _retornoMapper.Map(debitadoTaxaBancaria);
             }
 
-            return await Creditar(conta, valor, guidContaOrigem);
+            return await Creditar(depositoBancarioDto.Conta,
+                                  depositoBancarioDto.Valor,
+                                  depositoBancarioDto.GuidContaOrigem);
         }
 
-        public async Task<RetornoViewModel> Sacar(Conta conta, decimal valor, Guid? guidContaOrigem = null)
+        public async Task<RetornoViewModel> Sacar(SaqueBancarioViewModel saqueBancarioViewModel)
         {
-            var debitadoTaxaBancaria = await conta.DebitarTaxaBancaria(TipoTaxaBancaria.Saque, valor);
+            var saqueBancarioDto = _bancoMapper.Map(saqueBancarioViewModel);
+
+            var debitadoTaxaBancaria = await saqueBancarioDto.Conta.DebitarTaxaBancaria(
+                                                TipoTaxaBancaria.Saque,
+                                                saqueBancarioDto.Valor);
+
             if (!debitadoTaxaBancaria) return _retornoMapper.Map(debitadoTaxaBancaria);
 
-            return await Debitar(conta, valor, guidContaOrigem);
+            return await Debitar(saqueBancarioDto.Conta,
+                                 saqueBancarioDto.Valor,
+                                 saqueBancarioDto.GuidContaOrigem);
         }
 
-        public async Task<RetornoViewModel> Transferir(Conta contaOrigem, Conta contaDestino, decimal valor)
+        public async Task<RetornoViewModel> Transferir(TransferenciaBancariaViewModel transferenciaBancariaViewModel)
         {
-            var debitadoTaxaBancaria = await contaOrigem.DebitarTaxaBancaria(TipoTaxaBancaria.Transferencia, valor);
+            var transferenciaBancariaDto = _bancoMapper.Map(transferenciaBancariaViewModel);
+
+            var contaOrigem = transferenciaBancariaDto.ContaOrigem;
+            var contaDestino = transferenciaBancariaDto.ContaDestino;
+
+            var debitadoTaxaBancaria = await contaOrigem.DebitarTaxaBancaria(TipoTaxaBancaria.Transferencia,
+                                                                             transferenciaBancariaDto.Valor);
             if (!debitadoTaxaBancaria) return _retornoMapper.Map(debitadoTaxaBancaria);
 
-            var retornoViewModel = await Debitar(contaOrigem, valor, null);
+            var retornoViewModel = await Debitar(contaOrigem, transferenciaBancariaDto.Valor, null);
             if (!retornoViewModel.Resultado) return retornoViewModel;
 
             if (contaOrigem.GuidBanco == contaDestino.GuidBanco)
-                return await Creditar(contaDestino, valor, null);
+                return await Creditar(contaDestino, transferenciaBancariaDto.Valor, null);
 
-            return await _bancoCentralApplication.Transferir(contaOrigem, contaDestino, valor);
+            return await _bancoCentralApplication.Transferir(contaOrigem, contaDestino, transferenciaBancariaDto.Valor);
         }
 
         private async Task<RetornoViewModel> Debitar(Conta conta, decimal valor, Guid? guidContaOrigem)
@@ -84,7 +119,7 @@ namespace ContaBancaria.Application
 
         private async Task<RetornoViewModel> AtualizarConta(Conta conta)
         {
-            var atualizado = await _bancoRepository.AtualizarConta(conta);
+            var atualizado = await _contaRepository.Atualizar(conta);
             return _retornoMapper.Map(atualizado);
         }
     }

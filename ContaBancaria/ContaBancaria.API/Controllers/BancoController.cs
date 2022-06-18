@@ -1,15 +1,11 @@
 ﻿using ContaBancaria.Application.Contracts.Interfaces;
-using ContaBancaria.Application.Contracts.ViewModels.Banco;
-using ContaBancaria.Application.Contracts.ViewModels.Conta;
-using Microsoft.AspNetCore.Authorization;
+using ContaBancaria.Application.Contracts.ViewModels.BancoCentral;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ContaBancaria.API.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class BancoController : ControllerBase
@@ -21,7 +17,7 @@ namespace ContaBancaria.API.Controllers
             _bancoApplication = bancoApplication;
         }
 
-        [HttpGet]
+        [HttpGet("Contas")]
         public async Task<IEnumerable<BancosViewModel>> ListarContas() => await _bancoApplication.ListarContas();
     }
 }

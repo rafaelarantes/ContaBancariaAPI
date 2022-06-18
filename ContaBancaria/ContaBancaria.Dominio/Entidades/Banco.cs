@@ -5,23 +5,24 @@ namespace ContaBancaria.Dominio.Entidades
 {
     public class Banco : Entity
     {
-        private readonly string _nome;
-        private readonly ushort _numero;
-        private readonly ushort _agencia;
-        public IEnumerable<TaxaBancaria> TaxasBancarias { get; private set; }
+        public string Nome { get; private set; }
+        public ushort Numero { get; private set; }
+        public ushort Agencia { get; private set; }
 
-        public Banco(string nome, ushort numero, ushort agencia, IEnumerable<TaxaBancaria> taxasBancarias)
+        public List<TaxaBancaria> TaxasBancarias { get; private set; }
+        public List<Conta> Contas { get; private set; }
+
+        public Banco(string nome, ushort numero, ushort agencia, List<TaxaBancaria> taxasBancarias)
         {
-            _nome = nome;
-            _numero = numero;
-            _agencia = agencia;
-            
+            Nome = nome;
+            Numero = numero;
+            Agencia = agencia;
             TaxasBancarias = taxasBancarias ?? new List<TaxaBancaria>();
         }
 
-        public override string ToString()
+        public Banco()
         {
-            return $"{ _nome } { _numero } { _agencia }";
+
         }
 
         public decimal CalcularTaxaBancaria(decimal valor, List<TaxaBancaria> taxasBancarias)
