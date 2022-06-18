@@ -4,7 +4,7 @@ namespace ContaBancaria.Application.Contracts.ViewModels.Banco
 {
     public class DepositoBancarioViewModel
     {
-        public Dominio.Entidades.Conta Conta { get; set; }
+        public Guid GuidConta { get; set; }
 
         public decimal Valor { get; set; }
 

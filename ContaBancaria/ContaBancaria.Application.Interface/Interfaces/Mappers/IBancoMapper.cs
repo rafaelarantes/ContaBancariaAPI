@@ -17,5 +17,7 @@ namespace ContaBancaria.Application.Contracts.Interfaces.Mappers
         SaqueBancarioDto Map(SaqueBancarioViewModel saqueBancarioViewModel);
 
         TransferenciaBancariaDto Map(TransferenciaBancariaViewModel transferenciaBancariaViewModel);
+        
+        IEnumerable<ContaViewModel> Map(IEnumerable<Conta> contas);
     }
 }

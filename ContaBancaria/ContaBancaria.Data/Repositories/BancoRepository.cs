@@ -16,17 +16,22 @@ namespace ContaBancaria.Data.Repositories
 
         public async Task<RetornoDto> Excluir(Guid guid)
         {
-            return await Excluir(guid);
+            return await Excluir<Banco>(guid);
         }
 
         public async Task<RetornoDto> Incluir(Banco banco)
         {
-            return await Incluir(banco);
+            return await Incluir<Banco>(banco);
         }
 
         public async Task<IEnumerable<Banco>> Listar()
         {
-            return await Listar();
+            return await Listar<Banco>();
+        }
+
+        public async Task<Banco> Obter(Guid guid)
+        {
+            return await Obter<Banco>(guid);
         }
     }
 }

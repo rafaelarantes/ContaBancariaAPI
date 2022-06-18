@@ -27,8 +27,8 @@ namespace ContaBancaria.Data.Repositories
         {
             try
             {
-                await _bancoContext.AddAsync(entity);
-                _bancoContext.SaveChanges();
+                await _bancoContext.Set<T>().AddAsync(entity);
+                await _bancoContext.SaveChangesAsync();
 
                 return new RetornoDto
                 {
@@ -46,8 +46,8 @@ namespace ContaBancaria.Data.Repositories
         {
             try
             {
-                await Task.Run(() => _bancoContext.Set<T>().Update(entity));
-                _bancoContext.SaveChanges();
+                _bancoContext.Set<T>().Update(entity);
+                await _bancoContext.SaveChangesAsync();
 
                 return new RetornoDto
                 {
@@ -70,7 +70,7 @@ namespace ContaBancaria.Data.Repositories
                                               .SingleOrDefaultAsync(x => x.Guid == guid);
 
                 _bancoContext.Set<T>().Remove(item);
-                _bancoContext.SaveChanges();
+                await _bancoContext.SaveChangesAsync();
 
                 return new RetornoDto
                 {
@@ -93,7 +93,7 @@ namespace ContaBancaria.Data.Repositories
 
         public async Task<T> Obter<T>(Guid guid) where T : Entity
         {
-            return await _bancoContext.Query<T>().AsNoTracking().SingleOrDefaultAsync(x => x.Guid == guid);
+            return await _bancoContext.Set<T>().AsNoTracking().SingleOrDefaultAsync(x => x.Guid == guid);
         }
 
         protected virtual void Dispose(bool disposing)
@@ -102,8 +102,16 @@ namespace ContaBancaria.Data.Repositories
             {
                 if (disposing)
                 {
-                    _bancoContext.SaveChanges();
-                    _dbContextTransaction.Commit();
+                    try
+                    {
+                        _bancoContext.SaveChanges();
+                        _dbContextTransaction.Commit();
+                    }
+                    catch (Exception)
+                    {
+                        _dbContextTransaction.Dispose();
+                        throw;
+                    }
                 }
 
                 disposedValue = true;

@@ -7,12 +7,12 @@ namespace ContaBancaria.Application.Contracts.Interfaces.Mappers
 {
     public interface IContaMapper
     {
-        DepositoBancarioViewModel Map(DepositoViewModel depositoViewModel, Conta conta);
+        DepositoBancarioViewModel Map(DepositoViewModel depositoViewModel);
 
-        SaqueBancarioViewModel Map(SaqueViewModel SaqueViewModel, Conta conta);
+        SaqueBancarioViewModel Map(SaqueViewModel SaqueViewModel);
 
-        TransferenciaBancariaViewModel Map(Conta contaOrigem, Conta contaDestino, 
-                                            TransferenciaViewModel transferenciaViewModel);
+        TransferenciaBancariaViewModel Map(TransferenciaViewModel transferenciaViewModel);
+        
         ExtratoViewModel Map(List<ExtratoConta> extrato);
     }
 }

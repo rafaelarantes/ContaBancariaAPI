@@ -11,7 +11,8 @@ namespace ContaBancaria.Dominio.Entidades
         public ulong Numero { get; private set; }
         public decimal Saldo => CalcularSaldo();
 
-        public List<ExtratoConta> Extrato { get; private set; }
+        public List<ExtratoConta> Extrato { get; private set; } =
+            new List<ExtratoConta>();
         
         public Banco Banco { get; private set; }
         public Guid GuidBanco { get; private set; }
@@ -20,7 +21,6 @@ namespace ContaBancaria.Dominio.Entidades
         public Conta(ulong numero, Banco banco)
         {
             Numero = numero;
-            Banco = banco;
             GuidBanco = banco.Guid;
             Extrato = new List<ExtratoConta>();
         }
@@ -37,7 +37,7 @@ namespace ContaBancaria.Dominio.Entidades
 
             if (guidContaOrigem == null) guidContaOrigem = Guid;
 
-            Extrato.Add(new ExtratoConta(valor, TipoOperacaoConta.Credito, DateTime.Now, guidContaOrigem.Value));
+            Extrato.Add(new ExtratoConta(valor, TipoOperacaoConta.Credito, DateTime.Now, Guid, guidContaOrigem.Value));
 
             return await Task.FromResult(true);
         }
@@ -49,7 +49,7 @@ namespace ContaBancaria.Dominio.Entidades
 
             if (guidContaOrigem == null) guidContaOrigem = Guid;
 
-            Extrato.Add(new ExtratoConta(valor, TipoOperacaoConta.Debito, DateTime.Now, guidContaOrigem.Value));
+            Extrato.Add(new ExtratoConta(valor, TipoOperacaoConta.Debito, DateTime.Now, Guid, guidContaOrigem.Value));
 
             return await Task.FromResult(true);
         }
@@ -63,13 +63,15 @@ namespace ContaBancaria.Dominio.Entidades
             var taxaBancaria = Banco.CalcularTaxaBancaria(valor, taxasBancarias);
 
             Extrato.Add(new ExtratoConta(taxaBancaria, TipoOperacaoConta.TaxaBancaria,
-                                          DateTime.Now, Guid.Empty, tipoTaxaBancaria));
+                                          DateTime.Now, Guid.Empty, Guid, tipoTaxaBancaria));
 
             return await Task.FromResult(true);
         }
 
         private decimal CalcularSaldo()
         {
+            if (Extrato == null) return 0;
+
             var somaValoresCredito = Extrato.Where(e => e.TipoOperacao == TipoOperacaoConta.Credito)
                                              .Sum(e => e.Valor);
 

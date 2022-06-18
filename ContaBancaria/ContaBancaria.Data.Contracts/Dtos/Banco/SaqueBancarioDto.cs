@@ -4,7 +4,7 @@ namespace ContaBancaria.Data.Contracts.Dtos.Banco
 {
     public class SaqueBancarioDto
     {
-        public Dominio.Entidades.Conta Conta { get; set; }
+        public Guid GuidConta { get; set; }
         public Guid? GuidContaOrigem { get; set; }
         public decimal Valor { get; set; }
     }

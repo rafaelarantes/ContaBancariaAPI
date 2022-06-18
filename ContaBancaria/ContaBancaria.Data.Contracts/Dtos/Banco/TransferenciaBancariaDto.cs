@@ -1,11 +1,14 @@
-﻿namespace ContaBancaria.Data.Contracts.Dtos.Banco
+﻿using System;
+
+namespace ContaBancaria.Data.Contracts.Dtos.Banco
 {
     public class TransferenciaBancariaDto
     {
-        public Dominio.Entidades.Conta ContaOrigem { get; set; }
+        public Guid GuidContaOrigem { get; set; }
 
-        public Dominio.Entidades.Conta ContaDestino { get; set; }
+        public Guid GuidContaDestino { get; set; }
 
         public decimal Valor { get; set; }
+
     }
 }

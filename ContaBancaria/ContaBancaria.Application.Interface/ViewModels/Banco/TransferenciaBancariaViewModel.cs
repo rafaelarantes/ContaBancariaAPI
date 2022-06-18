@@ -1,10 +1,12 @@
-﻿namespace ContaBancaria.Application.Contracts.ViewModels.Banco
+﻿using System;
+
+namespace ContaBancaria.Application.Contracts.ViewModels.Banco
 {
     public class TransferenciaBancariaViewModel
     {
-        public Dominio.Entidades.Conta ContaOrigem { get; set; }
+        public Guid GuidContaOrigem { get; set; }
 
-        public Dominio.Entidades.Conta ContaDestino { get; set; }
+        public Guid GuidContaDestino { get; set; }
 
         public decimal Valor { get; set; }
     }

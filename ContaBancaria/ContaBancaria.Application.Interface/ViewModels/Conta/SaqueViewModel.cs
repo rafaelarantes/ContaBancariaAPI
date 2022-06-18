@@ -4,7 +4,7 @@ namespace ContaBancaria.Application.Contracts.ViewModels.Conta
 {
     public class SaqueViewModel
     {
-        public Guid GuidContaDestino { get; set; }
+        public Guid GuidConta { get; set; }
 
         public decimal Valor { get; set; }
 

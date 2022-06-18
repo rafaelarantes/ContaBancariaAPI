@@ -24,27 +24,19 @@ namespace ContaBancaria.Application
 
         public async Task<RetornoViewModel> Depositar(DepositoViewModel depositoViewModel)
         {
-            var conta = await _contaRepository.Obter(depositoViewModel.GuidContaDestino);
-            var depositoBancarioViewModel = _contaMapper.Map(depositoViewModel, conta);
-
+            var depositoBancarioViewModel = _contaMapper.Map(depositoViewModel);
             return await _bancoApplication.Depositar(depositoBancarioViewModel);
         }
 
         public async Task<RetornoViewModel> Sacar(SaqueViewModel saqueViewModel)
         {
-            var conta = await _contaRepository.Obter(saqueViewModel.GuidContaDestino);
-            var saqueBancarioViewModel = _contaMapper.Map(saqueViewModel, conta);
-
+            var saqueBancarioViewModel = _contaMapper.Map(saqueViewModel);
             return await _bancoApplication.Sacar(saqueBancarioViewModel);
         }
 
         public async Task<RetornoViewModel> Transferir(TransferenciaViewModel transferenciaViewModel)
         {
-            var contaOrigem = await _contaRepository.Obter(transferenciaViewModel.GuidContaOrigem);
-            var contaDestino = await _contaRepository.Obter(transferenciaViewModel.GuidContaDestino);
-            
-            var transferenciaBancariaViewModel = _contaMapper.Map(contaOrigem, contaDestino, transferenciaViewModel);
-
+            var transferenciaBancariaViewModel = _contaMapper.Map(transferenciaViewModel);
             return await _bancoApplication.Transferir(transferenciaBancariaViewModel); 
         }
 

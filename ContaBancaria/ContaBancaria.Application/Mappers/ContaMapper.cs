@@ -22,34 +22,33 @@ namespace ContaBancaria.Application.Mappers
             };
         }
 
-        public DepositoBancarioViewModel Map(DepositoViewModel depositoViewModel, Conta conta)
+        public DepositoBancarioViewModel Map(DepositoViewModel depositoViewModel)
         {
             return new DepositoBancarioViewModel
             {
-                Conta = conta,
+                GuidConta = depositoViewModel.GuidContaDestino,
                 GuidContaOrigem = depositoViewModel.GuidContaOrigem,
                 Valor = depositoViewModel.Valor
             };
         }
 
-        public SaqueBancarioViewModel Map(SaqueViewModel SaqueViewModel, Conta conta)
+        public SaqueBancarioViewModel Map(SaqueViewModel SaqueViewModel)
         {
             return new SaqueBancarioViewModel
             {
-                Conta = conta,
+                GuidConta = SaqueViewModel.GuidConta,
                 GuidContaOrigem = SaqueViewModel.GuidContaOrigem,
                 Valor = SaqueViewModel.Valor
             };
         }
 
-        public TransferenciaBancariaViewModel Map(Conta contaOrigem, Conta contaDestino, 
-                                                  TransferenciaViewModel transferenciaViewModel)
+        public TransferenciaBancariaViewModel Map(TransferenciaViewModel transferenciaViewModel)
         {
             return new TransferenciaBancariaViewModel
             {
-                ContaOrigem = contaOrigem,
-                ContaDestino = contaDestino,
-                Valor = transferenciaViewModel.Valor
+                Valor = transferenciaViewModel.Valor,
+                GuidContaOrigem = transferenciaViewModel.GuidContaOrigem,
+                GuidContaDestino = transferenciaViewModel.GuidContaDestino
             };
         }
 

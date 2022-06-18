@@ -33,8 +33,8 @@ namespace ContaBancaria.Application.Mappers
         {
             return new DepositoBancarioDto
             {
-                Conta = depositoBancarioViewModel.Conta,
-                GuidContaOrigem =  depositoBancarioViewModel.GuidContaOrigem,
+                GuidConta = depositoBancarioViewModel.GuidConta,
+                GuidContaOrigem = depositoBancarioViewModel.GuidContaOrigem,
                 Valor = depositoBancarioViewModel.Valor
             };
         }
@@ -43,7 +43,7 @@ namespace ContaBancaria.Application.Mappers
         {
             return new SaqueBancarioDto
             {
-                Conta = saqueBancarioViewModel.Conta,
+                GuidConta = saqueBancarioViewModel.GuidConta,
                 GuidContaOrigem = saqueBancarioViewModel.GuidContaOrigem,
                 Valor = saqueBancarioViewModel.Valor
             };
@@ -53,10 +53,21 @@ namespace ContaBancaria.Application.Mappers
         {
             return new TransferenciaBancariaDto
             {
-                ContaOrigem = transferenciaBancariaViewModel.ContaOrigem,
-                ContaDestino = transferenciaBancariaViewModel.ContaDestino,
+                GuidContaOrigem = transferenciaBancariaViewModel.GuidContaOrigem,
+                GuidContaDestino = transferenciaBancariaViewModel.GuidContaDestino,
                 Valor = transferenciaBancariaViewModel.Valor
             };
+        }
+
+        public IEnumerable<ContaViewModel> Map(IEnumerable<Conta> contas)
+        {
+            return contas.Select(c => new ContaViewModel
+            {
+                Guid = c.Guid,
+                GuidBanco = c.GuidBanco,
+                Numero = c.Numero,
+                Saldo = c.Saldo
+            });
         }
     }
 }

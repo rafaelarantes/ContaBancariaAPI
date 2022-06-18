@@ -76,7 +76,19 @@ namespace ContaBancaria.Application.Tests
             _bancoCentralAplicationMock.Setup(b => b.Transferir(It.IsAny<Conta>(), It.IsAny<Conta>(), It.IsAny<decimal>()))
                 .Returns(Task.FromResult(retornoViewModel));
         }
-        
+
+        private void Mockar_ContaRepository_Obter_Sequence(List<Conta> contas)
+        {
+            var setupSequence = _contaRepositoryMock.SetupSequence(c => c.Obter(It.IsAny<Guid>()));
+
+            foreach(var conta in contas)
+            {
+                setupSequence.Returns(Task.FromResult(conta));
+            }
+            
+        }
+
+
         private Conta CriarConta(List<TaxaBancaria> taxaBancarias = null)
         {
             var banco = new Banco("Banco teste", 1, 1111, taxaBancarias);
@@ -104,12 +116,14 @@ namespace ContaBancaria.Application.Tests
 
             var conta = CriarConta();
             Mockar_AtualizarConta(conta);
+            Mockar_ContaRepository_Obter_Sequence(new List<Conta> { conta });
 
             var depositoBancarioViewModel = new DepositoBancarioViewModel
             {
-                Conta = conta,
+                GuidConta = conta.Guid,
                 Valor = VALOR_DEPOSITO,
             };
+
 
             //Act
             var retornoViewModel = await _bancoApplication.Depositar(depositoBancarioViewModel);
@@ -137,10 +151,11 @@ namespace ContaBancaria.Application.Tests
                                  TipoValorTaxaBancaria.Percentual, $"{TAXA_PERCENTUAL}% valor depositado")
             });
             Mockar_AtualizarConta(conta);
+            Mockar_ContaRepository_Obter_Sequence(new List<Conta> { conta });
 
             var depositoBancarioViewModel = new DepositoBancarioViewModel
             {
-                Conta = conta,
+                GuidConta = conta.Guid,
                 Valor = VALOR_DEPOSITO,
             };
 
@@ -170,14 +185,13 @@ namespace ContaBancaria.Application.Tests
                                  TipoValorTaxaBancaria.Percentual, $"{TAXA_PERCENTUAL}% valor depositado")
             });
             Mockar_AtualizarConta(conta);
-
-            var guidContaOrigem = Guid.NewGuid();
+            Mockar_ContaRepository_Obter_Sequence(new List<Conta> { conta });
 
             var depositoBancarioViewModel = new DepositoBancarioViewModel
             {
-                Conta = conta,
+                GuidConta = conta.Guid,
                 Valor = VALOR_DEPOSITO,
-                GuidContaOrigem = guidContaOrigem
+                GuidContaOrigem = Guid.NewGuid()
             };
 
             //Act
@@ -203,16 +217,17 @@ namespace ContaBancaria.Application.Tests
             var conta = CriarConta();
             Mockar_AtualizarConta(conta);
             Mockar_RetornoMapper_MapBool(new RetornoViewModel { Resultado = true });
+            Mockar_ContaRepository_Obter_Sequence(new List<Conta> { conta, conta });
 
             var depositoBancarioViewModel = new DepositoBancarioViewModel
             {
-                Conta = conta,
+                GuidConta = conta.Guid,
                 Valor = VALOR_DEPOSITO
             };
 
             var saqueBancarioViewModel = new SaqueBancarioViewModel
             {
-                Conta = conta,
+                GuidConta = conta.Guid,
                 Valor = VALOR_SAQUE,
             };
 
@@ -240,17 +255,20 @@ namespace ContaBancaria.Application.Tests
             const decimal SALDO = VALOR_DEPOSITO;
 
             var conta = CriarConta();
+            
+            Mockar_ContaRepository_Obter_Sequence(new List<Conta> { conta, conta });
+
             Mockar_RetornoMapper_MapBool(new RetornoViewModel { Resultado = false });
 
             var depositoBancarioViewModel = new DepositoBancarioViewModel
             {
-                Conta = conta,
+                GuidConta = conta.Guid,
                 Valor = VALOR_DEPOSITO
             };
 
             var saqueBancarioViewModel = new SaqueBancarioViewModel
             {
-                Conta = conta,
+                GuidConta = conta.Guid,
                 Valor = VALOR_SAQUE,
             };
 
@@ -286,16 +304,17 @@ namespace ContaBancaria.Application.Tests
 
             Mockar_AtualizarConta(conta);
             Mockar_RetornoMapper_MapBool(new RetornoViewModel { Resultado = true });
+            Mockar_ContaRepository_Obter_Sequence(new List<Conta> { conta, conta });
 
             var depositoBancarioViewModel = new DepositoBancarioViewModel
             {
-                Conta = conta,
+                GuidConta = conta.Guid,
                 Valor = VALOR_DEPOSITO
             };
 
             var saqueBancarioViewModel = new SaqueBancarioViewModel
             {
-                Conta = conta,
+                GuidConta = conta.Guid,
                 Valor = VALOR_SAQUE,
             };
 
@@ -329,17 +348,18 @@ namespace ContaBancaria.Application.Tests
 
             Mockar_AtualizarConta(contaOrigem);
             Mockar_RetornoMapper_MapBool(new RetornoViewModel { Resultado = true });
+            Mockar_ContaRepository_Obter_Sequence(new List<Conta> { contaOrigem, contaOrigem, contaDestino });
 
             var depositoBancarioViewModel = new DepositoBancarioViewModel
             {
-                Conta = contaOrigem,
+                GuidConta = contaOrigem.Guid,
                 Valor = VALOR_DEPOSITO
             };
 
             var saqueBancarioViewModel = new TransferenciaBancariaViewModel
             {
-                ContaOrigem = contaOrigem,
-                ContaDestino = contaDestino,
+                GuidContaOrigem = contaOrigem.Guid,
+                GuidContaDestino = contaDestino.Guid,
                 Valor = VALOR_TRANSFERIDO,
             };
 
@@ -379,17 +399,18 @@ namespace ContaBancaria.Application.Tests
             Mockar_AtualizarConta(contaOrigem);
             Mockar_BancoCentralApplication_Transferir(new RetornoViewModel { Resultado = true });
             Mockar_RetornoMapper_MapBool(new RetornoViewModel { Resultado = true });
+            Mockar_ContaRepository_Obter_Sequence(new List<Conta> { contaOrigem, contaOrigem, contaDestino });
 
             var depositoBancarioViewModel = new DepositoBancarioViewModel
             {
-                Conta = contaOrigem,
+                GuidContaOrigem = contaOrigem.Guid,
                 Valor = VALOR_DEPOSITO
             };
 
             var saqueBancarioViewModel = new TransferenciaBancariaViewModel
             {
-                ContaOrigem = contaOrigem,
-                ContaDestino = contaDestino,
+                GuidContaOrigem = contaOrigem.Guid,
+                GuidContaDestino = contaDestino.Guid,
                 Valor = VALOR_TRANSFERIDO,
             };
 
@@ -427,17 +448,18 @@ namespace ContaBancaria.Application.Tests
 
             Mockar_AtualizarConta(contaOrigem);
             Mockar_RetornoMapper_MapBool(new RetornoViewModel { Resultado = false });
+            Mockar_ContaRepository_Obter_Sequence(new List<Conta> { contaOrigem, contaOrigem, contaDestino });
 
             var depositoBancarioViewModel = new DepositoBancarioViewModel
             {
-                Conta = contaOrigem,
+                GuidContaOrigem = contaOrigem.Guid,
                 Valor = VALOR_DEPOSITO
             };
 
             var saqueBancarioViewModel = new TransferenciaBancariaViewModel
             {
-                ContaOrigem = contaOrigem,
-                ContaDestino = contaDestino,
+                GuidContaOrigem = contaOrigem.Guid,
+                GuidContaDestino = contaDestino.Guid,
                 Valor = VALOR_TRANSFERIDO,
             };
 
@@ -486,17 +508,18 @@ namespace ContaBancaria.Application.Tests
             Mockar_AtualizarConta(contaOrigem);
             Mockar_BancoCentralApplication_Transferir(new RetornoViewModel { Resultado = true });
             Mockar_RetornoMapper_MapBool(new RetornoViewModel { Resultado = true });
+            Mockar_ContaRepository_Obter_Sequence(new List<Conta> { contaOrigem, contaOrigem, contaDestino });
 
             var depositoBancarioViewModel = new DepositoBancarioViewModel
             {
-                Conta = contaOrigem,
+                GuidContaOrigem = contaOrigem.Guid,
                 Valor = VALOR_DEPOSITO
             };
 
             var saqueBancarioViewModel = new TransferenciaBancariaViewModel
             {
-                ContaOrigem = contaOrigem,
-                ContaDestino = contaDestino,
+                GuidContaOrigem = contaOrigem.Guid,
+                GuidContaDestino = contaDestino.Guid,
                 Valor = VALOR_TRANSFERIDO,
             };
 

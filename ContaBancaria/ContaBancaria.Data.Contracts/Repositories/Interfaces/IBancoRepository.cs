@@ -11,5 +11,6 @@ namespace ContaBancaria.Data.Contracts.Repositories.Interfaces
         Task<RetornoDto> Excluir(Guid guid);
         Task<RetornoDto> Incluir(Banco banco);
         Task<IEnumerable<Banco>> Listar();
+        Task<Banco> Obter(Guid guid);
     }
 }
