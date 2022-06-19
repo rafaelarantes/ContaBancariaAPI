@@ -22,6 +22,14 @@ namespace ContaBancaria.Dominio.Entidades
         {
             Numero = numero;
             GuidBanco = banco.Guid;
+            Banco = banco;
+            Extrato = new List<ExtratoConta>();
+        }
+
+        public Conta(ulong numero, Guid guidBanco)
+        {
+            Numero = numero;
+            GuidBanco = guidBanco;
             Extrato = new List<ExtratoConta>();
         }
 

@@ -93,6 +93,7 @@ namespace ContaBancaria.Application.Tests
         {
             var banco = new Banco("Banco teste", 1, 1111, taxaBancarias);
             return new Conta(111111, banco);
+            
         }
 
         private decimal CalcularSaldoExtrato(Conta conta)

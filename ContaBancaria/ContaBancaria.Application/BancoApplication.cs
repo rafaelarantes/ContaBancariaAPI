@@ -37,7 +37,7 @@ namespace ContaBancaria.Application
         public async Task<RetornoViewModel> CriarConta(NovaContaViewModel novaContaViewModel)
         {
             var banco = await _bancoRepository.Obter(novaContaViewModel.GuidBanco);
-            var conta = new Conta(novaContaViewModel.NumeroConta, banco);
+            var conta = new Conta(novaContaViewModel.NumeroConta, banco.Guid);
 
             var retornoDto = await _contaRepository.Incluir(conta);
 
@@ -60,8 +60,10 @@ namespace ContaBancaria.Application
         {
             var depositoBancarioDto = _bancoMapper.Map(depositoBancarioViewModel);
             var conta = await _contaRepository.ObterInclude(depositoBancarioDto.GuidConta);
+            if (conta == null) return _retornoMapper.Map(false);
 
-            if (depositoBancarioDto.GuidContaOrigem == Guid.Empty)
+            if (depositoBancarioDto.GuidContaOrigem == Guid.Empty ||
+                depositoBancarioDto.GuidContaOrigem == null)
             {
                 var debitadoTaxaBancaria = await conta.DebitarTaxaBancaria(
                                                     TipoTaxaBancaria.Deposito,
@@ -77,6 +79,7 @@ namespace ContaBancaria.Application
         {
             var saqueBancarioDto = _bancoMapper.Map(saqueBancarioViewModel);
             var conta = await _contaRepository.ObterInclude(saqueBancarioDto.GuidConta);
+            if (conta == null) return _retornoMapper.Map(false);
 
             var debitadoTaxaBancaria = await conta.DebitarTaxaBancaria(TipoTaxaBancaria.Saque,
                                                                        saqueBancarioDto.Valor);
@@ -91,7 +94,10 @@ namespace ContaBancaria.Application
             var transferenciaBancariaDto = _bancoMapper.Map(transferenciaBancariaViewModel);
 
             var contaOrigem = await _contaRepository.ObterInclude(transferenciaBancariaViewModel.GuidContaOrigem);
+            if (contaOrigem == null) return _retornoMapper.Map(false);
+
             var contaDestino = await _contaRepository.ObterInclude(transferenciaBancariaViewModel.GuidContaDestino);
+            if (contaDestino == null) return _retornoMapper.Map(false);
 
             var debitadoTaxaBancaria = await contaOrigem.DebitarTaxaBancaria(TipoTaxaBancaria.Transferencia,
                                                                              transferenciaBancariaDto.Valor);
