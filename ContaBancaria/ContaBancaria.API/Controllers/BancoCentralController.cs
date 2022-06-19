@@ -1,6 +1,7 @@
 ﻿using ContaBancaria.Application.Contracts.Interfaces;
 using ContaBancaria.Application.Contracts.ViewModels.BancoCentral;
 using ContaBancaria.Application.Contracts.ViewModels.Conta;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace ContaBancaria.API.Controllers
 {
+    [Authorize(Roles = "BancoCentral, Adm")]
     [Route("api/[controller]")]
     [ApiController]
     public class BancoCentralController : ControllerBase
@@ -18,6 +20,7 @@ namespace ContaBancaria.API.Controllers
         {
             _bancoCentralApplication = bancoCentralApplication;
         }
+
 
         [HttpGet("Bancos")]
         public async Task<IEnumerable<BancosViewModel>> ListarBancos() => await _bancoCentralApplication.ListarBancos();

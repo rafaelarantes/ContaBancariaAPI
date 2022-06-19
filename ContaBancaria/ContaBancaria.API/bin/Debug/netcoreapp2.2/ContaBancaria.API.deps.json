@@ -32,6 +32,8 @@
           "ContaBancaria.Application": "1.0.0",
           "ContaBancaria.Application.Contracts": "1.0.0",
           "Microsoft.AspNetCore.App": "2.2.0",
+          "Microsoft.AspNetCore.Authentication": "2.2.0",
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "2.2.0",
           "Microsoft.AspNetCore.Razor.Design": "2.2.0",
           "Microsoft.NETCore.App": "2.2.0",
           "Swashbuckle.AspNetCore": "6.3.1"
@@ -165,7 +167,9 @@
         "dependencies": {
           "ContaBancaria.Application.Contracts": "1.0.0",
           "ContaBancaria.Data": "1.0.0",
-          "ContaBancaria.Dominio": "1.0.0"
+          "ContaBancaria.Dominio": "1.0.0",
+          "Microsoft.AspNetCore.Authentication": "2.2.0",
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "2.2.0"
         },
         "runtime": {
           "ContaBancaria.Application.dll": {}

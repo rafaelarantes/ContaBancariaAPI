@@ -1,4 +1,5 @@
-﻿using ContaBancaria.Dominio.Entidades;
+﻿using ContaBancaria.Data.Helper;
+using ContaBancaria.Dominio.Entidades;
 using ContaBancaria.Dominio.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -15,6 +16,8 @@ namespace ContaBancaria.Data.Contexts
         public DbSet<Conta> Contas { get; set; }
         public DbSet<ExtratoConta> ExtratoContas { get; set; }
         public DbSet<TaxaBancaria> TaxasBancarias { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
+
 
         public BancoContext(IConfiguration configuration)
         {
@@ -36,6 +39,7 @@ namespace ContaBancaria.Data.Contexts
             MapearTaxaBancaria(modelBuilder);
             MapearConta(modelBuilder);
             MapearExtatoConta(modelBuilder);
+            MapearUsuarios(modelBuilder);
 
             CriarSeed(modelBuilder);
         }
@@ -55,6 +59,14 @@ namespace ContaBancaria.Data.Contexts
 
             taxasBancarias.ForEach(t => t.AssociarBanco(banco.Guid));
             modelBuilder.Entity<TaxaBancaria>().HasData(taxasBancarias);
+
+
+            var senhaSha1 = HashHelper.GerarSha1("123456");
+            modelBuilder.Entity<Usuario>()
+                        .HasData(new Usuario("conta", senhaSha1, "Conta"),
+                                 new Usuario("banco", senhaSha1, "Banco"),
+                                 new Usuario("central", senhaSha1, "BancoCentral"),
+                                 new Usuario("adm", senhaSha1, "Adm"));
         }
 
 
@@ -207,6 +219,33 @@ namespace ContaBancaria.Data.Contexts
             modelBuilder.Entity<ExtratoConta>()
                         .Property(c => c.GuidContaOrigem)
                         .HasColumnName("GUID_CONTA_ORIGEM");
+        }
+
+        private void MapearUsuarios(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Usuario>()
+                       .ToTable("USUARIO")
+                       .HasKey(e => e.Guid);
+
+            modelBuilder.Entity<Usuario>()
+                        .Property(p => p.Guid)
+                        .HasColumnName("GUID")
+                        .IsRequired();
+
+            modelBuilder.Entity<Usuario>()
+                        .Property(p => p.Login)
+                        .HasColumnName("LOGIN")
+                        .HasColumnType("varchar(100)");
+
+            modelBuilder.Entity<Usuario>()
+                        .Property(p => p.Senha)
+                        .HasColumnName("SENHA")
+                        .HasColumnType("varchar(100)");
+
+            modelBuilder.Entity<Usuario>()
+                        .Property(p => p.Autorizacao)
+                        .HasColumnName("AUTORIZACAO")
+                        .HasColumnType("varchar(50)");
         }
     }
 }

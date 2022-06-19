@@ -4543,7 +4543,9 @@
         "dependencies": {
           "ContaBancaria.Application.Contracts": "1.0.0",
           "ContaBancaria.Data": "1.0.0",
-          "ContaBancaria.Dominio": "1.0.0"
+          "ContaBancaria.Dominio": "1.0.0",
+          "Microsoft.AspNetCore.Authentication": "2.2.0",
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "2.2.0"
         },
         "compile": {
           "bin/placeholder/ContaBancaria.Application.dll": {}
@@ -12517,6 +12519,8 @@
       "ContaBancaria.Application >= 1.0.0",
       "ContaBancaria.Application.Contracts >= 1.0.0",
       "Microsoft.AspNetCore.App >= 2.2.0",
+      "Microsoft.AspNetCore.Authentication >= 2.2.0",
+      "Microsoft.AspNetCore.Authentication.JwtBearer >= 2.2.0",
       "Microsoft.AspNetCore.Razor.Design >= 2.2.0",
       "Microsoft.NETCore.App >= 2.2.0",
       "Swashbuckle.AspNetCore >= 6.3.1"
@@ -12580,6 +12584,14 @@
             "target": "Package",
             "version": "[2.2.0, )",
             "autoReferenced": true
+          },
+          "Microsoft.AspNetCore.Authentication": {
+            "target": "Package",
+            "version": "[2.2.0, )"
+          },
+          "Microsoft.AspNetCore.Authentication.JwtBearer": {
+            "target": "Package",
+            "version": "[2.2.0, )"
           },
           "Microsoft.AspNetCore.Razor.Design": {
             "suppressParent": "All",

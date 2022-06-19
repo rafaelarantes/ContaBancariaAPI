@@ -10,6 +10,7 @@ namespace ContaBancaria.API.DependencyInjection
         public static void StartData(this IServiceCollection services)
         {
             services.AddDbContext<BancoContext>();
+            services.AddTransient<IUsuarioRepository, UsuarioRepository>();
             services.AddTransient<IContaRepository, ContaRepository>();
             services.AddTransient<IBancoRepository, BancoRepository>();
         }

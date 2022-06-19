@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace ContaBancaria.API.Controllers
 {
+    [Authorize(Roles = "Conta, Adm")]
     [Route("api/[controller]")]
     [ApiController]
     public class ContaController : ControllerBase
