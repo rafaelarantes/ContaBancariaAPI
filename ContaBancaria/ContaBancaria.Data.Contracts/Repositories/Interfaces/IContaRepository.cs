@@ -8,7 +8,7 @@ namespace ContaBancaria.Data.Contracts.Repositories.Interfaces
 {
     public interface IContaRepository
     {
-        Task<Conta> Obter(Guid guidContaDestino);
+        Task<Conta> ObterInclude(Guid guidContaDestino);
 
         Task<RetornoDto> Atualizar(Conta conta);
 
@@ -16,6 +16,6 @@ namespace ContaBancaria.Data.Contracts.Repositories.Interfaces
         
         Task<RetornoDto> Excluir(Guid guid);
 
-        Task<IEnumerable<Conta>> Listar();
+        Task<IEnumerable<Conta>> ListarInclude();
     }
 }

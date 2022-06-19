@@ -79,7 +79,7 @@ namespace ContaBancaria.Application.Tests
 
         private void Mockar_ContaRepository_Obter_Sequence(List<Conta> contas)
         {
-            var setupSequence = _contaRepositoryMock.SetupSequence(c => c.Obter(It.IsAny<Guid>()));
+            var setupSequence = _contaRepositoryMock.SetupSequence(c => c.ObterInclude(It.IsAny<Guid>()));
 
             foreach(var conta in contas)
             {

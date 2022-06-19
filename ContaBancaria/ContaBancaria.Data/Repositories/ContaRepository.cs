@@ -15,9 +15,13 @@ namespace ContaBancaria.Data.Repositories
         {
         }
 
-        public async Task<Conta> Obter(Guid guid)
+        public async Task<Conta> ObterInclude(Guid guid)
         {
-            return await Obter<Conta>(guid);
+            return await _bancoContext.Set<Conta>()
+                                      .Include(i => i.Extrato)
+                                      .Include(i => i.Banco)
+                                      .Include(i => i.Banco.TaxasBancarias)
+                                      .SingleOrDefaultAsync(x => x.Guid == guid);
         }
 
         public async Task<RetornoDto> Atualizar(Conta conta)
@@ -35,7 +39,7 @@ namespace ContaBancaria.Data.Repositories
             return await Excluir<Conta>(guid);
         }
 
-        public async Task<IEnumerable<Conta>> Listar()
+        public async Task<IEnumerable<Conta>> ListarInclude()
         {
             return await _bancoContext.Set<Conta>()
                                       .Include(x => x.Extrato)

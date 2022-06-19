@@ -29,7 +29,7 @@ namespace ContaBancaria.API.Controllers
             return await _bancoApplication.CriarConta(novaContaViewModel);
         }
 
-        [HttpPost("ExcluirConta/{guid}")]
+        [HttpDelete("ExcluirConta/{guid}")]
         public async Task<RetornoViewModel> ExcluirConta(Guid guid)
         {
             return await _bancoApplication.ExcluirConta(guid);
