@@ -47,7 +47,7 @@ namespace ContaBancaria.Data.Migrations
                     GUID = table.Column<Guid>(nullable: false),
                     VALOR = table.Column<decimal>(type: "numeric", nullable: false),
                     TIPO_VALOR = table.Column<byte>(nullable: false),
-                    TIPO = table.Column<byte>(nullable: false),
+                    TIPO = table.Column<byte>(nullable: true),
                     DESCRICAO = table.Column<string>(type: "varchar(100)", nullable: true),
                     GUID_BANCO = table.Column<Guid>(nullable: false)
                 },
@@ -72,7 +72,7 @@ namespace ContaBancaria.Data.Migrations
                     VALOR = table.Column<decimal>(type: "money", nullable: false),
                     GUID_CONTA = table.Column<Guid>(nullable: false),
                     GUID_CONTA_ORIGEM = table.Column<Guid>(nullable: false),
-                    TIPO_TAXA_BANCARIA = table.Column<byte>(nullable: false)
+                    TIPO_TAXA_BANCARIA = table.Column<byte>(nullable: true)
                 },
                 constraints: table =>
                 {

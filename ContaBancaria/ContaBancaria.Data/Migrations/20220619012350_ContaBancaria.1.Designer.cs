@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ContaBancaria.Data.Migrations
 {
     [DbContext(typeof(BancoContext))]
-    [Migration("20220618175602_ContaBancaria.1")]
+    [Migration("20220619012350_ContaBancaria.1")]
     partial class ContaBancaria1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -84,7 +84,7 @@ namespace ContaBancaria.Data.Migrations
                     b.Property<byte>("TipoOperacao")
                         .HasColumnName("TIPO_OPERACAO");
 
-                    b.Property<byte>("TipoTaxaBancaria")
+                    b.Property<byte?>("TipoTaxaBancaria")
                         .HasColumnName("TIPO_TAXA_BANCARIA");
 
                     b.Property<decimal>("Valor")
@@ -111,7 +111,7 @@ namespace ContaBancaria.Data.Migrations
                     b.Property<Guid>("GuidBanco")
                         .HasColumnName("GUID_BANCO");
 
-                    b.Property<byte>("Tipo")
+                    b.Property<byte?>("Tipo")
                         .HasColumnName("TIPO");
 
                     b.Property<byte>("TipoValor")

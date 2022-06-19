@@ -82,7 +82,7 @@ namespace ContaBancaria.Data.Migrations
                     b.Property<byte>("TipoOperacao")
                         .HasColumnName("TIPO_OPERACAO");
 
-                    b.Property<byte>("TipoTaxaBancaria")
+                    b.Property<byte?>("TipoTaxaBancaria")
                         .HasColumnName("TIPO_TAXA_BANCARIA");
 
                     b.Property<decimal>("Valor")
@@ -109,7 +109,7 @@ namespace ContaBancaria.Data.Migrations
                     b.Property<Guid>("GuidBanco")
                         .HasColumnName("GUID_BANCO");
 
-                    b.Property<byte>("Tipo")
+                    b.Property<byte?>("Tipo")
                         .HasColumnName("TIPO");
 
                     b.Property<byte>("TipoValor")

@@ -9,7 +9,7 @@ namespace ContaBancaria.Dominio.Entidades
 
         public TipoValorTaxaBancaria TipoValor { get; private set; }
 
-        public TipoTaxaBancaria Tipo { get; private set; }
+        public TipoTaxaBancaria? Tipo { get; private set; }
 
         public string Descricao { get; private set; }
 

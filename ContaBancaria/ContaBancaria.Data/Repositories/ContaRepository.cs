@@ -1,6 +1,7 @@
 ﻿using ContaBancaria.Data.Contracts.Repositories.Interfaces;
 using ContaBancaria.Data.Dtos;
 using ContaBancaria.Dominio.Entidades;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -36,7 +37,10 @@ namespace ContaBancaria.Data.Repositories
 
         public async Task<IEnumerable<Conta>> Listar()
         {
-            return await Listar<Conta>();
+            return await _bancoContext.Set<Conta>()
+                                      .Include(x => x.Extrato)
+                                      .AsNoTracking()
+                                      .ToListAsync();
         }
     }
 }

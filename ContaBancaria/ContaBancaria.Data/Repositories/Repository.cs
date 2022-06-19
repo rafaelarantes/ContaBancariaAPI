@@ -28,11 +28,11 @@ namespace ContaBancaria.Data.Repositories
             try
             {
                 await _bancoContext.Set<T>().AddAsync(entity);
-                await _bancoContext.SaveChangesAsync();
+                var resultado = await _bancoContext.SaveChangesAsync();
 
                 return new RetornoDto
                 {
-                    Resultado = true
+                    Resultado = resultado > 0
                 };
             }
             catch (Exception)
@@ -46,12 +46,11 @@ namespace ContaBancaria.Data.Repositories
         {
             try
             {
-                _bancoContext.Set<T>().Update(entity);
-                await _bancoContext.SaveChangesAsync();
+                var resultado = await _bancoContext.SaveChangesAsync();
 
                 return new RetornoDto
                 {
-                    Resultado = true
+                    Resultado = resultado > 0
                 };
             }
             catch (Exception)
@@ -70,11 +69,11 @@ namespace ContaBancaria.Data.Repositories
                                               .SingleOrDefaultAsync(x => x.Guid == guid);
 
                 _bancoContext.Set<T>().Remove(item);
-                await _bancoContext.SaveChangesAsync();
+                var resultado = await _bancoContext.SaveChangesAsync();
 
                 return new RetornoDto
                 {
-                    Resultado = true
+                    Resultado = resultado > 0
                 };
             }
             catch (Exception)
@@ -93,7 +92,8 @@ namespace ContaBancaria.Data.Repositories
 
         public async Task<T> Obter<T>(Guid guid) where T : Entity
         {
-            return await _bancoContext.Set<T>().AsNoTracking().SingleOrDefaultAsync(x => x.Guid == guid);
+            return await _bancoContext.Set<T>()
+                                      .SingleOrDefaultAsync(x => x.Guid == guid);
         }
 
         protected virtual void Dispose(bool disposing)
@@ -104,7 +104,6 @@ namespace ContaBancaria.Data.Repositories
                 {
                     try
                     {
-                        _bancoContext.SaveChanges();
                         _dbContextTransaction.Commit();
                     }
                     catch (Exception)

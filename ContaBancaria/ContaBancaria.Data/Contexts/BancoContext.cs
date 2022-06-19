@@ -97,8 +97,7 @@ namespace ContaBancaria.Data.Contexts
             modelBuilder.Entity<TaxaBancaria>()
                         .Property(p => p.Tipo)
                         .HasColumnName("TIPO")
-                        .HasConversion(x => (byte)x, x => (TipoTaxaBancaria)x)
-                        .IsRequired();
+                        .HasConversion(x => (byte)x, x => (TipoTaxaBancaria)x);
 
             modelBuilder.Entity<TaxaBancaria>()
                         .Property(p => p.TipoValor)
@@ -170,8 +169,7 @@ namespace ContaBancaria.Data.Contexts
             modelBuilder.Entity<ExtratoConta>()
                        .Property(p => p.TipoTaxaBancaria)
                        .HasColumnName("TIPO_TAXA_BANCARIA")
-                       .HasConversion(x => (byte)x, x => (TipoTaxaBancaria)x)
-                       .IsRequired();
+                       .HasConversion(x => (byte)x, x => (TipoTaxaBancaria)x);
 
             modelBuilder.Entity<ExtratoConta>()
                        .Property(p => p.Valor)
