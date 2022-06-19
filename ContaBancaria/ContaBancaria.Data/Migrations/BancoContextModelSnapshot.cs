@@ -41,6 +41,15 @@ namespace ContaBancaria.Data.Migrations
                     b.HasKey("Guid");
 
                     b.ToTable("BANCO");
+
+                    b.HasData(
+                        new
+                        {
+                            Guid = new Guid("3cac4d99-6d48-4508-b06c-8ce9c5489124"),
+                            Agencia = 11111,
+                            Nome = "Banco",
+                            Numero = 1
+                        });
                 });
 
             modelBuilder.Entity("ContaBancaria.Dominio.Entidades.Conta", b =>
@@ -124,6 +133,35 @@ namespace ContaBancaria.Data.Migrations
                     b.HasIndex("GuidBanco");
 
                     b.ToTable("TAXA_BANCARIA");
+
+                    b.HasData(
+                        new
+                        {
+                            Guid = new Guid("477e1d1e-2f1c-4f36-b929-934e14919081"),
+                            Descricao = "1%",
+                            GuidBanco = new Guid("3cac4d99-6d48-4508-b06c-8ce9c5489124"),
+                            Tipo = (byte)2,
+                            TipoValor = (byte)1,
+                            Valor = 1m
+                        },
+                        new
+                        {
+                            Guid = new Guid("d29704e6-0f38-4780-8026-3f9e74119729"),
+                            Descricao = "R$ 4",
+                            GuidBanco = new Guid("3cac4d99-6d48-4508-b06c-8ce9c5489124"),
+                            Tipo = (byte)1,
+                            TipoValor = (byte)2,
+                            Valor = 4m
+                        },
+                        new
+                        {
+                            Guid = new Guid("a8cd00b0-ee69-48c6-8166-e907f68b696b"),
+                            Descricao = "R$ 1",
+                            GuidBanco = new Guid("3cac4d99-6d48-4508-b06c-8ce9c5489124"),
+                            Tipo = (byte)3,
+                            TipoValor = (byte)2,
+                            Valor = 1m
+                        });
                 });
 
             modelBuilder.Entity("ContaBancaria.Dominio.Entidades.Conta", b =>

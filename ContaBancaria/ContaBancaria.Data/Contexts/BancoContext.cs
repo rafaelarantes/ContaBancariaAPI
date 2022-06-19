@@ -1,7 +1,10 @@
 ﻿using ContaBancaria.Dominio.Entidades;
 using ContaBancaria.Dominio.Enums;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Configuration;
+using System;
+using System.Collections.Generic;
 
 namespace ContaBancaria.Data.Contexts
 {
@@ -33,7 +36,27 @@ namespace ContaBancaria.Data.Contexts
             MapearTaxaBancaria(modelBuilder);
             MapearConta(modelBuilder);
             MapearExtatoConta(modelBuilder);
+
+            CriarSeed(modelBuilder);
         }
+
+        private void CriarSeed(ModelBuilder modelBuilder)
+        {
+            var banco = new Banco("Banco", 1, 11111, default);
+            modelBuilder.Entity<Banco>().HasData(banco);
+
+            var taxasBancarias =
+                new List<TaxaBancaria>
+                {
+                    new TaxaBancaria(1, TipoTaxaBancaria.Deposito, TipoValorTaxaBancaria.Percentual, "1%"),
+                    new TaxaBancaria(4, TipoTaxaBancaria.Saque, TipoValorTaxaBancaria.Reais, "R$ 4"),
+                    new TaxaBancaria(1, TipoTaxaBancaria.Transferencia, TipoValorTaxaBancaria.Reais, "R$ 1")
+                };
+
+            taxasBancarias.ForEach(t => t.AssociarBanco(banco.Guid));
+            modelBuilder.Entity<TaxaBancaria>().HasData(taxasBancarias);
+        }
+
 
         private void MapearBanco(ModelBuilder modelBuilder)
         {
@@ -46,7 +69,7 @@ namespace ContaBancaria.Data.Contexts
                         .Property(p => p.Guid)
                         .HasColumnName("GUID")
                         .IsRequired();
-            
+
             modelBuilder.Entity<Banco>()
                         .Property(p => p.Nome)
                         .HasColumnName("NOME")
@@ -121,7 +144,7 @@ namespace ContaBancaria.Data.Contexts
             modelBuilder.Entity<Conta>()
                         .ToTable("CONTA")
                         .HasKey(c => c.Guid);
-                        
+
             modelBuilder.Entity<Conta>()
                         .Property(p => p.Guid)
                         .HasColumnName("GUID")

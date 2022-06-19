@@ -85,6 +85,26 @@ namespace ContaBancaria.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "BANCO",
+                columns: new[] { "GUID", "AGENCIA", "NOME", "NUMERO" },
+                values: new object[] { new Guid("3cac4d99-6d48-4508-b06c-8ce9c5489124"), 11111, "Banco", 1 });
+
+            migrationBuilder.InsertData(
+                table: "TAXA_BANCARIA",
+                columns: new[] { "GUID", "DESCRICAO", "GUID_BANCO", "TIPO", "TIPO_VALOR", "VALOR" },
+                values: new object[] { new Guid("477e1d1e-2f1c-4f36-b929-934e14919081"), "1%", new Guid("3cac4d99-6d48-4508-b06c-8ce9c5489124"), (byte)2, (byte)1, 1m });
+
+            migrationBuilder.InsertData(
+                table: "TAXA_BANCARIA",
+                columns: new[] { "GUID", "DESCRICAO", "GUID_BANCO", "TIPO", "TIPO_VALOR", "VALOR" },
+                values: new object[] { new Guid("d29704e6-0f38-4780-8026-3f9e74119729"), "R$ 4", new Guid("3cac4d99-6d48-4508-b06c-8ce9c5489124"), (byte)1, (byte)2, 4m });
+
+            migrationBuilder.InsertData(
+                table: "TAXA_BANCARIA",
+                columns: new[] { "GUID", "DESCRICAO", "GUID_BANCO", "TIPO", "TIPO_VALOR", "VALOR" },
+                values: new object[] { new Guid("a8cd00b0-ee69-48c6-8166-e907f68b696b"), "R$ 1", new Guid("3cac4d99-6d48-4508-b06c-8ce9c5489124"), (byte)3, (byte)2, 1m });
+
             migrationBuilder.CreateIndex(
                 name: "IX_CONTA_GUID_BANCO",
                 table: "CONTA",

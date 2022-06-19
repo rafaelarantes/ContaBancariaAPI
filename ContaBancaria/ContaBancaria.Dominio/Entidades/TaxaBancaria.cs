@@ -31,5 +31,10 @@ namespace ContaBancaria.Dominio.Entidades
         {
 
         }
+
+        public void AssociarBanco(Guid guidBanco)
+        {
+            GuidBanco = guidBanco;
+        }
     }
 }
