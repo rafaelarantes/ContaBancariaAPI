@@ -22,6 +22,22 @@ namespace ContaBancaria.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "FILA_PROCESSAMENTO",
+                columns: table => new
+                {
+                    GUID = table.Column<Guid>(nullable: false),
+                    DADOS = table.Column<string>(type: "varchar(max)", nullable: false),
+                    TIPO_COMANDO_FILA = table.Column<byte>(nullable: false),
+                    SITUACAO = table.Column<byte>(nullable: false),
+                    DATA_GERACAO = table.Column<DateTime>(type: "datetime", nullable: false),
+                    DATA_PROCESSAMENTO = table.Column<DateTime>(type: "datetime", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FILA_PROCESSAMENTO", x => x.GUID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "USUARIO",
                 columns: table => new
                 {
@@ -102,33 +118,33 @@ namespace ContaBancaria.Data.Migrations
             migrationBuilder.InsertData(
                 table: "BANCO",
                 columns: new[] { "GUID", "AGENCIA", "NOME", "NUMERO" },
-                values: new object[] { new Guid("20ef055c-2f7a-4995-83ee-4555207e0608"), 11111, "Banco", 1 });
+                values: new object[] { new Guid("06d7dd04-0e57-4c26-8d68-a5fd6553dd16"), 11111, "Banco", 1 });
 
             migrationBuilder.InsertData(
                 table: "USUARIO",
                 columns: new[] { "GUID", "AUTORIZACAO", "LOGIN", "SENHA" },
                 values: new object[,]
                 {
-                    { new Guid("9c0ff412-3496-431c-a89c-22982030cfa4"), "Conta", "conta", "7C4A8D09CA3762AF61E59520943DC26494F8941B" },
-                    { new Guid("644e3a32-7d67-4bd4-b08e-e21338b9f7c6"), "Banco", "banco", "7C4A8D09CA3762AF61E59520943DC26494F8941B" },
-                    { new Guid("9315a43d-bc8d-4a45-8050-641a033983df"), "BancoCentral", "central", "7C4A8D09CA3762AF61E59520943DC26494F8941B" },
-                    { new Guid("56b5df15-b978-4c17-86ee-09cc4047e417"), "Adm", "adm", "7C4A8D09CA3762AF61E59520943DC26494F8941B" }
+                    { new Guid("b2a36205-ca9a-4d08-a760-9ccf7313c914"), "Conta", "conta", "7C4A8D09CA3762AF61E59520943DC26494F8941B" },
+                    { new Guid("b06e9c97-3544-4ba3-aee2-98eb01008a85"), "Banco", "banco", "7C4A8D09CA3762AF61E59520943DC26494F8941B" },
+                    { new Guid("d802c3b5-0e12-4759-a92d-c5c6c3859a38"), "BancoCentral", "central", "7C4A8D09CA3762AF61E59520943DC26494F8941B" },
+                    { new Guid("cbf0d216-6904-4f5d-94fd-ee040a30c322"), "Adm", "adm", "7C4A8D09CA3762AF61E59520943DC26494F8941B" }
                 });
 
             migrationBuilder.InsertData(
                 table: "TAXA_BANCARIA",
                 columns: new[] { "GUID", "DESCRICAO", "GUID_BANCO", "TIPO", "TIPO_VALOR", "VALOR" },
-                values: new object[] { new Guid("9490fa28-66a8-4bf1-b8c1-1e80f83d14fd"), "1%", new Guid("20ef055c-2f7a-4995-83ee-4555207e0608"), (byte)2, (byte)1, 1m });
+                values: new object[] { new Guid("69372eab-5107-49ea-94cd-897e91304e5f"), "1%", new Guid("06d7dd04-0e57-4c26-8d68-a5fd6553dd16"), (byte)2, (byte)1, 1m });
 
             migrationBuilder.InsertData(
                 table: "TAXA_BANCARIA",
                 columns: new[] { "GUID", "DESCRICAO", "GUID_BANCO", "TIPO", "TIPO_VALOR", "VALOR" },
-                values: new object[] { new Guid("fc056d11-ed57-4b2a-a371-f66fe38ba496"), "R$ 4", new Guid("20ef055c-2f7a-4995-83ee-4555207e0608"), (byte)1, (byte)2, 4m });
+                values: new object[] { new Guid("38963719-3780-468c-bcb7-a4d9248c7e15"), "R$ 4", new Guid("06d7dd04-0e57-4c26-8d68-a5fd6553dd16"), (byte)1, (byte)2, 4m });
 
             migrationBuilder.InsertData(
                 table: "TAXA_BANCARIA",
                 columns: new[] { "GUID", "DESCRICAO", "GUID_BANCO", "TIPO", "TIPO_VALOR", "VALOR" },
-                values: new object[] { new Guid("57574877-3562-4d83-ac69-9e40aadfa5d9"), "R$ 1", new Guid("20ef055c-2f7a-4995-83ee-4555207e0608"), (byte)3, (byte)2, 1m });
+                values: new object[] { new Guid("f92b9799-dc12-436b-be12-25affb6366c3"), "R$ 1", new Guid("06d7dd04-0e57-4c26-8d68-a5fd6553dd16"), (byte)3, (byte)2, 1m });
 
             migrationBuilder.CreateIndex(
                 name: "IX_CONTA_GUID_BANCO",
@@ -150,6 +166,9 @@ namespace ContaBancaria.Data.Migrations
         {
             migrationBuilder.DropTable(
                 name: "EXTRATO_CONTA");
+
+            migrationBuilder.DropTable(
+                name: "FILA_PROCESSAMENTO");
 
             migrationBuilder.DropTable(
                 name: "TAXA_BANCARIA");

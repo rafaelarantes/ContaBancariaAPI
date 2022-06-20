@@ -45,7 +45,7 @@ namespace ContaBancaria.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Guid = new Guid("f1efd866-934e-4337-bd2c-756f0885139b"),
+                            Guid = new Guid("06d7dd04-0e57-4c26-8d68-a5fd6553dd16"),
                             Agencia = 11111,
                             Nome = "Banco",
                             Numero = 1
@@ -167,27 +167,27 @@ namespace ContaBancaria.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Guid = new Guid("a2b30a0f-a97e-4f3d-b6ac-88a4378e3cf1"),
+                            Guid = new Guid("69372eab-5107-49ea-94cd-897e91304e5f"),
                             Descricao = "1%",
-                            GuidBanco = new Guid("f1efd866-934e-4337-bd2c-756f0885139b"),
+                            GuidBanco = new Guid("06d7dd04-0e57-4c26-8d68-a5fd6553dd16"),
                             Tipo = (byte)2,
                             TipoValor = (byte)1,
                             Valor = 1m
                         },
                         new
                         {
-                            Guid = new Guid("1fba310f-2137-436e-9917-9c91071a8f20"),
+                            Guid = new Guid("38963719-3780-468c-bcb7-a4d9248c7e15"),
                             Descricao = "R$ 4",
-                            GuidBanco = new Guid("f1efd866-934e-4337-bd2c-756f0885139b"),
+                            GuidBanco = new Guid("06d7dd04-0e57-4c26-8d68-a5fd6553dd16"),
                             Tipo = (byte)1,
                             TipoValor = (byte)2,
                             Valor = 4m
                         },
                         new
                         {
-                            Guid = new Guid("057e97d1-c753-4d9a-b056-c619e96ea9e0"),
+                            Guid = new Guid("f92b9799-dc12-436b-be12-25affb6366c3"),
                             Descricao = "R$ 1",
-                            GuidBanco = new Guid("f1efd866-934e-4337-bd2c-756f0885139b"),
+                            GuidBanco = new Guid("06d7dd04-0e57-4c26-8d68-a5fd6553dd16"),
                             Tipo = (byte)3,
                             TipoValor = (byte)2,
                             Valor = 1m
@@ -219,28 +219,28 @@ namespace ContaBancaria.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Guid = new Guid("b856bcdb-c0b1-460a-b4bb-bcdf5b7f1cb1"),
+                            Guid = new Guid("b2a36205-ca9a-4d08-a760-9ccf7313c914"),
                             Autorizacao = "Conta",
                             Login = "conta",
                             Senha = "7C4A8D09CA3762AF61E59520943DC26494F8941B"
                         },
                         new
                         {
-                            Guid = new Guid("9dacd231-9a24-4ba8-841f-d588214a2c82"),
+                            Guid = new Guid("b06e9c97-3544-4ba3-aee2-98eb01008a85"),
                             Autorizacao = "Banco",
                             Login = "banco",
                             Senha = "7C4A8D09CA3762AF61E59520943DC26494F8941B"
                         },
                         new
                         {
-                            Guid = new Guid("b53fc76d-5ac1-405c-b53f-9c54bbf4e988"),
+                            Guid = new Guid("d802c3b5-0e12-4759-a92d-c5c6c3859a38"),
                             Autorizacao = "BancoCentral",
                             Login = "central",
                             Senha = "7C4A8D09CA3762AF61E59520943DC26494F8941B"
                         },
                         new
                         {
-                            Guid = new Guid("ccdc7bcf-ab59-4e93-8491-0ab11857156b"),
+                            Guid = new Guid("cbf0d216-6904-4f5d-94fd-ee040a30c322"),
                             Autorizacao = "Adm",
                             Login = "adm",
                             Senha = "7C4A8D09CA3762AF61E59520943DC26494F8941B"

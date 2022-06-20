@@ -70,12 +70,15 @@ namespace ContaBancaria.ServiceBus
 
                     await _filaProcessamentoRepository.Gravar();
                 }
+
+                _filaProcessamentoRepository.FinalizarTransacao();
             }
         }
 
         private async Task<RetornoDto> Processar(string url, string data, string token)
         {
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            
             var content = new StringContent(data, Encoding.UTF8, "application/json");
             var resultado = await _httpClient.PostAsync(url, content);
 

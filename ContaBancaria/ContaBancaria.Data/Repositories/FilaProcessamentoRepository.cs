@@ -31,8 +31,6 @@ namespace ContaBancaria.Data.Repositories
         public override async Task<RetornoDto> Gravar()
         {
             var gravou = await _bancoContext.SaveChangesAsync();
-            _dbContextTransaction.Commit();
-            _dbContextTransaction = _bancoContext.Database.BeginTransaction();
 
             return new RetornoDto
             {
@@ -40,6 +38,10 @@ namespace ContaBancaria.Data.Repositories
             };
         }
 
-
+        public void FinalizarTransacao()
+        {
+            _dbContextTransaction.Commit();
+            _dbContextTransaction = _bancoContext.Database.BeginTransaction();
+        }
     }
 }

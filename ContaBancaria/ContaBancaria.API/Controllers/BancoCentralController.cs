@@ -22,7 +22,7 @@ namespace ContaBancaria.API.Controllers
         }
 
 
-        [HttpGet("Bancos")]
+        [HttpGet("ListarBancos")]
         public async Task<IEnumerable<BancosViewModel>> ListarBancos() => await _bancoCentralApplication.ListarBancos();
 
         [HttpPost("CriarBanco")]
