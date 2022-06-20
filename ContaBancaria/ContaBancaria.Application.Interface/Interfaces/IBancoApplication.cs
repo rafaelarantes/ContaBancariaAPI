@@ -15,5 +15,6 @@ namespace ContaBancaria.Application.Contracts.Interfaces
         Task<IEnumerable<ContaViewModel>> ListarContas();
         Task<RetornoViewModel> CriarConta(NovaContaViewModel novaContaViewModel);
         Task<RetornoViewModel> ExcluirConta(Guid guid);
+        Task<RetornoViewModel> ReceberTransferencia(DepositoBancarioViewModel depositoBancarioViewModel);
     }
 }

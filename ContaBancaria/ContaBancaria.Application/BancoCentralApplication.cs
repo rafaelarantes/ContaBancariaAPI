@@ -1,5 +1,6 @@
 ﻿using ContaBancaria.Application.Contracts.Interfaces;
 using ContaBancaria.Application.Contracts.Interfaces.Mappers;
+using ContaBancaria.Application.Contracts.ViewModels.Banco;
 using ContaBancaria.Application.Contracts.ViewModels.BancoCentral;
 using ContaBancaria.Application.Contracts.ViewModels.Conta;
 using ContaBancaria.Data.Contracts.Repositories.Interfaces;
@@ -52,9 +53,9 @@ namespace ContaBancaria.Application
 
         public async Task<RetornoViewModel> Transferir(Conta contaOrigem, Conta contaDestino, decimal valor)
         {
-            var depositoViewModel = new DepositoViewModel
+            var depositoViewModel = new DepositoBancarioViewModel
             {
-                GuidContaDestino = contaDestino.Guid,
+                GuidConta = contaDestino.Guid,
                 Valor = valor,
                 GuidContaOrigem = contaOrigem.Guid
             };

@@ -9,11 +9,11 @@ namespace ContaBancaria.Dominio.Entidades
 
         public TipoComandoFila TipoComandoFila { get; private set; }
 
-        public SituacaoFilaProcessamento Situacao { get; private set; }
+        public SituacaoFilaProcessamento Situacao { get; set; }
 
         public DateTime DataGeracao { get; private set; }
 
-        public DateTime? DataProcessamento { get; private set; }
+        public DateTime? DataProcessamento { get; set; }
 
         public FilaProcessamento(TipoComandoFila tipoComandoFila, string dados)
         {

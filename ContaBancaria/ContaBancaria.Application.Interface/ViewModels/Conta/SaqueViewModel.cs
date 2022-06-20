@@ -8,6 +8,5 @@ namespace ContaBancaria.Application.Contracts.ViewModels.Conta
 
         public decimal Valor { get; set; }
 
-        public Guid GuidContaOrigem { get; set; }
     }
 }

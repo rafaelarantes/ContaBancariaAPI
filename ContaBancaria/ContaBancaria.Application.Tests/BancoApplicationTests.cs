@@ -196,7 +196,7 @@ namespace ContaBancaria.Application.Tests
             };
 
             //Act
-            var retornoViewModel = await _bancoApplication.Depositar(depositoBancarioViewModel);
+            var retornoViewModel = await _bancoApplication.ReceberTransferencia(depositoBancarioViewModel);
             var saldoExtrato = CalcularSaldoExtrato(conta);
 
             //Assert

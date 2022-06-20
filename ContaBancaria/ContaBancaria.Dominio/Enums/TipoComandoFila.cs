@@ -4,7 +4,7 @@ namespace ContaBancaria.Dominio.Enums
 {
     public enum TipoComandoFila : byte
     {
-        [Description("Conta/Depositar")]
+        [Description("Banco/ReceberTransferencia")]
         Deposito = 1 
     }
 }

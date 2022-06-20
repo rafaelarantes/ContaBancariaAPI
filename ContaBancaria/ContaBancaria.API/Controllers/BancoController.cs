@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ContaBancaria.API.Controllers
 {
-    [Authorize(Roles = "Banco, Adm")]
+    [Authorize(Roles = "BancoCentral, Banco, Adm")]
     [Route("api/[controller]")]
     [ApiController]
     public class BancoController : ControllerBase
@@ -30,11 +30,17 @@ namespace ContaBancaria.API.Controllers
             return await _bancoApplication.CriarConta(novaContaViewModel);
         }
 
+
         [HttpDelete("ExcluirConta/{guid}")]
         public async Task<RetornoViewModel> ExcluirConta(Guid guid)
         {
             return await _bancoApplication.ExcluirConta(guid);
         }
 
+        [HttpPost("ReceberTransferencia")]
+        public async Task<RetornoViewModel> ReceberTransferencia([FromBody] DepositoBancarioViewModel depositoBancarioViewModel)
+        {
+            return await _bancoApplication.ReceberTransferencia(depositoBancarioViewModel);
+        }
     }
 }

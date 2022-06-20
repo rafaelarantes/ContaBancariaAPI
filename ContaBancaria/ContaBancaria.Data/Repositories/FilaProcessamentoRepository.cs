@@ -22,14 +22,19 @@ namespace ContaBancaria.Data.Repositories
 
         public IEnumerable<FilaProcessamento> ListarPendenteTracking()
         {
-            var filas = ListarTracking<FilaProcessamento>(
+            var filas = Listar<FilaProcessamento>(
                 t => t.Situacao == SituacaoFilaProcessamento.Enfileirado || 
                      t.Situacao == SituacaoFilaProcessamento.Erro);
             return filas.OrderByDescending(f => f.DataGeracao);
         }
 
-        public override async Task<RetornoDto> Gravar()
+        public async Task<RetornoDto> Gravar(FilaProcessamento filaProcessamento)
         {
+            var fila = await Obter<FilaProcessamento>(filaProcessamento.Guid);
+
+            fila.DataProcessamento = filaProcessamento.DataProcessamento;
+            fila.Situacao = filaProcessamento.Situacao;
+
             var gravou = await _bancoContext.SaveChangesAsync();
 
             return new RetornoDto
@@ -41,6 +46,13 @@ namespace ContaBancaria.Data.Repositories
         public void FinalizarTransacao()
         {
             _dbContextTransaction.Commit();
+            _dbContextTransaction = _bancoContext.Database.BeginTransaction();
+        }
+
+        public void Rollback()
+        {
+            _dbContextTransaction.Rollback();
+            _dbContextTransaction.Dispose();
             _dbContextTransaction = _bancoContext.Database.BeginTransaction();
         }
     }

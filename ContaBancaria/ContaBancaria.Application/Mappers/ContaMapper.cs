@@ -26,8 +26,7 @@ namespace ContaBancaria.Application.Mappers
         {
             return new DepositoBancarioViewModel
             {
-                GuidConta = depositoViewModel.GuidContaDestino,
-                GuidContaOrigem = depositoViewModel.GuidContaOrigem,
+                GuidConta = depositoViewModel.GuidConta,
                 Valor = depositoViewModel.Valor
             };
         }
@@ -37,7 +36,6 @@ namespace ContaBancaria.Application.Mappers
             return new SaqueBancarioViewModel
             {
                 GuidConta = SaqueViewModel.GuidConta,
-                GuidContaOrigem = SaqueViewModel.GuidContaOrigem,
                 Valor = SaqueViewModel.Valor
             };
         }

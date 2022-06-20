@@ -92,9 +92,10 @@ namespace ContaBancaria.Data.Repositories
         }
 
 
-        public IEnumerable<T> ListarTracking<T>(Func<T, bool> predicado) where T : Entity
+        public IEnumerable<T> Listar<T>(Func<T, bool> predicado) where T : Entity
         {
             return _bancoContext.Set<T>()
+                                .AsNoTracking()
                                 .Where(predicado);
         }
 

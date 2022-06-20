@@ -46,6 +46,7 @@ namespace ContaBancaria.ServiceBus
                 var filaProcessamentos = _filaProcessamentoRepository.ListarPendenteTracking();
                 if(!filaProcessamentos.Any())
                 {
+                    _filaProcessamentoRepository.Rollback();
                     await Task.Delay(5000);
                     continue;
                 }
@@ -62,16 +63,16 @@ namespace ContaBancaria.ServiceBus
                         if(!retornoDto.Resultado) processamento.ProcessadoComErro();
                         
                         processamento.Finalizado();
+
+                        await _filaProcessamentoRepository.Gravar(processamento);
+                        _filaProcessamentoRepository.FinalizarTransacao();
                     }
                     catch (Exception)
                     {
                         processamento.ProcessadoComErro();
+                        _filaProcessamentoRepository.Rollback();
                     }
-
-                    await _filaProcessamentoRepository.Gravar();
                 }
-
-                _filaProcessamentoRepository.FinalizarTransacao();
             }
         }
 

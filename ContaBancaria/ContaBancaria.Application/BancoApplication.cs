@@ -60,15 +60,11 @@ namespace ContaBancaria.Application
             var conta = await _contaRepository.ObterInclude(depositoBancarioDto.GuidConta);
             if (conta == null) return _retornoMapper.Map(false);
 
-            if (depositoBancarioDto.GuidContaOrigem == Guid.Empty ||
-                depositoBancarioDto.GuidContaOrigem == null)
-            {
-                var debitadoTaxaBancaria = await conta.DebitarTaxaBancaria(
-                                                    TipoTaxaBancaria.Deposito,
-                                                    depositoBancarioDto.Valor);
+            var debitadoTaxaBancaria = await conta.DebitarTaxaBancaria(
+                                                TipoTaxaBancaria.Deposito,
+                                                depositoBancarioDto.Valor);
 
-                if (!debitadoTaxaBancaria) return _retornoMapper.Map(debitadoTaxaBancaria);
-            }
+            if (!debitadoTaxaBancaria) return _retornoMapper.Map(debitadoTaxaBancaria);
 
             return await Creditar(conta, depositoBancarioDto.Valor, depositoBancarioDto.GuidContaOrigem);
         }
@@ -108,6 +104,15 @@ namespace ContaBancaria.Application
                 return await Creditar(contaDestino, transferenciaBancariaDto.Valor, null);
 
             return await _bancoCentralApplication.Transferir(contaOrigem, contaDestino, transferenciaBancariaDto.Valor);
+        }
+
+        public async Task<RetornoViewModel> ReceberTransferencia(DepositoBancarioViewModel depositoBancarioViewModel)
+        {
+            var depositoBancarioDto = _bancoMapper.Map(depositoBancarioViewModel);
+            var conta = await _contaRepository.ObterInclude(depositoBancarioDto.GuidConta);
+            if (conta == null) return _retornoMapper.Map(false);
+
+            return await Creditar(conta, depositoBancarioDto.Valor, depositoBancarioDto.GuidContaOrigem);
         }
 
         private async Task<RetornoViewModel> Debitar(Conta conta, decimal valor, Guid? guidContaOrigem)

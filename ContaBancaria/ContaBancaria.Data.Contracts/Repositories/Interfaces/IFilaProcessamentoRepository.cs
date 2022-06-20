@@ -9,10 +9,11 @@ namespace ContaBancaria.Data.Contracts.Repositories.Interfaces
     {
         Task<RetornoDto> Incluir(FilaProcessamento serviceBusDto);
         
-        Task<RetornoDto> Gravar();
+        Task<RetornoDto> Gravar(FilaProcessamento processamento);
 
         void FinalizarTransacao();
 
         IEnumerable<FilaProcessamento> ListarPendenteTracking();
+        void Rollback();
     }
 }
