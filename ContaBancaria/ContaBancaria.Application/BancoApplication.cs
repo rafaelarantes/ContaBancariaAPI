@@ -1,10 +1,8 @@
 ﻿using ContaBancaria.Application.Contracts.Interfaces;
 using ContaBancaria.Application.Contracts.Interfaces.Mappers;
 using ContaBancaria.Application.Contracts.ViewModels.Banco;
-using ContaBancaria.Application.Contracts.ViewModels.BancoCentral;
 using ContaBancaria.Application.Contracts.ViewModels.Conta;
 using ContaBancaria.Data.Contracts.Repositories.Interfaces;
-using ContaBancaria.Data.Dtos;
 using ContaBancaria.Dominio.Entidades;
 using ContaBancaria.Dominio.Enums;
 using System;
@@ -117,7 +115,7 @@ namespace ContaBancaria.Application
             var debitado = await conta.Debitar(valor, guidContaOrigem);
             if (!debitado) return _retornoMapper.Map(debitado);
 
-            return await AtualizarConta(conta);
+            return await AtualizarConta();
         }
 
         private async Task<RetornoViewModel> Creditar(Conta conta, decimal valor, Guid? guidContaOrigem)
@@ -125,12 +123,12 @@ namespace ContaBancaria.Application
             var creditado = await conta.Creditar(valor, guidContaOrigem);
             if (!creditado) return _retornoMapper.Map(creditado);
 
-            return await AtualizarConta(conta);
+            return await AtualizarConta();
         }
 
-        private async Task<RetornoViewModel> AtualizarConta(Conta conta)
+        private async Task<RetornoViewModel> AtualizarConta()
         {
-            var atualizado = await _contaRepository.Atualizar(conta);
+            var atualizado = await _contaRepository.Gravar();
             return _retornoMapper.Map(atualizado);
         }
     }

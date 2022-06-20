@@ -45,7 +45,7 @@ namespace ContaBancaria.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Guid = new Guid("20ef055c-2f7a-4995-83ee-4555207e0608"),
+                            Guid = new Guid("f1efd866-934e-4337-bd2c-756f0885139b"),
                             Agencia = 11111,
                             Nome = "Banco",
                             Numero = 1
@@ -105,6 +105,36 @@ namespace ContaBancaria.Data.Migrations
                     b.ToTable("EXTRATO_CONTA");
                 });
 
+            modelBuilder.Entity("ContaBancaria.Dominio.Entidades.FilaProcessamento", b =>
+                {
+                    b.Property<Guid>("Guid")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("GUID");
+
+                    b.Property<string>("Dados")
+                        .IsRequired()
+                        .HasColumnName("DADOS")
+                        .HasColumnType("varchar(max)");
+
+                    b.Property<DateTime>("DataGeracao")
+                        .HasColumnName("DATA_GERACAO")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime?>("DataProcessamento")
+                        .HasColumnName("DATA_PROCESSAMENTO")
+                        .HasColumnType("datetime");
+
+                    b.Property<byte>("Situacao")
+                        .HasColumnName("SITUACAO");
+
+                    b.Property<byte>("TipoComandoFila")
+                        .HasColumnName("TIPO_COMANDO_FILA");
+
+                    b.HasKey("Guid");
+
+                    b.ToTable("FILA_PROCESSAMENTO");
+                });
+
             modelBuilder.Entity("ContaBancaria.Dominio.Entidades.TaxaBancaria", b =>
                 {
                     b.Property<Guid>("Guid")
@@ -137,27 +167,27 @@ namespace ContaBancaria.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Guid = new Guid("9490fa28-66a8-4bf1-b8c1-1e80f83d14fd"),
+                            Guid = new Guid("a2b30a0f-a97e-4f3d-b6ac-88a4378e3cf1"),
                             Descricao = "1%",
-                            GuidBanco = new Guid("20ef055c-2f7a-4995-83ee-4555207e0608"),
+                            GuidBanco = new Guid("f1efd866-934e-4337-bd2c-756f0885139b"),
                             Tipo = (byte)2,
                             TipoValor = (byte)1,
                             Valor = 1m
                         },
                         new
                         {
-                            Guid = new Guid("fc056d11-ed57-4b2a-a371-f66fe38ba496"),
+                            Guid = new Guid("1fba310f-2137-436e-9917-9c91071a8f20"),
                             Descricao = "R$ 4",
-                            GuidBanco = new Guid("20ef055c-2f7a-4995-83ee-4555207e0608"),
+                            GuidBanco = new Guid("f1efd866-934e-4337-bd2c-756f0885139b"),
                             Tipo = (byte)1,
                             TipoValor = (byte)2,
                             Valor = 4m
                         },
                         new
                         {
-                            Guid = new Guid("57574877-3562-4d83-ac69-9e40aadfa5d9"),
+                            Guid = new Guid("057e97d1-c753-4d9a-b056-c619e96ea9e0"),
                             Descricao = "R$ 1",
-                            GuidBanco = new Guid("20ef055c-2f7a-4995-83ee-4555207e0608"),
+                            GuidBanco = new Guid("f1efd866-934e-4337-bd2c-756f0885139b"),
                             Tipo = (byte)3,
                             TipoValor = (byte)2,
                             Valor = 1m
@@ -189,28 +219,28 @@ namespace ContaBancaria.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Guid = new Guid("9c0ff412-3496-431c-a89c-22982030cfa4"),
+                            Guid = new Guid("b856bcdb-c0b1-460a-b4bb-bcdf5b7f1cb1"),
                             Autorizacao = "Conta",
                             Login = "conta",
                             Senha = "7C4A8D09CA3762AF61E59520943DC26494F8941B"
                         },
                         new
                         {
-                            Guid = new Guid("644e3a32-7d67-4bd4-b08e-e21338b9f7c6"),
+                            Guid = new Guid("9dacd231-9a24-4ba8-841f-d588214a2c82"),
                             Autorizacao = "Banco",
                             Login = "banco",
                             Senha = "7C4A8D09CA3762AF61E59520943DC26494F8941B"
                         },
                         new
                         {
-                            Guid = new Guid("9315a43d-bc8d-4a45-8050-641a033983df"),
+                            Guid = new Guid("b53fc76d-5ac1-405c-b53f-9c54bbf4e988"),
                             Autorizacao = "BancoCentral",
                             Login = "central",
                             Senha = "7C4A8D09CA3762AF61E59520943DC26494F8941B"
                         },
                         new
                         {
-                            Guid = new Guid("56b5df15-b978-4c17-86ee-09cc4047e417"),
+                            Guid = new Guid("ccdc7bcf-ab59-4e93-8491-0ab11857156b"),
                             Autorizacao = "Adm",
                             Login = "adm",
                             Senha = "7C4A8D09CA3762AF61E59520943DC26494F8941B"

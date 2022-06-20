@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "4lNLtQjMS+7n1xJe7S0q/jyrRI2QEZDypXEDY2nLuysBpZDEjI8L4JcLKgeqYnHftSXBrtQFoQCCM/HEFM3oQQ==",
+  "dgSpecHash": "gSs4wp5ogKxL6Gt1jcqNRtpWiTN5PjpGWz6r4AyxLoYSRBH4HKcRmaFpLQ/x2Q7K4VqsZEGgn6FRpaqidRA4YQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\rafae\\OneDrive\\Desktop\\Projetos\\ContaBancariaAPI\\ContaBancaria\\ContaBancaria.Application.Tests\\ContaBancaria.Application.Tests.csproj",
   "expectedPackageFiles": [

@@ -24,11 +24,6 @@ namespace ContaBancaria.Data.Repositories
                                       .SingleOrDefaultAsync(x => x.Guid == guid);
         }
 
-        public async Task<RetornoDto> Atualizar(Conta conta)
-        {
-            return await Atualizar<Conta>(conta);
-        }
-
         public async Task<RetornoDto> Incluir(Conta conta)
         {
             return await Incluir<Conta>(conta);

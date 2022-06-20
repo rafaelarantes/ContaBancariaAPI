@@ -1,0 +1,5 @@
+C:\Users\rafae\OneDrive\Desktop\Projetos\ContaBancariaAPI\ContaBancaria\ContaBancaria.Cross.Mediator\obj\Debug\netcoreapp2.2\ContaBancaria.Cross.Mediator.csproj.AssemblyReference.cache
+C:\Users\rafae\OneDrive\Desktop\Projetos\ContaBancariaAPI\ContaBancaria\ContaBancaria.Cross.Mediator\obj\Debug\netcoreapp2.2\ContaBancaria.Cross.Mediator.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rafae\OneDrive\Desktop\Projetos\ContaBancariaAPI\ContaBancaria\ContaBancaria.Cross.Mediator\obj\Debug\netcoreapp2.2\ContaBancaria.Cross.Mediator.AssemblyInfoInputs.cache
+C:\Users\rafae\OneDrive\Desktop\Projetos\ContaBancariaAPI\ContaBancaria\ContaBancaria.Cross.Mediator\obj\Debug\netcoreapp2.2\ContaBancaria.Cross.Mediator.AssemblyInfo.cs
+C:\Users\rafae\OneDrive\Desktop\Projetos\ContaBancariaAPI\ContaBancaria\ContaBancaria.Cross.Mediator\obj\Debug\netcoreapp2.2\ContaBancaria.Cross.Mediator.csproj.CoreCompileInputs.cache

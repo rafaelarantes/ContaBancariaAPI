@@ -17,6 +17,7 @@ namespace ContaBancaria.Data.Contexts
         public DbSet<ExtratoConta> ExtratoContas { get; set; }
         public DbSet<TaxaBancaria> TaxasBancarias { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<FilaProcessamento> FilaProcessamentos { get; set; }
 
 
         public BancoContext(IConfiguration configuration)
@@ -40,6 +41,7 @@ namespace ContaBancaria.Data.Contexts
             MapearConta(modelBuilder);
             MapearExtatoConta(modelBuilder);
             MapearUsuarios(modelBuilder);
+            MapearFilaProcessamento(modelBuilder);
 
             CriarSeed(modelBuilder);
         }
@@ -246,6 +248,48 @@ namespace ContaBancaria.Data.Contexts
                         .Property(p => p.Autorizacao)
                         .HasColumnName("AUTORIZACAO")
                         .HasColumnType("varchar(50)");
+        }
+
+        private void MapearFilaProcessamento(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<FilaProcessamento>()
+                       .ToTable("FILA_PROCESSAMENTO")
+                       .HasKey(e => e.Guid);
+
+            modelBuilder.Entity<FilaProcessamento>()
+                        .Property(p => p.Guid)
+                        .HasColumnName("GUID")
+                        .IsRequired();
+
+            modelBuilder.Entity<FilaProcessamento>()
+                        .Property(p => p.Dados)
+                        .HasColumnName("DADOS")
+                        .HasColumnType("varchar(max)")
+                        .IsRequired();
+
+
+            modelBuilder.Entity<FilaProcessamento>()
+                        .Property(p => p.DataGeracao)
+                        .HasColumnName("DATA_GERACAO")
+                        .HasColumnType("datetime")
+                        .IsRequired();
+
+            modelBuilder.Entity<FilaProcessamento>()
+                        .Property(p => p.DataProcessamento)
+                        .HasColumnName("DATA_PROCESSAMENTO")
+                        .HasColumnType("datetime");
+
+            modelBuilder.Entity<FilaProcessamento>()
+                       .Property(p => p.Situacao)
+                       .HasColumnName("SITUACAO")
+                       .HasConversion(x => (byte)x, x => (SituacaoFilaProcessamento)x)
+                       .IsRequired();
+
+            modelBuilder.Entity<FilaProcessamento>()
+                       .Property(p => p.TipoComandoFila)
+                       .HasColumnName("TIPO_COMANDO_FILA")
+                       .HasConversion(x => (byte)x, x => (TipoComandoFila)x)
+                       .IsRequired();
         }
     }
 }

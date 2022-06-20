@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ContaBancaria.Data.Repositories
@@ -14,7 +15,7 @@ namespace ContaBancaria.Data.Repositories
     {
         protected BancoContext _bancoContext;
 
-        private IDbContextTransaction _dbContextTransaction;
+        protected IDbContextTransaction _dbContextTransaction;
         private bool disposedValue;
 
         public Repository(IConfiguration configuration)
@@ -42,7 +43,7 @@ namespace ContaBancaria.Data.Repositories
             }
         }
 
-        public async Task<RetornoDto> Atualizar<T>(T entity) where T : Entity
+        public virtual async Task<RetornoDto> Gravar()
         {
             try
             {
@@ -88,6 +89,13 @@ namespace ContaBancaria.Data.Repositories
             return await _bancoContext.Set<T>()
                                       .AsNoTracking()
                                       .ToListAsync();
+        }
+
+
+        public IEnumerable<T> ListarTracking<T>(Func<T, bool> predicado) where T : Entity
+        {
+            return _bancoContext.Set<T>()
+                                .Where(predicado);
         }
 
         public async Task<T> Obter<T>(Guid guid) where T : Entity

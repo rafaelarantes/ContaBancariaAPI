@@ -1,17 +1,13 @@
 ﻿using ContaBancaria.Application.Contracts.Interfaces;
 using ContaBancaria.Application.Contracts.Interfaces.Mappers;
-using ContaBancaria.Application.Contracts.ViewModels.Banco;
 using ContaBancaria.Application.Contracts.ViewModels.BancoCentral;
 using ContaBancaria.Application.Contracts.ViewModels.Conta;
-using ContaBancaria.Application.Mappers;
 using ContaBancaria.Data.Contracts.Repositories.Interfaces;
 using ContaBancaria.Data.Dtos;
 using ContaBancaria.Dominio.Entidades;
-using ContaBancaria.Dominio.Enums;
 using Moq;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -24,17 +20,20 @@ namespace ContaBancaria.Application.Tests
         private readonly Mock<IBancoMapper> _bancoMapperMock;
         private readonly Mock<IRetornoMapper> _retornoMapperMock;
         private readonly Mock<IBancoRepository> _bancoRepositoryMock;
+        private readonly Mock<IFilaProcessamentoRepository> _filaProcessamentoRepository;
 
         public BancoCentralApplicationTests()
         {
             _bancoMapperMock = new Mock<IBancoMapper>();
             _retornoMapperMock = new Mock<IRetornoMapper>();
             _bancoRepositoryMock = new Mock<IBancoRepository>();
+            _filaProcessamentoRepository = new Mock<IFilaProcessamentoRepository>();
 
             _bancoCentralApplication = new BancoCentralApplication(
                                                      bancoMapper: _bancoMapperMock.Object,
                                                      bancoRepository: _bancoRepositoryMock.Object,
-                                                     retornoMapper: _retornoMapperMock.Object);
+                                                     retornoMapper: _retornoMapperMock.Object,
+                                                     filaProcessamentoRepository: _filaProcessamentoRepository.Object);
         }
 
         private void Mockar_BancoMapper_Map(Banco banco)

@@ -57,7 +57,7 @@ namespace ContaBancaria.Application.Tests
 
         private void Mockar_BancoRepository_AtualizarConta(RetornoDto retornoDto)
         {
-            _contaRepositoryMock.Setup(b => b.Atualizar(It.IsAny<Conta>()))
+            _contaRepositoryMock.Setup(b => b.Gravar())
                 .Returns(Task.FromResult(retornoDto));
         }
 
@@ -135,7 +135,7 @@ namespace ContaBancaria.Application.Tests
 
             Assert.Equal(saldoExtrato, conta.Saldo);
 
-            _contaRepositoryMock.Verify(b => b.Atualizar(It.IsAny<Conta>()), Times.Once);
+            _contaRepositoryMock.Verify(b => b.Gravar(), Times.Once);
         }
 
         [Fact]
@@ -169,7 +169,7 @@ namespace ContaBancaria.Application.Tests
             Assert.Equal(saldoExtrato, conta.Saldo);
             Assert.Equal(SALDO, conta.Saldo);
 
-            _contaRepositoryMock.Verify(b => b.Atualizar(It.IsAny<Conta>()), Times.Once);
+            _contaRepositoryMock.Verify(b => b.Gravar(), Times.Once);
         }
 
         [Fact]
@@ -204,7 +204,7 @@ namespace ContaBancaria.Application.Tests
             Assert.Equal(saldoExtrato, conta.Saldo);
             Assert.Equal(SALDO, conta.Saldo);
 
-            _contaRepositoryMock.Verify(b => b.Atualizar(It.IsAny<Conta>()), Times.Once);
+            _contaRepositoryMock.Verify(b => b.Gravar(), Times.Once);
         }
 
         [Fact]
@@ -244,7 +244,7 @@ namespace ContaBancaria.Application.Tests
             Assert.Equal(SALDO, conta.Saldo);
             Assert.Equal(SALDO, saldoExtrato);
 
-            _contaRepositoryMock.Verify(b => b.Atualizar(It.IsAny<Conta>()), Times.Exactly(2));
+            _contaRepositoryMock.Verify(b => b.Gravar(), Times.Exactly(2));
         }
 
         [Fact]
@@ -285,7 +285,7 @@ namespace ContaBancaria.Application.Tests
             Assert.Equal(SALDO, conta.Saldo);
             Assert.Equal(SALDO, saldoExtrato);
 
-            _contaRepositoryMock.Verify(b => b.Atualizar(It.IsAny<Conta>()), Times.Once);
+            _contaRepositoryMock.Verify(b => b.Gravar(), Times.Once);
         }
 
         [Fact]
@@ -331,7 +331,7 @@ namespace ContaBancaria.Application.Tests
             Assert.Equal(SALDO, conta.Saldo);
             Assert.Equal(SALDO, saldoExtrato);
 
-            _contaRepositoryMock.Verify(b => b.Atualizar(It.IsAny<Conta>()), Times.Exactly(2));
+            _contaRepositoryMock.Verify(b => b.Gravar(), Times.Exactly(2));
         }
 
         [Fact]
@@ -380,7 +380,7 @@ namespace ContaBancaria.Application.Tests
             Assert.Equal(SALDO_CONTA_DESTINO, contaDestino.Saldo);
             Assert.Equal(SALDO_CONTA_DESTINO, saldoExtratoContaDestino);
 
-            _contaRepositoryMock.Verify(b => b.Atualizar(It.IsAny<Conta>()), Times.Exactly(3));
+            _contaRepositoryMock.Verify(b => b.Gravar(), Times.Exactly(3));
         }
 
         [Fact]
@@ -427,7 +427,7 @@ namespace ContaBancaria.Application.Tests
             Assert.Equal(SALDO_CONTA_ORIGEM, contaOrigem.Saldo);
             Assert.Equal(SALDO_CONTA_ORIGEM, saldoExtratoContaOrigem);
 
-            _contaRepositoryMock.Verify(b => b.Atualizar(It.IsAny<Conta>()), Times.Exactly(2));
+            _contaRepositoryMock.Verify(b => b.Gravar(), Times.Exactly(2));
             _bancoCentralAplicationMock.Verify(b => b.Transferir(It.IsAny<Conta>(),
                                                                  It.IsAny<Conta>(),
               
@@ -480,7 +480,7 @@ namespace ContaBancaria.Application.Tests
             Assert.Equal(SALDO_CONTA_DESTINO, contaDestino.Saldo);
             Assert.Equal(SALDO_CONTA_DESTINO, saldoExtratoContaDestino);
 
-            _contaRepositoryMock.Verify(b => b.Atualizar(It.IsAny<Conta>()), Times.Once);
+            _contaRepositoryMock.Verify(b => b.Gravar(), Times.Once);
         }
 
         [Fact]
@@ -536,7 +536,7 @@ namespace ContaBancaria.Application.Tests
             Assert.Equal(SALDO_CONTA_ORIGEM, contaOrigem.Saldo);
             Assert.Equal(SALDO_CONTA_ORIGEM, saldoExtratoContaOrigem);
 
-            _contaRepositoryMock.Verify(b => b.Atualizar(It.IsAny<Conta>()), Times.Exactly(2));
+            _contaRepositoryMock.Verify(b => b.Gravar(), Times.Exactly(2));
             _bancoCentralAplicationMock.Verify(b => b.Transferir(It.IsAny<Conta>(),
                                                                  It.IsAny<Conta>(),
 

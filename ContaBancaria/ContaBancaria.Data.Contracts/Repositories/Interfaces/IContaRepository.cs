@@ -10,7 +10,7 @@ namespace ContaBancaria.Data.Contracts.Repositories.Interfaces
     {
         Task<Conta> ObterInclude(Guid guidContaDestino);
 
-        Task<RetornoDto> Atualizar(Conta conta);
+        Task<RetornoDto> Gravar();
 
         Task<RetornoDto> Incluir(Conta conta);
         
