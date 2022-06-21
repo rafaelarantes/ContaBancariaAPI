@@ -62,8 +62,11 @@ namespace ContaBancaria.Dominio.Entidades
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> DebitarTaxaBancaria(TipoTaxaBancaria tipoTaxaBancaria, decimal valor)
+        public void DebitarTaxaBancaria(TipoTaxaBancaria tipoTaxaBancaria,
+                                        decimal valor)
         {
+            if (Banco.TaxasBancarias == null || !Banco.TaxasBancarias.Any()) return;
+            
             var taxasBancarias = Banco.TaxasBancarias.ToList()
                                                       .Where(t => t.Tipo == tipoTaxaBancaria)
                                                       .ToList();
@@ -72,8 +75,6 @@ namespace ContaBancaria.Dominio.Entidades
 
             Extrato.Add(new ExtratoConta(taxaBancaria, TipoOperacaoConta.TaxaBancaria,
                                           DateTime.Now, Guid.Empty, Guid, tipoTaxaBancaria));
-
-            return await Task.FromResult(true);
         }
 
         private decimal CalcularSaldo()

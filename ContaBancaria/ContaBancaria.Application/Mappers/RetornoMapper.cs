@@ -1,6 +1,7 @@
 ﻿using ContaBancaria.Application.Contracts.Interfaces.Mappers;
 using ContaBancaria.Application.Contracts.ViewModels.Conta;
 using ContaBancaria.Data.Dtos;
+using System.Collections.Generic;
 
 namespace ContaBancaria.Application.Mappers
 {
@@ -14,11 +15,12 @@ namespace ContaBancaria.Application.Mappers
             };
         }
 
-        public RetornoViewModel Map(bool resultado)
+        public RetornoViewModel Map(bool resultado, List<string> mensagens)
         {
             return new RetornoViewModel
             {
-                Resultado = resultado
+                Resultado = resultado,
+                Mensagens = mensagens ?? default
             };
         }
     }

@@ -20,39 +20,29 @@ namespace ContaBancaria.Application.Tests
     {
         private readonly IBancoApplication _bancoApplication;
         private readonly IBancoMapper _bancoMapper;
+        private readonly IRetornoMapper _retornoMapper;
+
 
         private readonly Mock<IBancoCentralApplication> _bancoCentralAplicationMock;
-        private readonly Mock<IRetornoMapper> _retornoMapperMock;
         private readonly Mock<IBancoRepository> _bancoRepositoryMock;
         private readonly Mock<IContaRepository> _contaRepositoryMock;
 
         public BancoApplicationTests()
         {
             _bancoCentralAplicationMock = new Mock<IBancoCentralApplication>();
-            _retornoMapperMock = new Mock<IRetornoMapper>();
             _bancoRepositoryMock = new Mock<IBancoRepository>();
             _contaRepositoryMock = new Mock<IContaRepository>();
 
             _bancoMapper = new BancoMapper();
+            _retornoMapper = new RetornoMapper();
+
 
             _bancoApplication = new BancoApplication(bancoCentralApplication: _bancoCentralAplicationMock.Object,
-                                                     retornoMapper: _retornoMapperMock.Object,
+                                                     retornoMapper: _retornoMapper,
                                                      bancoRepository: _bancoRepositoryMock.Object,
                                                      bancoMapper: _bancoMapper,
                                                      contaRepository: _contaRepositoryMock.Object
                                                      );
-        }
-
-        private void Mockar_RetornoMapper_Map(RetornoViewModel retornoViewModel)
-        {
-            _retornoMapperMock.Setup(b => b.Map(It.IsAny<RetornoDto>()))
-                .Returns(retornoViewModel);
-        }
-
-        private void Mockar_RetornoMapper_MapBool(RetornoViewModel retornoViewModel)
-        {
-            _retornoMapperMock.Setup(b => b.Map(It.IsAny<bool>()))
-                .Returns(retornoViewModel);
         }
 
         private void Mockar_BancoRepository_AtualizarConta(RetornoDto retornoDto)
@@ -61,14 +51,12 @@ namespace ContaBancaria.Application.Tests
                 .Returns(Task.FromResult(retornoDto));
         }
 
-        private void Mockar_AtualizarConta(Conta conta)
+        private void Mockar_AtualizarConta()
         {
             Mockar_BancoRepository_AtualizarConta(new RetornoDto
             {
                 Resultado = true
             });
-
-            Mockar_RetornoMapper_Map(new RetornoViewModel { Resultado = true });
         }
 
         private void Mockar_BancoCentralApplication_Transferir(RetornoViewModel retornoViewModel)
@@ -85,7 +73,6 @@ namespace ContaBancaria.Application.Tests
             {
                 setupSequence.Returns(Task.FromResult(conta));
             }
-            
         }
 
 
@@ -116,7 +103,7 @@ namespace ContaBancaria.Application.Tests
             const decimal VALOR_DEPOSITO = 1000M;
 
             var conta = CriarConta();
-            Mockar_AtualizarConta(conta);
+            Mockar_AtualizarConta();
             Mockar_ContaRepository_Obter_Sequence(new List<Conta> { conta });
 
             var depositoBancarioViewModel = new DepositoBancarioViewModel
@@ -151,7 +138,7 @@ namespace ContaBancaria.Application.Tests
                 new TaxaBancaria(TAXA_PERCENTUAL, TipoTaxaBancaria.Deposito, 
                                  TipoValorTaxaBancaria.Percentual, $"{TAXA_PERCENTUAL}% valor depositado")
             });
-            Mockar_AtualizarConta(conta);
+            Mockar_AtualizarConta();
             Mockar_ContaRepository_Obter_Sequence(new List<Conta> { conta });
 
             var depositoBancarioViewModel = new DepositoBancarioViewModel
@@ -185,7 +172,7 @@ namespace ContaBancaria.Application.Tests
                 new TaxaBancaria(TAXA_PERCENTUAL, TipoTaxaBancaria.Deposito,
                                  TipoValorTaxaBancaria.Percentual, $"{TAXA_PERCENTUAL}% valor depositado")
             });
-            Mockar_AtualizarConta(conta);
+            Mockar_AtualizarConta();
             Mockar_ContaRepository_Obter_Sequence(new List<Conta> { conta });
 
             var depositoBancarioViewModel = new DepositoBancarioViewModel
@@ -216,8 +203,7 @@ namespace ContaBancaria.Application.Tests
             const decimal SALDO = VALOR_DEPOSITO - VALOR_SAQUE;
 
             var conta = CriarConta();
-            Mockar_AtualizarConta(conta);
-            Mockar_RetornoMapper_MapBool(new RetornoViewModel { Resultado = true });
+            Mockar_AtualizarConta();
             Mockar_ContaRepository_Obter_Sequence(new List<Conta> { conta, conta });
 
             var depositoBancarioViewModel = new DepositoBancarioViewModel
@@ -259,8 +245,6 @@ namespace ContaBancaria.Application.Tests
             
             Mockar_ContaRepository_Obter_Sequence(new List<Conta> { conta, conta });
 
-            Mockar_RetornoMapper_MapBool(new RetornoViewModel { Resultado = false });
-
             var depositoBancarioViewModel = new DepositoBancarioViewModel
             {
                 GuidConta = conta.Guid,
@@ -272,6 +256,8 @@ namespace ContaBancaria.Application.Tests
                 GuidConta = conta.Guid,
                 Valor = VALOR_SAQUE,
             };
+
+            Mockar_AtualizarConta();
 
             //Act
             await _bancoApplication.Depositar(depositoBancarioViewModel);
@@ -303,8 +289,7 @@ namespace ContaBancaria.Application.Tests
                                  TipoValorTaxaBancaria.Reais, $"R${TAXA}%")
             });
 
-            Mockar_AtualizarConta(conta);
-            Mockar_RetornoMapper_MapBool(new RetornoViewModel { Resultado = true });
+            Mockar_AtualizarConta();
             Mockar_ContaRepository_Obter_Sequence(new List<Conta> { conta, conta });
 
             var depositoBancarioViewModel = new DepositoBancarioViewModel
@@ -347,8 +332,7 @@ namespace ContaBancaria.Application.Tests
             var contaOrigem = new Conta(111111, bancoOrigem);
             var contaDestino = new Conta(211112, bancoOrigem);
 
-            Mockar_AtualizarConta(contaOrigem);
-            Mockar_RetornoMapper_MapBool(new RetornoViewModel { Resultado = true });
+            Mockar_AtualizarConta();
             Mockar_ContaRepository_Obter_Sequence(new List<Conta> { contaOrigem, contaOrigem, contaDestino });
 
             var depositoBancarioViewModel = new DepositoBancarioViewModel
@@ -397,9 +381,8 @@ namespace ContaBancaria.Application.Tests
             var bancoDestino = new Banco("Banco teste 2", 2, 2222, new List<TaxaBancaria>());
             var contaDestino = new Conta(211112, bancoDestino);
 
-            Mockar_AtualizarConta(contaOrigem);
+            Mockar_AtualizarConta();
             Mockar_BancoCentralApplication_Transferir(new RetornoViewModel { Resultado = true });
-            Mockar_RetornoMapper_MapBool(new RetornoViewModel { Resultado = true });
             Mockar_ContaRepository_Obter_Sequence(new List<Conta> { contaOrigem, contaOrigem, contaDestino });
 
             var depositoBancarioViewModel = new DepositoBancarioViewModel
@@ -447,8 +430,7 @@ namespace ContaBancaria.Application.Tests
             var contaOrigem = new Conta(111111, bancoOrigem);
             var contaDestino = new Conta(211112, bancoOrigem);
 
-            Mockar_AtualizarConta(contaOrigem);
-            Mockar_RetornoMapper_MapBool(new RetornoViewModel { Resultado = false });
+            Mockar_AtualizarConta();
             Mockar_ContaRepository_Obter_Sequence(new List<Conta> { contaOrigem, contaOrigem, contaDestino });
 
             var depositoBancarioViewModel = new DepositoBancarioViewModel
@@ -506,9 +488,8 @@ namespace ContaBancaria.Application.Tests
             });
             var contaDestino = new Conta(211112, bancoDestino);
 
-            Mockar_AtualizarConta(contaOrigem);
+            Mockar_AtualizarConta();
             Mockar_BancoCentralApplication_Transferir(new RetornoViewModel { Resultado = true });
-            Mockar_RetornoMapper_MapBool(new RetornoViewModel { Resultado = true });
             Mockar_ContaRepository_Obter_Sequence(new List<Conta> { contaOrigem, contaOrigem, contaDestino });
 
             var depositoBancarioViewModel = new DepositoBancarioViewModel
