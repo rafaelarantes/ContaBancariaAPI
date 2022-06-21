@@ -13,6 +13,6 @@ namespace ContaBancaria.Application.Contracts.Interfaces.Mappers
 
         TransferenciaBancariaViewModel Map(TransferenciaViewModel transferenciaViewModel);
         
-        ExtratoViewModel Map(List<ExtratoConta> extrato);
+        ExtratoViewModel Map(Conta conta);
     }
 }

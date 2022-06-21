@@ -2,23 +2,23 @@
 using ContaBancaria.Application.Contracts.ViewModels.Banco;
 using ContaBancaria.Application.Contracts.ViewModels.Conta;
 using ContaBancaria.Dominio.Entidades;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace ContaBancaria.Application.Mappers
 {
     public class ContaMapper : IContaMapper
     {
-        public ExtratoViewModel Map(List<ExtratoConta> extrato)
+        public ExtratoViewModel Map(Conta conta)
         {
             return new ExtratoViewModel
             {
-                ExtratoItems = extrato.ToList().Select(e => new ExtratoItemViewModel 
+                ExtratoItems = conta.Extrato.ToList().Select(e => new ExtratoItemViewModel 
                 { 
                     DataOperacao = e.DataOperacao,
                     TipoOperacao = e.TipoOperacao,
                     Valor = e.Valor
-                })
+                }),
+                Saldo = conta.Saldo
             };
         }
 

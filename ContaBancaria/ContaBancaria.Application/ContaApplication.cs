@@ -43,7 +43,7 @@ namespace ContaBancaria.Application
         public async Task<ExtratoViewModel> VisualizarExtrato(Guid guidConta)
         {
             var conta = await _contaRepository.ObterInclude(guidConta);
-            return _contaMapper.Map(conta.Extrato);
+            return _contaMapper.Map(conta);
         }
     }
 }
