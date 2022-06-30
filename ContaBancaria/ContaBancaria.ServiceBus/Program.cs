@@ -3,6 +3,7 @@ using ContaBancaria.Data.Contracts.Repositories.Interfaces;
 using ContaBancaria.Data.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -12,7 +13,6 @@ namespace ContaBancaria.ServiceBus
     {
         static async Task Main(string[] args)
         {
-
             var configuration = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("appSettings.json", false)
@@ -26,6 +26,8 @@ namespace ContaBancaria.ServiceBus
 
             var serviceProvider = services.BuildServiceProvider();
             await serviceProvider.GetService<Bus>().Executar();
+
+            Console.ReadKey();
         }
     }
 }

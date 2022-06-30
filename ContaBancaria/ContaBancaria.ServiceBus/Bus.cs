@@ -1,6 +1,8 @@
 ﻿using ContaBancaria.Data.Contracts.Repositories.Interfaces;
 using ContaBancaria.Data.Dtos;
 using ContaBancaria.Data.Helper;
+using ContaBancaria.Dominio.Entidades;
+using ContaBancaria.Dominio.Enums;
 using ContaBancaria.Dominio.Helper;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -35,48 +37,25 @@ namespace ContaBancaria.ServiceBus
 
         public async Task Executar()
         {
-            var cancelationToken = CancellationToken.None;
+            _filaProcessamentoRepository.Receber(TipoComandoFila.Deposito, Processar());
+        }
 
+        private Action<TipoComandoFila, string> Processar()
+        {
             var login = _configuration.GetSection("Login").Value;
             var autorizacao = _configuration.GetSection("Autorizacao").Value;
             var secret = _configuration.GetSection("Secret").Value;
 
-            while (!cancelationToken.IsCancellationRequested)
+            return async (TipoComandoFila tipoComandoFila, string dados) =>
             {
-                var filaProcessamentos = _filaProcessamentoRepository.ListarPendenteTracking();
-                if(!filaProcessamentos.Any())
-                {
-                    _filaProcessamentoRepository.Rollback();
-                    await Task.Delay(5000);
-                    continue;
-                }
-
                 var token = TokenHelper.GerarToken(login, autorizacao, secret);
 
-                foreach (var processamento in filaProcessamentos)
-                {
-                    try
-                    {
-                        var url = processamento.TipoComandoFila.GetEnumDescription();
-                        var retornoDto = await Processar(url, processamento.Dados, token);
-                        
-                        if(!retornoDto.Resultado) processamento.ProcessadoComErro();
-                        
-                        processamento.Finalizado();
-
-                        await _filaProcessamentoRepository.Gravar(processamento);
-                        _filaProcessamentoRepository.FinalizarTransacao();
-                    }
-                    catch (Exception)
-                    {
-                        processamento.ProcessadoComErro();
-                        _filaProcessamentoRepository.Rollback();
-                    }
-                }
-            }
+                var url = tipoComandoFila.GetEnumDescription();
+                var retornoDto = await ProcessarPost(url, dados, token);
+            };
         }
 
-        private async Task<RetornoDto> Processar(string url, string data, string token)
+        private async Task<RetornoDto> ProcessarPost(string url, string data, string token)
         {
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             

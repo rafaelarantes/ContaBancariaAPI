@@ -1,19 +1,13 @@
-﻿using ContaBancaria.Data.Dtos;
-using ContaBancaria.Dominio.Entidades;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using ContaBancaria.Dominio.Entidades;
+using ContaBancaria.Dominio.Enums;
+using System;
 
 namespace ContaBancaria.Data.Contracts.Repositories.Interfaces
 {
     public interface IFilaProcessamentoRepository
     {
-        Task<RetornoDto> Incluir(FilaProcessamento serviceBusDto);
+        void Publicar(FilaProcessamento filaProcessamento);
         
-        Task<RetornoDto> Gravar(FilaProcessamento processamento);
-
-        void FinalizarTransacao();
-
-        IEnumerable<FilaProcessamento> ListarPendenteTracking();
-        void Rollback();
+        void Receber(TipoComandoFila tipoComandoFila, Action<TipoComandoFila, string> callback);
     }
 }

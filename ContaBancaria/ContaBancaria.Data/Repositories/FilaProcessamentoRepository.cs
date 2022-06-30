@@ -1,59 +1,35 @@
 ﻿using ContaBancaria.Data.Contracts.Repositories.Interfaces;
-using ContaBancaria.Data.Dtos;
 using ContaBancaria.Dominio.Entidades;
 using ContaBancaria.Dominio.Enums;
 using Microsoft.Extensions.Configuration;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
+using System;
+using System.Text;
 
 namespace ContaBancaria.Data.Repositories
 {
-    public class FilaProcessamentoRepository : Repository, IFilaProcessamentoRepository
+    public class FilaProcessamentoRepository : QueueRepository, IFilaProcessamentoRepository
     {
         public FilaProcessamentoRepository(IConfiguration configuration) : base(configuration)
         {
+
         }
 
-        public async Task<RetornoDto> Incluir(FilaProcessamento filaProcessamento)
+        public void Publicar(FilaProcessamento filaProcessamento)
         {
-            return await Incluir<FilaProcessamento>(filaProcessamento);
+            Publish(filaProcessamento.Dados, filaProcessamento.TipoComandoFila);
         }
 
-        public IEnumerable<FilaProcessamento> ListarPendenteTracking()
+        public void Receber(TipoComandoFila tipoComandoFila, 
+                            Action<TipoComandoFila, string> callback)
         {
-            var filas = Listar<FilaProcessamento>(
-                t => t.Situacao == SituacaoFilaProcessamento.Enfileirado || 
-                     t.Situacao == SituacaoFilaProcessamento.Erro);
-            return filas.OrderByDescending(f => f.DataGeracao);
-        }
-
-        public async Task<RetornoDto> Gravar(FilaProcessamento filaProcessamento)
-        {
-            var fila = await Obter<FilaProcessamento>(filaProcessamento.Guid);
-
-            fila.DataProcessamento = filaProcessamento.DataProcessamento;
-            fila.Situacao = filaProcessamento.Situacao;
-
-            var gravou = await _bancoContext.SaveChangesAsync();
-
-            return new RetornoDto
+            Received(tipoComandoFila, (model, ea) =>
             {
-                Resultado = gravou > 0
-            };
-        }
-
-        public void FinalizarTransacao()
-        {
-            _dbContextTransaction.Commit();
-            _dbContextTransaction = _bancoContext.Database.BeginTransaction();
-        }
-
-        public void Rollback()
-        {
-            _dbContextTransaction.Rollback();
-            _dbContextTransaction.Dispose();
-            _dbContextTransaction = _bancoContext.Database.BeginTransaction();
+                var body = ea.Body.ToArray();
+                var json = Encoding.UTF8.GetString(body);
+                
+                callback.Invoke(tipoComandoFila, json);
+            });
         }
     }
 }
