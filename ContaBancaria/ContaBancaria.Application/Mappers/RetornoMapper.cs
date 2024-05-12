@@ -11,7 +11,8 @@ namespace ContaBancaria.Application.Mappers
         {
             return new RetornoViewModel
             {
-                Resultado = retornoDto.Resultado
+                Resultado = retornoDto.Resultado,
+                Data = retornoDto.Data
             };
         }
 

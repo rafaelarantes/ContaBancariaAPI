@@ -7,5 +7,7 @@ namespace ContaBancaria.Application.Contracts.ViewModels.Conta
         public bool Resultado { get; set; }
 
         public List<string> Mensagens { get; set; }
+
+        public object Data { get; set; }
     }
 }
