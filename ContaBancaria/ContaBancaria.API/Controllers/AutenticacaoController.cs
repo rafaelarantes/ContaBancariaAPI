@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace ContaBancaria.API.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class AutenticacaoController : Controller
     {
         private readonly IAutenticacaoApplication _autenticacaoApplication;
