@@ -112,7 +112,7 @@ namespace ContaBancaria.Application
             var contabancoExterno = contaOrigem.GuidBanco != contaDestino.GuidBanco;
 
             if (contabancoExterno)
-                return _bancoCentralApplication.Transferir(contaOrigem, contaDestino,
+                return await _bancoCentralApplication.Transferir(contaOrigem, contaDestino,
                                                            transferenciaBancariaDto.Valor);
 
             return await Creditar(contaDestino, transferenciaBancariaDto.Valor, null);

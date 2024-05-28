@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ContaBancaria.Data.Repositories
 {
-    public class FilaProcessamentoRepository : Repository, IFilaProcessamentoRepository
+    public class FilaProcessamentoRepository : DbRepository, IFilaProcessamentoRepository
     {
         public FilaProcessamentoRepository(IConfiguration configuration) : base(configuration)
         {

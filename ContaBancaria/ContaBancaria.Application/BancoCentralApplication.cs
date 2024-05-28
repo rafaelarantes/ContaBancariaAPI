@@ -31,10 +31,12 @@ namespace ContaBancaria.Application
             _filaProcessamentoRepository = filaProcessamentoRepository;
         }
 
-        public async Task<IEnumerable<BancosViewModel>> ListarBancos()
+        public async Task<RetornoViewModel> ListarBancos()
         {
             var bancos = await _bancoRepository.Listar();
-            return _bancoMapper.Map(bancos);
+            var bancoViewModel = _bancoMapper.Map(bancos);
+
+            return _retornoMapper.Map(bancoViewModel);
         }
 
         public async Task<RetornoViewModel> CriarBanco(NovoBancoViewModel novoBancoViewModel)
