@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "cLYYPNhpX+8LIy3auHfgP5I2Qpu+MUhToOHfNdLRKq7X9LcfY7VTUkQ4wSFAh9GLy6w/uBJBhwv5D3CIN8OVUQ==",
+  "dgSpecHash": "tCgXgmId9HEiG5AVvKiFUaqFELvHMDCWE8L4QxiZw6ZF9sA2Hq873jXiqFDqXugChEWd4UPHlkBScqgJBls4+g==",
   "success": true,
   "projectFilePath": "C:\\Users\\rafae\\OneDrive\\Desktop\\Projetos\\ContaBancariaAPI\\ContaBancaria\\ContaBancaria.Application.Interface\\ContaBancaria.Application.Contracts.csproj",
   "expectedPackageFiles": [
@@ -152,36 +152,5 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1903",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'Microsoft.NETCore.App' 2.2.0 has a known high severity vulnerability, https://github.com/advisories/GHSA-2xjx-v99w-gqf3",
-      "libraryId": "Microsoft.NETCore.App",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v2.2"
-      ]
-    },
-    {
-      "code": "NU1903",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'Microsoft.NETCore.App' 2.2.0 has a known high severity vulnerability, https://github.com/advisories/GHSA-6px8-22w5-w334",
-      "libraryId": "Microsoft.NETCore.App",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v2.2"
-      ]
-    },
-    {
-      "code": "NU1902",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'Microsoft.NETCore.App' 2.2.0 has a known moderate severity vulnerability, https://github.com/advisories/GHSA-x5qj-9vmx-7g6g",
-      "libraryId": "Microsoft.NETCore.App",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v2.2"
-      ]
-    }
-  ]
+  "logs": []
 }
