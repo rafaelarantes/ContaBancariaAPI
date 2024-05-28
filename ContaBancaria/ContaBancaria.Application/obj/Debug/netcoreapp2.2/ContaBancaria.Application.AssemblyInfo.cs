@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ContaBancaria.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a9e404868d1de184560f02a765c954b708a2de91")]
 [assembly: System.Reflection.AssemblyProductAttribute("ContaBancaria.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ContaBancaria.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
