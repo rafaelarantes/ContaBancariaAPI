@@ -12,7 +12,7 @@ namespace ContaBancaria.Application.Contracts.Interfaces
         Task<RetornoViewModel> Transferir(TransferenciaBancariaViewModel transferenciaBancariaViewModel);
         Task<RetornoViewModel> Depositar(DepositoBancarioViewModel depositoBancarioViewModel);
         Task<RetornoViewModel> Sacar(SaqueBancarioViewModel saqueBancarioViewModel);
-        Task<IEnumerable<ContaViewModel>> ListarContas();
+        Task<RetornoViewModel> ListarContas();
         Task<RetornoViewModel> CriarConta(NovaContaViewModel novaContaViewModel);
         Task<RetornoViewModel> ExcluirConta(Guid guid);
         Task<RetornoViewModel> ReceberTransferencia(DepositoBancarioViewModel depositoBancarioViewModel);

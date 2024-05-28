@@ -7,6 +7,15 @@ namespace ContaBancaria.Application.Mappers
 {
     public class RetornoMapper : IRetornoMapper
     {
+        public RetornoViewModel Map(object data, bool resultado = true)
+        {
+            return new RetornoViewModel
+            {
+                Resultado = resultado, 
+                Data = data
+            };
+        }
+
         public RetornoViewModel Map(RetornoDto retornoDto)
         {
             return new RetornoViewModel

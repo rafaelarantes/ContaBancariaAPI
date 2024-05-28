@@ -42,17 +42,11 @@ namespace ContaBancaria.Application
 
             var token = TokenHelper.GerarToken(usuario.Login, usuario.Autorizacao, secret);
 
-            return _retornoMapper.Map(new RetornoDto
+            return _retornoMapper.Map(new AutenticacaoViewModel
             {
-                 Resultado = !string.IsNullOrWhiteSpace(token),
-                 Data = new AutenticacaoViewModel
-                 {
-                     Token = token,
-                     Autorizacao = usuario.Autorizacao
-                 }
-            });
+                Token = token,
+                Autorizacao = usuario.Autorizacao
+            }, !string.IsNullOrWhiteSpace(token));
         }
-
-        
     }
 }

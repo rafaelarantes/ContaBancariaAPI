@@ -49,10 +49,12 @@ namespace ContaBancaria.Application
             return _retornoMapper.Map(retornoDto.Resultado, default);
         }
 
-        public async Task<IEnumerable<ContaViewModel>> ListarContas()
+        public async Task<RetornoViewModel> ListarContas()
         {
             var contas = await _contaRepository.ListarInclude();
-            return _bancoMapper.Map(contas);
+            var contasViewModel =  _bancoMapper.Map(contas);
+
+            return _retornoMapper.Map(contasViewModel);
         }
 
         public async Task<RetornoViewModel> Depositar(DepositoBancarioViewModel depositoBancarioViewModel)
