@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ContaBancaria.Data.Repositories
 {
-    public class BancoRepository : Repository, IBancoRepository
+    public class BancoRepository : DbRepository, IBancoRepository
     {
         public BancoRepository(IConfiguration configuration) : base(configuration)
         {

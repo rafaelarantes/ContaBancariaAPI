@@ -12,14 +12,17 @@ namespace ContaBancaria.Application
         private readonly IBancoApplication _bancoApplication;
         private readonly IContaMapper _contaMapper;
         private readonly IContaRepository _contaRepository;
+        private readonly IRetornoMapper _retornoMapper;
 
         public ContaApplication(IBancoApplication bancoApplication,
                                 IContaMapper contaMapper,
-                                IContaRepository contaRepository)
+                                IContaRepository contaRepository,
+                                IRetornoMapper retornoMapper)
         {
             _bancoApplication = bancoApplication;
             _contaMapper = contaMapper;
             _contaRepository = contaRepository;
+            _retornoMapper = retornoMapper;
         }
 
         public async Task<RetornoViewModel> Depositar(DepositoViewModel depositoViewModel)
@@ -40,10 +43,12 @@ namespace ContaBancaria.Application
             return await _bancoApplication.Transferir(transferenciaBancariaViewModel); 
         }
 
-        public async Task<ExtratoViewModel> VisualizarExtrato(Guid guidConta)
+        public async Task<RetornoViewModel> VisualizarExtrato(Guid guidConta)
         {
             var conta = await _contaRepository.ObterInclude(guidConta);
-            return _contaMapper.Map(conta);
+            var extratoViewModel = _contaMapper.Map(conta);
+
+            return _retornoMapper.Map(extratoViewModel);
         }
     }
 }

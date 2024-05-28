@@ -6,7 +6,7 @@ namespace ContaBancaria.Application.Contracts.Interfaces
 {
     public interface IContaApplication
     {
-        Task<ExtratoViewModel> VisualizarExtrato(Guid guidConta);
+        Task<RetornoViewModel> VisualizarExtrato(Guid guidConta);
 
         Task<RetornoViewModel> Depositar(DepositoViewModel depositoViewModel);
         

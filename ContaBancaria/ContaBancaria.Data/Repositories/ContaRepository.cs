@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ContaBancaria.Data.Repositories
 {
-    public class ContaRepository : Repository, IContaRepository
+    public class ContaRepository : DbRepository, IContaRepository
     {
         public ContaRepository(IConfiguration configuration) : base(configuration)
         {

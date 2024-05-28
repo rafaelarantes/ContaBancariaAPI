@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ContaBancaria.Data.Repositories
 {
-    public class UsuarioRepository : Repository, IUsuarioRepository
+    public class UsuarioRepository : DbRepository, IUsuarioRepository
     {
         public UsuarioRepository(IConfiguration configuration) : base(configuration)
         {

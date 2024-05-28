@@ -20,7 +20,7 @@ namespace ContaBancaria.API.Controllers
         }
 
         [HttpGet("{guid}")]
-        public async Task<ExtratoViewModel> VisualizarExtrato(Guid guid) 
+        public async Task<RetornoViewModel> VisualizarExtrato(Guid guid) 
             => await _contaApplication.VisualizarExtrato(guid);
 
         [HttpPost("Depositar")]
