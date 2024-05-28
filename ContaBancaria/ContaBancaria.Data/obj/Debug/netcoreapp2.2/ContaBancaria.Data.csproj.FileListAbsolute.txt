@@ -1,0 +1,17 @@
+C:\Users\rafae\OneDrive\Desktop\Projetos\ContaBancariaAPI\ContaBancaria\ContaBancaria.Data\bin\Debug\netcoreapp2.2\ContaBancaria.Data.deps.json
+C:\Users\rafae\OneDrive\Desktop\Projetos\ContaBancariaAPI\ContaBancaria\ContaBancaria.Data\bin\Debug\netcoreapp2.2\ContaBancaria.Data.dll
+C:\Users\rafae\OneDrive\Desktop\Projetos\ContaBancariaAPI\ContaBancaria\ContaBancaria.Data\bin\Debug\netcoreapp2.2\ContaBancaria.Data.pdb
+C:\Users\rafae\OneDrive\Desktop\Projetos\ContaBancariaAPI\ContaBancaria\ContaBancaria.Data\bin\Debug\netcoreapp2.2\ContaBancaria.Data.Contracts.dll
+C:\Users\rafae\OneDrive\Desktop\Projetos\ContaBancariaAPI\ContaBancaria\ContaBancaria.Data\bin\Debug\netcoreapp2.2\ContaBancaria.Dominio.Contracts.dll
+C:\Users\rafae\OneDrive\Desktop\Projetos\ContaBancariaAPI\ContaBancaria\ContaBancaria.Data\bin\Debug\netcoreapp2.2\ContaBancaria.Dominio.dll
+C:\Users\rafae\OneDrive\Desktop\Projetos\ContaBancariaAPI\ContaBancaria\ContaBancaria.Data\bin\Debug\netcoreapp2.2\ContaBancaria.Data.Contracts.pdb
+C:\Users\rafae\OneDrive\Desktop\Projetos\ContaBancariaAPI\ContaBancaria\ContaBancaria.Data\bin\Debug\netcoreapp2.2\ContaBancaria.Dominio.Contracts.pdb
+C:\Users\rafae\OneDrive\Desktop\Projetos\ContaBancariaAPI\ContaBancaria\ContaBancaria.Data\bin\Debug\netcoreapp2.2\ContaBancaria.Dominio.pdb
+C:\Users\rafae\OneDrive\Desktop\Projetos\ContaBancariaAPI\ContaBancaria\ContaBancaria.Data\obj\Debug\netcoreapp2.2\ContaBancaria.Data.csproj.AssemblyReference.cache
+C:\Users\rafae\OneDrive\Desktop\Projetos\ContaBancariaAPI\ContaBancaria\ContaBancaria.Data\obj\Debug\netcoreapp2.2\ContaBancaria.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rafae\OneDrive\Desktop\Projetos\ContaBancariaAPI\ContaBancaria\ContaBancaria.Data\obj\Debug\netcoreapp2.2\ContaBancaria.Data.AssemblyInfoInputs.cache
+C:\Users\rafae\OneDrive\Desktop\Projetos\ContaBancariaAPI\ContaBancaria\ContaBancaria.Data\obj\Debug\netcoreapp2.2\ContaBancaria.Data.AssemblyInfo.cs
+C:\Users\rafae\OneDrive\Desktop\Projetos\ContaBancariaAPI\ContaBancaria\ContaBancaria.Data\obj\Debug\netcoreapp2.2\ContaBancaria.Data.csproj.CoreCompileInputs.cache
+C:\Users\rafae\OneDrive\Desktop\Projetos\ContaBancariaAPI\ContaBancaria\ContaBancaria.Data\obj\Debug\netcoreapp2.2\ContaBancaria.Data.csproj.CopyComplete
+C:\Users\rafae\OneDrive\Desktop\Projetos\ContaBancariaAPI\ContaBancaria\ContaBancaria.Data\obj\Debug\netcoreapp2.2\ContaBancaria.Data.dll
+C:\Users\rafae\OneDrive\Desktop\Projetos\ContaBancariaAPI\ContaBancaria\ContaBancaria.Data\obj\Debug\netcoreapp2.2\ContaBancaria.Data.pdb

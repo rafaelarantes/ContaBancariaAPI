@@ -1,0 +1,13 @@
+C:\Users\rafae\OneDrive\Desktop\Projetos\ContaBancariaAPI\ContaBancaria\ContaBancaria.Dominio\bin\Debug\netcoreapp2.2\ContaBancaria.Dominio.deps.json
+C:\Users\rafae\OneDrive\Desktop\Projetos\ContaBancariaAPI\ContaBancaria\ContaBancaria.Dominio\bin\Debug\netcoreapp2.2\ContaBancaria.Dominio.dll
+C:\Users\rafae\OneDrive\Desktop\Projetos\ContaBancariaAPI\ContaBancaria\ContaBancaria.Dominio\bin\Debug\netcoreapp2.2\ContaBancaria.Dominio.pdb
+C:\Users\rafae\OneDrive\Desktop\Projetos\ContaBancariaAPI\ContaBancaria\ContaBancaria.Dominio\bin\Debug\netcoreapp2.2\ContaBancaria.Dominio.Contracts.dll
+C:\Users\rafae\OneDrive\Desktop\Projetos\ContaBancariaAPI\ContaBancaria\ContaBancaria.Dominio\bin\Debug\netcoreapp2.2\ContaBancaria.Dominio.Contracts.pdb
+C:\Users\rafae\OneDrive\Desktop\Projetos\ContaBancariaAPI\ContaBancaria\ContaBancaria.Dominio\obj\Debug\netcoreapp2.2\ContaBancaria.Dominio.csproj.AssemblyReference.cache
+C:\Users\rafae\OneDrive\Desktop\Projetos\ContaBancariaAPI\ContaBancaria\ContaBancaria.Dominio\obj\Debug\netcoreapp2.2\ContaBancaria.Dominio.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rafae\OneDrive\Desktop\Projetos\ContaBancariaAPI\ContaBancaria\ContaBancaria.Dominio\obj\Debug\netcoreapp2.2\ContaBancaria.Dominio.AssemblyInfoInputs.cache
+C:\Users\rafae\OneDrive\Desktop\Projetos\ContaBancariaAPI\ContaBancaria\ContaBancaria.Dominio\obj\Debug\netcoreapp2.2\ContaBancaria.Dominio.AssemblyInfo.cs
+C:\Users\rafae\OneDrive\Desktop\Projetos\ContaBancariaAPI\ContaBancaria\ContaBancaria.Dominio\obj\Debug\netcoreapp2.2\ContaBancaria.Dominio.csproj.CoreCompileInputs.cache
+C:\Users\rafae\OneDrive\Desktop\Projetos\ContaBancariaAPI\ContaBancaria\ContaBancaria.Dominio\obj\Debug\netcoreapp2.2\ContaBancaria.Dominio.csproj.CopyComplete
+C:\Users\rafae\OneDrive\Desktop\Projetos\ContaBancariaAPI\ContaBancaria\ContaBancaria.Dominio\obj\Debug\netcoreapp2.2\ContaBancaria.Dominio.dll
+C:\Users\rafae\OneDrive\Desktop\Projetos\ContaBancariaAPI\ContaBancaria\ContaBancaria.Dominio\obj\Debug\netcoreapp2.2\ContaBancaria.Dominio.pdb
