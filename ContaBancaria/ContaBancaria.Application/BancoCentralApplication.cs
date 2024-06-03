@@ -8,7 +8,6 @@ using ContaBancaria.Dominio.Entidades;
 using ContaBancaria.Dominio.Enums;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ContaBancaria.Application
@@ -34,7 +33,7 @@ namespace ContaBancaria.Application
         public async Task<RetornoViewModel> ListarBancos()
         {
             var bancos = await _bancoRepository.Listar();
-            var bancoViewModel = _bancoMapper.Map(bancos);
+            var bancoViewModel =  _bancoMapper.Map(bancos);
 
             return _retornoMapper.Map(bancoViewModel);
         }
@@ -53,7 +52,7 @@ namespace ContaBancaria.Application
             return _retornoMapper.Map(retornoDto);
         }
 
-        public async Task<RetornoViewModel> Transferir(Conta contaOrigem, Conta contaDestino, decimal valor)
+        public RetornoViewModel Transferir(Conta contaOrigem, Conta contaDestino, decimal valor)
         {
             var depositoViewModel = new DepositoBancarioViewModel
             {
@@ -63,11 +62,11 @@ namespace ContaBancaria.Application
             };
 
             var dados = JsonConvert.SerializeObject(depositoViewModel);
-            var filaProcessamento = new FilaProcessamento(TipoComandoFila.Deposito, dados);
-            
-            var retornoDto = await _filaProcessamentoRepository.Incluir(filaProcessamento);
 
-            return _retornoMapper.Map(retornoDto);
+            _filaProcessamentoRepository.Publicar(
+                new FilaProcessamento(TipoComandoFila.Deposito, dados));
+
+            return _retornoMapper.Map(true, default);
         }
     }
 }

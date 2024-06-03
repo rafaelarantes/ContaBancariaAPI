@@ -62,14 +62,14 @@ namespace ContaBancaria.Application.Tests
         private void Mockar_BancoCentralApplication_Transferir(RetornoViewModel retornoViewModel)
         {
             _bancoCentralAplicationMock.Setup(b => b.Transferir(It.IsAny<Conta>(), It.IsAny<Conta>(), It.IsAny<decimal>()))
-                .Returns(Task.FromResult(retornoViewModel));
+                .Returns(retornoViewModel);
         }
 
         private void Mockar_ContaRepository_Obter_Sequence(List<Conta> contas)
         {
             var setupSequence = _contaRepositoryMock.SetupSequence(c => c.ObterInclude(It.IsAny<Guid>()));
 
-            foreach (var conta in contas)
+            foreach(var conta in contas)
             {
                 setupSequence.Returns(Task.FromResult(conta));
             }
@@ -80,7 +80,7 @@ namespace ContaBancaria.Application.Tests
         {
             var banco = new Banco("Banco teste", 1, 1111, taxaBancarias);
             return new Conta(111111, banco);
-
+            
         }
 
         private decimal CalcularSaldoExtrato(Conta conta)
@@ -95,7 +95,7 @@ namespace ContaBancaria.Application.Tests
             var saldoExtrato = valoresCredito - valoresDebito;
             return saldoExtrato;
         }
-
+                
         [Fact]
         public async Task Depositar_DepositoValido_SaldoEExtratoDevemContemOValor()
         {
@@ -133,9 +133,9 @@ namespace ContaBancaria.Application.Tests
             const decimal TAXA_PERCENTUAL = 1M;
             const decimal SALDO = VALOR_DEPOSITO - TAXA_PERCENTUAL / 100 * VALOR_DEPOSITO;
 
-            var conta = CriarConta(new List<TaxaBancaria>
+            var conta = CriarConta(new List<TaxaBancaria> 
             {
-                new TaxaBancaria(TAXA_PERCENTUAL, TipoTaxaBancaria.Deposito,
+                new TaxaBancaria(TAXA_PERCENTUAL, TipoTaxaBancaria.Deposito, 
                                  TipoValorTaxaBancaria.Percentual, $"{TAXA_PERCENTUAL}% valor depositado")
             });
             Mockar_AtualizarConta();
@@ -242,7 +242,7 @@ namespace ContaBancaria.Application.Tests
             const decimal SALDO = VALOR_DEPOSITO;
 
             var conta = CriarConta();
-
+            
             Mockar_ContaRepository_Obter_Sequence(new List<Conta> { conta, conta });
 
             var depositoBancarioViewModel = new DepositoBancarioViewModel
@@ -401,7 +401,7 @@ namespace ContaBancaria.Application.Tests
             //Act
             await _bancoApplication.Depositar(depositoBancarioViewModel);
             var retornoViewModel = await _bancoApplication.Transferir(saqueBancarioViewModel);
-
+            
             var saldoExtratoContaOrigem = CalcularSaldoExtrato(contaOrigem);
 
             //Assert
@@ -413,7 +413,7 @@ namespace ContaBancaria.Application.Tests
             _contaRepositoryMock.Verify(b => b.Gravar(), Times.Exactly(2));
             _bancoCentralAplicationMock.Verify(b => b.Transferir(It.IsAny<Conta>(),
                                                                  It.IsAny<Conta>(),
-
+              
                                                                  It.IsAny<decimal>()), Times.Once);
         }
 
