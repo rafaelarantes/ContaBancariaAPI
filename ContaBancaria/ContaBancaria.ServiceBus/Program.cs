@@ -1,6 +1,7 @@
 ﻿using ContaBancaria.Data.Contexts;
 using ContaBancaria.Data.Contracts.Repositories.Interfaces;
 using ContaBancaria.Data.Repositories;
+using ContaBancaria.ServiceBus.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -22,6 +23,9 @@ namespace ContaBancaria.ServiceBus
             services.AddSingleton<IConfiguration>(configuration);
             services.AddDbContext<BancoContext>();
             services.AddTransient<IFilaProcessamentoRepository, FilaProcessamentoRepository>();
+            services.AddTransient<IFilaProcessamentoDbRepository, FilaProcessamentoDbRepository>();
+            services.AddTransient<IBusDb, BusDb>();
+            services.AddTransient<IBusRabbitMQ, BusRabbitMQ>();
             services.AddTransient<Bus>();
 
             var serviceProvider = services.BuildServiceProvider();

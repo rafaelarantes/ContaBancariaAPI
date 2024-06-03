@@ -11,6 +11,7 @@ namespace ContaBancaria.API.DependencyInjection
         {
             services.AddDbContext<BancoContext>();
             services.AddTransient<IFilaProcessamentoRepository, FilaProcessamentoRepository>();
+            services.AddTransient<IFilaProcessamentoDbRepository, FilaProcessamentoDbRepository>();
             services.AddTransient<IUsuarioRepository, UsuarioRepository>();
             services.AddTransient<IContaRepository, ContaRepository>();
             services.AddTransient<IBancoRepository, BancoRepository>();

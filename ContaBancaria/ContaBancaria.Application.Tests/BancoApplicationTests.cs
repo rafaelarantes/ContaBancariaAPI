@@ -62,7 +62,7 @@ namespace ContaBancaria.Application.Tests
         private void Mockar_BancoCentralApplication_Transferir(RetornoViewModel retornoViewModel)
         {
             _bancoCentralAplicationMock.Setup(b => b.Transferir(It.IsAny<Conta>(), It.IsAny<Conta>(), It.IsAny<decimal>()))
-                .Returns(retornoViewModel);
+                .Returns(Task.FromResult(retornoViewModel));
         }
 
         private void Mockar_ContaRepository_Obter_Sequence(List<Conta> contas)

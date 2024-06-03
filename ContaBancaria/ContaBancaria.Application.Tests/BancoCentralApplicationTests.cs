@@ -1,10 +1,12 @@
-﻿using ContaBancaria.Application.Contracts.Interfaces;
+﻿using Castle.Components.DictionaryAdapter.Xml;
+using ContaBancaria.Application.Contracts.Interfaces;
 using ContaBancaria.Application.Contracts.Interfaces.Mappers;
 using ContaBancaria.Application.Contracts.ViewModels.BancoCentral;
 using ContaBancaria.Application.Contracts.ViewModels.Conta;
 using ContaBancaria.Data.Contracts.Repositories.Interfaces;
 using ContaBancaria.Data.Dtos;
 using ContaBancaria.Dominio.Entidades;
+using Microsoft.Extensions.Configuration;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -21,6 +23,8 @@ namespace ContaBancaria.Application.Tests
         private readonly Mock<IRetornoMapper> _retornoMapperMock;
         private readonly Mock<IBancoRepository> _bancoRepositoryMock;
         private readonly Mock<IFilaProcessamentoRepository> _filaProcessamentoRepository;
+        private readonly Mock<IFilaProcessamentoDbRepository> _filaProcessamentoDbRepository;
+        private readonly Mock<IConfiguration> _configuration;
 
         public BancoCentralApplicationTests()
         {
@@ -28,12 +32,16 @@ namespace ContaBancaria.Application.Tests
             _retornoMapperMock = new Mock<IRetornoMapper>();
             _bancoRepositoryMock = new Mock<IBancoRepository>();
             _filaProcessamentoRepository = new Mock<IFilaProcessamentoRepository>();
+            _filaProcessamentoDbRepository = new Mock<IFilaProcessamentoDbRepository>();
+            _configuration = new Mock<IConfiguration>();
 
             _bancoCentralApplication = new BancoCentralApplication(
                                                      bancoMapper: _bancoMapperMock.Object,
                                                      bancoRepository: _bancoRepositoryMock.Object,
                                                      retornoMapper: _retornoMapperMock.Object,
-                                                     filaProcessamentoRepository: _filaProcessamentoRepository.Object);
+                                                     filaProcessamentoRepository: _filaProcessamentoRepository.Object,
+                                                     filaProcessamentoDbRepository: _filaProcessamentoDbRepository.Object,
+                                                     configuration: _configuration.Object);
         }
 
         private void Mockar_BancoMapper_Map(Banco banco)
