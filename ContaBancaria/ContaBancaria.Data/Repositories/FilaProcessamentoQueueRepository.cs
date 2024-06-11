@@ -2,15 +2,14 @@
 using ContaBancaria.Dominio.Entidades;
 using ContaBancaria.Dominio.Enums;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
 using System;
 using System.Text;
 
 namespace ContaBancaria.Data.Repositories
 {
-    public class FilaProcessamentoRepository : QueueRepository, IFilaProcessamentoRepository
+    public class FilaProcessamentoQueueRepository : QueueRepository, IFilaProcessamentoQueueRepository
     {
-        public FilaProcessamentoRepository(IConfiguration configuration) : base(configuration)
+        public FilaProcessamentoQueueRepository(IConfiguration configuration) : base(configuration)
         {
 
         }

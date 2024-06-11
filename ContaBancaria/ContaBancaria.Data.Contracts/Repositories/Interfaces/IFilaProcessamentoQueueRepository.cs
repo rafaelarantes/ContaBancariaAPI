@@ -4,7 +4,7 @@ using System;
 
 namespace ContaBancaria.Data.Contracts.Repositories.Interfaces
 {
-    public interface IFilaProcessamentoRepository
+    public interface IFilaProcessamentoQueueRepository
     {
         void Publicar(FilaProcessamento filaProcessamento);
         

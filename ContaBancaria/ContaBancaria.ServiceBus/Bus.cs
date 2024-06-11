@@ -11,7 +11,7 @@ namespace ContaBancaria.ServiceBus
 {
     public class Bus
     {
-        private readonly IFilaProcessamentoRepository _filaProcessamentoRepository;
+        private readonly IFilaProcessamentoQueueRepository _filaProcessamentoRepository;
         private readonly IFilaProcessamentoDbRepository _filaProcessamentoDbRepository;
         private readonly IConfiguration _configuration;
         private readonly HttpClient _httpClient;
@@ -19,7 +19,7 @@ namespace ContaBancaria.ServiceBus
         private readonly IBusDb _busDb;
         private readonly IBusRabbitMQ _busRabbitMQ;
 
-        public Bus(IFilaProcessamentoRepository filaProcessamentoRepository,
+        public Bus(IFilaProcessamentoQueueRepository filaProcessamentoRepository,
                    IFilaProcessamentoDbRepository filaProcessamentoDbRepository,
                    IConfiguration configuration,
                    IBusDb busDb,

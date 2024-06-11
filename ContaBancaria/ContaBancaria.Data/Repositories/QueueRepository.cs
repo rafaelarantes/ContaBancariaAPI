@@ -9,11 +9,18 @@ namespace ContaBancaria.Data.Repositories
 {
     public abstract class QueueRepository : Repository
     {
+        private readonly IConfiguration _configuration;
+        
         private IConnection _connection;
         private IModel _channel;
+
         protected QueueRepository(IConfiguration configuration)
         {
-            var factory = new ConnectionFactory() { HostName = "localhost" };
+            _configuration = configuration;
+
+            var hostName = _configuration.GetSection("MessagingAddress").Value;
+            var factory = new ConnectionFactory() { HostName = hostName };
+
             _connection = factory.CreateConnection();
             _channel = _connection.CreateModel();
         }
@@ -38,12 +45,7 @@ namespace ContaBancaria.Data.Repositories
                                  autoAck: true,
                                  consumer: consumer);
         }
-
-        protected override void Commit()
-        {
-        }
-
-        protected override void Rollback()
+        protected override void Disposing()
         {
             _channel.Dispose();
         }

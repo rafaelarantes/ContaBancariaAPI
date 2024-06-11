@@ -103,14 +103,27 @@ namespace ContaBancaria.Data.Repositories
                                       .SingleOrDefaultAsync(x => x.Guid == guid);
         }
 
-        protected override void Commit()
+        protected virtual void Commit()
         {
             _dbContextTransaction.Commit();
         }
 
-        protected override void Rollback()
+        protected virtual void Rollback()
         {
             _dbContextTransaction.Dispose();
+        }
+
+        protected override void Disposing()
+        {
+            try
+            {
+                Commit();
+            }
+            catch (Exception)
+            {
+                Rollback();
+                throw;
+            }
         }
     }
 }

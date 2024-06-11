@@ -4,7 +4,9 @@ using ContaBancaria.Application.Contracts.ViewModels.Banco;
 using ContaBancaria.Application.Contracts.ViewModels.BancoCentral;
 using ContaBancaria.Application.Contracts.ViewModels.Conta;
 using ContaBancaria.Data.Contracts.Repositories.Interfaces;
+using ContaBancaria.Data.Dtos;
 using ContaBancaria.Data.Enums;
+using ContaBancaria.Data.Repositories;
 using ContaBancaria.Dominio.Entidades;
 using ContaBancaria.Dominio.Enums;
 using Microsoft.Extensions.Configuration;
@@ -19,26 +21,17 @@ namespace ContaBancaria.Application
         private readonly IBancoMapper _bancoMapper;
         private readonly IBancoRepository _bancoRepository;
         private readonly IRetornoMapper _retornoMapper;
-        private readonly IFilaProcessamentoRepository _filaProcessamentoRepository;
-        private readonly IFilaProcessamentoDbRepository _filaProcessamentoDbRepository;
-        private readonly IConfiguration _configuration;
-        private readonly TipoFila _tipoFila;
+        private readonly IFilaProcessamentoApplication _filaProcessamentoApplication;
 
         public BancoCentralApplication(IBancoMapper bancoMapper,
                         IBancoRepository bancoRepository,
                         IRetornoMapper retornoMapper,
-                        IFilaProcessamentoRepository filaProcessamentoRepository,
-                        IFilaProcessamentoDbRepository filaProcessamentoDbRepository,
-                        IConfiguration configuration)
+                        IFilaProcessamentoApplication filaProcessamentoApplication)
         {
             _bancoMapper = bancoMapper;
             _bancoRepository = bancoRepository;
             _retornoMapper = retornoMapper;
-            _filaProcessamentoRepository = filaProcessamentoRepository;
-            _filaProcessamentoDbRepository = filaProcessamentoDbRepository;
-            _configuration = configuration;
-
-            _tipoFila = Enum.Parse<TipoFila>(_configuration.GetSection("Messaging").Value);
+            _filaProcessamentoApplication = filaProcessamentoApplication;
         }
 
         public async Task<RetornoViewModel> ListarBancos()
@@ -65,21 +58,6 @@ namespace ContaBancaria.Application
 
         public async Task<RetornoViewModel> Transferir(Conta contaOrigem, Conta contaDestino, decimal valor)
         {
-            switch (_tipoFila)
-            {
-                case TipoFila.Db:
-                    return await TransferirDb(contaOrigem, contaDestino, valor);
-
-                case TipoFila.RabbitMQ:
-                    return TransferirRabbitMQ(contaOrigem, contaDestino, valor);
-
-                default:
-                    throw new NotImplementedException();
-            }
-        }
-
-        private RetornoViewModel TransferirRabbitMQ(Conta contaOrigem, Conta contaDestino, decimal valor)
-        {
             var depositoViewModel = new DepositoBancarioViewModel
             {
                 GuidConta = contaDestino.Guid,
@@ -88,26 +66,7 @@ namespace ContaBancaria.Application
             };
 
             var dados = JsonConvert.SerializeObject(depositoViewModel);
-
-            _filaProcessamentoRepository.Publicar(
-                new FilaProcessamento(TipoComandoFila.Deposito, dados));
-
-            return _retornoMapper.Map(true, default);
-        }
-
-        private async Task<RetornoViewModel> TransferirDb(Conta contaOrigem, Conta contaDestino, decimal valor)
-        {
-            var depositoViewModel = new DepositoBancarioViewModel
-            {
-                GuidConta = contaDestino.Guid,
-                Valor = valor,
-                GuidContaOrigem = contaOrigem.Guid
-            };
-
-            var dados = JsonConvert.SerializeObject(depositoViewModel);
-            var filaProcessamento = new FilaProcessamento(TipoComandoFila.Deposito, dados);
-
-            var retornoDto = await _filaProcessamentoDbRepository.Incluir(filaProcessamento);
+            var retornoDto = await _filaProcessamentoApplication.Enfileirar(TipoComandoFila.Deposito, dados);
 
             return _retornoMapper.Map(retornoDto);
         }

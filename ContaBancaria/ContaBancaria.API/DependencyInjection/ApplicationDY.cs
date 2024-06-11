@@ -15,6 +15,7 @@ namespace ContaBancaria.API.DependencyInjection
             services.AddSingleton<IBancoMapper, BancoMapper>();
 
             services.AddTransient<IAutenticacaoApplication, AutenticacaoApplication>();
+            services.AddTransient<IFilaProcessamentoApplication, FilaProcessamentoApplication>();
             services.AddTransient<IContaApplication, ContaApplication>();
             services.AddTransient<IBancoApplication, BancoApplication>();
             services.AddTransient<IBancoCentralApplication, BancoCentralApplication>();

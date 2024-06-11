@@ -11,9 +11,9 @@ namespace ContaBancaria.Data.Contracts.Repositories.Interfaces
 
         Task<RetornoDto> Gravar(FilaProcessamento processamento);
 
-        void FinalizarTransacao();
-
         IEnumerable<FilaProcessamento> ListarPendenteTracking();
+
+        void Commit();
 
         void Rollback();
     }

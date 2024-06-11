@@ -6,9 +6,7 @@ namespace ContaBancaria.Data.Repositories
     {
         private bool disposedValue;
 
-        protected abstract void Commit();
-        protected abstract void Rollback();
-
+        protected abstract void Disposing();
 
         protected virtual void Dispose(bool disposing)
         {
@@ -16,21 +14,12 @@ namespace ContaBancaria.Data.Repositories
             {
                 if (disposing)
                 {
-                    try
-                    {
-                        Commit();
-                    }
-                    catch (Exception)
-                    {
-                        Rollback();
-                        throw;
-                    }
+                    Disposing();
                 }
 
                 disposedValue = true;
             }
         }
-
 
         public void Dispose()
         {

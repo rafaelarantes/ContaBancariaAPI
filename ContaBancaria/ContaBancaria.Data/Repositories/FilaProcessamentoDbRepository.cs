@@ -3,10 +3,8 @@ using ContaBancaria.Data.Dtos;
 using ContaBancaria.Dominio.Entidades;
 using ContaBancaria.Dominio.Enums;
 using Microsoft.Extensions.Configuration;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ContaBancaria.Data.Repositories
@@ -45,13 +43,13 @@ namespace ContaBancaria.Data.Repositories
             };
         }
 
-        public void FinalizarTransacao()
+        public new void Commit()
         {
             _dbContextTransaction.Commit();
             _dbContextTransaction = _bancoContext.Database.BeginTransaction();
         }
 
-        public void Rollback()
+        public new void Rollback()
         {
             _dbContextTransaction.Rollback();
             _dbContextTransaction.Dispose();

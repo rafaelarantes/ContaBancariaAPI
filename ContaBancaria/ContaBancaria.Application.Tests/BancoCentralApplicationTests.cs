@@ -22,26 +22,20 @@ namespace ContaBancaria.Application.Tests
         private readonly Mock<IBancoMapper> _bancoMapperMock;
         private readonly Mock<IRetornoMapper> _retornoMapperMock;
         private readonly Mock<IBancoRepository> _bancoRepositoryMock;
-        private readonly Mock<IFilaProcessamentoRepository> _filaProcessamentoRepository;
-        private readonly Mock<IFilaProcessamentoDbRepository> _filaProcessamentoDbRepository;
-        private readonly Mock<IConfiguration> _configuration;
+        private readonly Mock<IFilaProcessamentoApplication> _filaProcessamentoApplication;
 
         public BancoCentralApplicationTests()
         {
             _bancoMapperMock = new Mock<IBancoMapper>();
             _retornoMapperMock = new Mock<IRetornoMapper>();
             _bancoRepositoryMock = new Mock<IBancoRepository>();
-            _filaProcessamentoRepository = new Mock<IFilaProcessamentoRepository>();
-            _filaProcessamentoDbRepository = new Mock<IFilaProcessamentoDbRepository>();
-            _configuration = new Mock<IConfiguration>();
+            _filaProcessamentoApplication = new Mock<IFilaProcessamentoApplication>();
 
             _bancoCentralApplication = new BancoCentralApplication(
                                                      bancoMapper: _bancoMapperMock.Object,
                                                      bancoRepository: _bancoRepositoryMock.Object,
-                                                     retornoMapper: _retornoMapperMock.Object,
-                                                     filaProcessamentoRepository: _filaProcessamentoRepository.Object,
-                                                     filaProcessamentoDbRepository: _filaProcessamentoDbRepository.Object,
-                                                     configuration: _configuration.Object);
+                                                     filaProcessamentoApplication: _filaProcessamentoApplication.Object,
+                                                     retornoMapper: _retornoMapperMock.Object);
         }
 
         private void Mockar_BancoMapper_Map(Banco banco)

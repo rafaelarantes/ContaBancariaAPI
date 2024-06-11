@@ -22,7 +22,7 @@ namespace ContaBancaria.ServiceBus
             var services = new ServiceCollection();
             services.AddSingleton<IConfiguration>(configuration);
             services.AddDbContext<BancoContext>();
-            services.AddTransient<IFilaProcessamentoRepository, FilaProcessamentoRepository>();
+            services.AddTransient<IFilaProcessamentoQueueRepository, FilaProcessamentoQueueRepository>();
             services.AddTransient<IFilaProcessamentoDbRepository, FilaProcessamentoDbRepository>();
             services.AddTransient<IBusDb, BusDb>();
             services.AddTransient<IBusRabbitMQ, BusRabbitMQ>();

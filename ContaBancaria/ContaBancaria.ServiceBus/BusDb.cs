@@ -65,7 +65,7 @@ namespace ContaBancaria.ServiceBus
                         processamento.Finalizado();
 
                         await _filaProcessamentoDbRepository.Gravar(processamento);
-                        _filaProcessamentoDbRepository.FinalizarTransacao();
+                        _filaProcessamentoDbRepository.Commit();
                     }
                     catch (Exception)
                     {

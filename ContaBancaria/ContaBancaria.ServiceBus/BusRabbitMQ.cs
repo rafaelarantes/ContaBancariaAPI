@@ -16,12 +16,12 @@ namespace ContaBancaria.ServiceBus
     public class BusRabbitMQ : IBusRabbitMQ
     {
         private readonly IConfiguration _configuration;
-        private readonly IFilaProcessamentoRepository _filaProcessamentoRepository;
+        private readonly IFilaProcessamentoQueueRepository _filaProcessamentoRepository;
 
         private HttpClient _httpClient;
 
         public BusRabbitMQ(IConfiguration configuration,
-                           IFilaProcessamentoRepository filaProcessamentoRepository)
+                           IFilaProcessamentoQueueRepository filaProcessamentoRepository)
         {
             _configuration = configuration;
             _filaProcessamentoRepository = filaProcessamentoRepository;
