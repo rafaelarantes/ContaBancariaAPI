@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore;
+﻿using ContaBancaria.Data.Contexts;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 
 namespace ContaBancaria.API
 {
@@ -7,7 +9,7 @@ namespace ContaBancaria.API
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+            CreateWebHostBuilder(args).Build().MigrateDatabase<BancoContext>().Run();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>

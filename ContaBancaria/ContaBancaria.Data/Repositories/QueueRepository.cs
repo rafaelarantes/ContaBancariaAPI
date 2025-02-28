@@ -29,7 +29,7 @@ namespace ContaBancaria.Data.Repositories
         {
             var body = Encoding.UTF8.GetBytes(dados);
 
-            _channel.BasicPublish(exchange: "",
+            _channel.BasicPublish(exchange: "", 
                                  routingKey: tipoComandoFila.ToString(),
                                  basicProperties: null,
                                  body: body);
