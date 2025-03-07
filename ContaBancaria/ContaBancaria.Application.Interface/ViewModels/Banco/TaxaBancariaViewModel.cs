@@ -9,5 +9,7 @@ namespace ContaBancaria.Application.Contracts.ViewModels.Banco
         public TipoTaxaBancaria TipoTaxaBancaria { get; set; }
 
         public string Descricao { get; set; }
+
+        public TipoValorTaxaBancaria TipoValorTaxaBancaria { get; set; }
     }
 }

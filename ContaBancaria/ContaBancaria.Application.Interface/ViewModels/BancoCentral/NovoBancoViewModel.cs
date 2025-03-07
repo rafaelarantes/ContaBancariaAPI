@@ -14,9 +14,6 @@ namespace ContaBancaria.Application.Contracts.ViewModels.BancoCentral
         public string Nome { get; set; }
 
         public IEnumerable<TaxaBancariaViewModel> TaxasBancarias { get; set; } =
-            new List<TaxaBancariaViewModel>();
-
-        
-        public TipoValorTaxaBancaria TipoValorTaxaBancaria { get; set; }
+            new List<TaxaBancariaViewModel>();     
     }
 }
