@@ -2,6 +2,7 @@
 using ContaBancaria.Application.Contracts.ViewModels.BancoCentral;
 using ContaBancaria.Data.Contracts.Dtos.Banco;
 using ContaBancaria.Dominio.Entidades;
+using ContaBancaria.Dominio.Enums;
 using System.Collections.Generic;
 
 namespace ContaBancaria.Application.Contracts.Interfaces.Mappers

@@ -8,6 +8,7 @@ namespace ContaBancaria.Application.Contracts.Interfaces
 {
     public interface IBancoCentralApplication
     {
+        RetornoViewModel ObterSelecaoTaxaBancaria();
         Task<RetornoViewModel> ListarBancos();
         Task<RetornoViewModel> CriarBanco(NovoBancoViewModel novoBancoViewModel);
         Task<RetornoViewModel> ExcluirBanco(Guid guid);

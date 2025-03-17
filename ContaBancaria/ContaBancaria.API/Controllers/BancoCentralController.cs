@@ -21,6 +21,8 @@ namespace ContaBancaria.API.Controllers
             _bancoCentralApplication = bancoCentralApplication;
         }
 
+        [HttpGet("ObterSelecaoTaxaBancaria")]
+        public RetornoViewModel ObterSelecaoTaxaBancaria() => _bancoCentralApplication.ObterSelecaoTaxaBancaria();
 
         [HttpGet("ListarBancos")]
         public async Task<RetornoViewModel> ListarBancos() => await _bancoCentralApplication.ListarBancos();

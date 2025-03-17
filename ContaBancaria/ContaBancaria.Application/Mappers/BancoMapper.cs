@@ -1,8 +1,11 @@
 ﻿using ContaBancaria.Application.Contracts.Interfaces.Mappers;
 using ContaBancaria.Application.Contracts.ViewModels.Banco;
 using ContaBancaria.Application.Contracts.ViewModels.BancoCentral;
+using ContaBancaria.Application.Contracts.ViewModels.Shared;
 using ContaBancaria.Data.Contracts.Dtos.Banco;
 using ContaBancaria.Dominio.Entidades;
+using ContaBancaria.Dominio.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 

@@ -3,15 +3,14 @@ using ContaBancaria.Application.Contracts.Interfaces.Mappers;
 using ContaBancaria.Application.Contracts.ViewModels.Banco;
 using ContaBancaria.Application.Contracts.ViewModels.BancoCentral;
 using ContaBancaria.Application.Contracts.ViewModels.Conta;
+using ContaBancaria.Application.Contracts.ViewModels.Shared;
 using ContaBancaria.Data.Contracts.Repositories.Interfaces;
 using ContaBancaria.Data.Dtos;
-using ContaBancaria.Data.Enums;
-using ContaBancaria.Data.Repositories;
 using ContaBancaria.Dominio.Entidades;
 using ContaBancaria.Dominio.Enums;
-using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ContaBancaria.Application
@@ -32,6 +31,31 @@ namespace ContaBancaria.Application
             _bancoRepository = bancoRepository;
             _retornoMapper = retornoMapper;
             _filaProcessamentoApplication = filaProcessamentoApplication;
+        }
+
+        public RetornoViewModel ObterSelecaoTaxaBancaria()
+        {
+            var retornoDto = new RetornoDto
+            {
+                Resultado = true,
+                Data = new SelecaoTaxaBancariaViewModel
+                {
+                    TipoTaxaBancaria = Enum.GetValues(typeof(TipoTaxaBancaria)).Cast<TipoTaxaBancaria>().ToList()
+                                            .Select(t => new SelecaoViewModel
+                                            {
+                                                Descricao = t.ToString(),
+                                                Valor = (int)t
+                                            }).ToList(),
+                    TipoValorTaxaBancaria = Enum.GetValues(typeof(TipoValorTaxaBancaria)).Cast<TipoValorTaxaBancaria>().ToList()
+                                                .Select(t => new SelecaoViewModel
+                                                {
+                                                    Descricao = t.ToString(),
+                                                    Valor = (int)t
+                                                }).ToList()
+                }
+            };
+
+            return _retornoMapper.Map(retornoDto);
         }
 
         public async Task<RetornoViewModel> ListarBancos()
